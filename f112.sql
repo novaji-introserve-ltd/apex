@@ -27,7 +27,7 @@ prompt APPLICATION 112 - Ruby Banking Application
 -- Application Export:
 --   Application:     112
 --   Name:            Ruby Banking Application
---   Date and Time:   22:58 Saturday June 11, 2016
+--   Date and Time:   23:25 Saturday June 11, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export

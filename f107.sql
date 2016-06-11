@@ -27,7 +27,7 @@ prompt APPLICATION 107 - sms.novajii.com
 -- Application Export:
 --   Application:     107
 --   Name:            sms.novajii.com
---   Date and Time:   22:54 Saturday June 11, 2016
+--   Date and Time:   23:21 Saturday June 11, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export

@@ -27,7 +27,7 @@ prompt APPLICATION 101 - EasyTaxPayer
 -- Application Export:
 --   Application:     101
 --   Name:            EasyTaxPayer
---   Date and Time:   23:18 Saturday June 11, 2016
+--   Date and Time:   00:00 Sunday June 12, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export

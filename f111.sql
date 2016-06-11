@@ -27,7 +27,7 @@ prompt APPLICATION 111 - ore.ng(Development)
 -- Application Export:
 --   Application:     111
 --   Name:            ore.ng(Development)
---   Date and Time:   23:23 Saturday June 11, 2016
+--   Date and Time:   00:06 Sunday June 12, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export

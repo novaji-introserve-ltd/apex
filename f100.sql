@@ -27,7 +27,7 @@ prompt APPLICATION 100 - Sample Database Application
 -- Application Export:
 --   Application:     100
 --   Name:            Sample Database Application
---   Date and Time:   23:18 Saturday June 11, 2016
+--   Date and Time:   00:00 Sunday June 12, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export

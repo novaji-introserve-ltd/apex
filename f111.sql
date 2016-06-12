@@ -27,7 +27,7 @@ prompt APPLICATION 111 - ore.ng
 -- Application Export:
 --   Application:     111
 --   Name:            ore.ng
---   Date and Time:   06:10 Sunday June 12, 2016
+--   Date and Time:   00:00 Monday June 13, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -163,7 +163,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_12=>'LOGO1'
 ,p_substitution_value_12=>'ore-logo-blue.png'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160612060519'
+,p_last_upd_yyyymmddhh24miss=>'20160612153501'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'https://ore.ng/')
 ,p_ui_type_name => null
 );
@@ -2274,7 +2274,7 @@ wwv_flow_api.create_flow_process(
 '',
 '',
 'select nvl(initcap(fname),''Guest'')||'' '' ||nvl(initcap(lname),''''), ',
-'case  when picture_filename is null then ''<img src="http://ore.com.ng/images/user-icon.png" />'' else ',
+'case  when picture_filename is null then ''<img src="https://ore.ng/images/user-icon.png" />'' else ',
 '''<img src="''||apex_util.get_blob_file_src(''P57_PICTURE'',p_user_id)||''" />'' end ',
 'into :g_firstname,:g_display_picture from or_user where lower(username) = lower(:app_user);',
 '',
@@ -52259,7 +52259,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'C'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160404123627'
+,p_last_upd_yyyymmddhh24miss=>'20160612151810'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29898335879802605)
@@ -52334,8 +52334,21 @@ wwv_flow_api.create_page_plug(
 ,p_attribute_02=>'HTML'
 );
 wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(978283363537112101)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_api.id(7526479902933774964)
+,p_button_name=>'P101_LOGIN'
+,p_button_static_id=>'P101_LOGIN'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'t-Button--large:t-Button--stretch'
+,p_button_template_id=>wwv_flow_api.id(1315414778375073335)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Login'
+,p_button_position=>'BELOW_BOX'
+);
+wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(29898449485802606)
-,p_button_sequence=>10
+,p_button_sequence=>30
 ,p_button_plug_id=>wwv_flow_api.id(7526479902933774964)
 ,p_button_name=>'RESET'
 ,p_button_action=>'REDIRECT_PAGE'
@@ -52345,19 +52358,6 @@ wwv_flow_api.create_page_button(
 ,p_button_position=>'BELOW_BOX'
 ,p_button_redirect_url=>'f?p=&APP_ID.:82:&SESSION.::&DEBUG.:RP::'
 ,p_button_cattributes=>'style="padding-right:10px"'
-);
-wwv_flow_api.create_page_button(
- p_id=>wwv_flow_api.id(978283363537112101)
-,p_button_sequence=>20
-,p_button_plug_id=>wwv_flow_api.id(7526479902933774964)
-,p_button_name=>'P101_LOGIN'
-,p_button_static_id=>'P101_LOGIN'
-,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--gapRight'
-,p_button_template_id=>wwv_flow_api.id(1315414778375073335)
-,p_button_is_hot=>'Y'
-,p_button_image_alt=>'Login'
-,p_button_position=>'BELOW_BOX'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(7526480002441774973)
@@ -52372,7 +52372,7 @@ wwv_flow_api.create_page_item(
 ,p_cSize=>64
 ,p_cMaxlength=>100
 ,p_field_template=>wwv_flow_api.id(1653905900709671302)
-,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--large'
+,p_item_template_options=>'t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'N'
 ,p_attribute_04=>'TEXT'
@@ -52391,7 +52391,7 @@ wwv_flow_api.create_page_item(
 ,p_cSize=>64
 ,p_cMaxlength=>100
 ,p_field_template=>wwv_flow_api.id(1653905900709671302)
-,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--large'
+,p_item_template_options=>'t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
 ,p_protection_level=>'S'
 ,p_attribute_01=>'Y'
 ,p_attribute_02=>'Y'

@@ -22,12 +22,12 @@ end;
 /
 prompt --application/set_environment
  
-prompt APPLICATION 101 - EasyTaxPayer
+prompt APPLICATION 101 - easytaxpayer.com
 --
 -- Application Export:
 --   Application:     101
---   Name:            EasyTaxPayer
---   Date and Time:   00:00 Sunday June 12, 2016
+--   Name:            easytaxpayer.com
+--   Date and Time:   06:10 Sunday June 12, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -85,7 +85,7 @@ wwv_flow_api.create_flow(
  p_id=>wwv_flow.g_flow_id
 ,p_display_id=>nvl(wwv_flow_application_install.get_application_id,101)
 ,p_owner=>nvl(wwv_flow_application_install.get_schema,'EASYTAXPAYER')
-,p_name=>nvl(wwv_flow_application_install.get_application_name,'EasyTaxPayer')
+,p_name=>nvl(wwv_flow_application_install.get_application_name,'easytaxpayer.com')
 ,p_alias=>nvl(wwv_flow_application_install.get_application_alias,'F_101')
 ,p_page_view_logging=>'YES'
 ,p_page_protection_enabled_y_n=>'Y'
@@ -117,7 +117,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_01=>'IMG'
 ,p_substitution_value_01=>'http://easytaxpayer.com/img/'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160412155146'
+,p_last_upd_yyyymmddhh24miss=>'20160612060657'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );

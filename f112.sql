@@ -22,12 +22,12 @@ end;
 /
 prompt --application/set_environment
  
-prompt APPLICATION 112 - Ruby Banking Application
+prompt APPLICATION 112 - ruby.banking.app
 --
 -- Application Export:
 --   Application:     112
---   Name:            Ruby Banking Application
---   Date and Time:   00:07 Sunday June 12, 2016
+--   Name:            ruby.banking.app
+--   Date and Time:   06:10 Sunday June 12, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -87,7 +87,7 @@ wwv_flow_api.create_flow(
  p_id=>wwv_flow.g_flow_id
 ,p_display_id=>nvl(wwv_flow_application_install.get_application_id,112)
 ,p_owner=>nvl(wwv_flow_application_install.get_schema,'REAGOVAT')
-,p_name=>nvl(wwv_flow_application_install.get_application_name,'Ruby Banking Application')
+,p_name=>nvl(wwv_flow_application_install.get_application_name,'ruby.banking.app')
 ,p_alias=>nvl(wwv_flow_application_install.get_application_alias,'F_112')
 ,p_page_view_logging=>'YES'
 ,p_page_protection_enabled_y_n=>'Y'
@@ -115,7 +115,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160610223232'
+,p_last_upd_yyyymmddhh24miss=>'20160612060750'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );

@@ -22,12 +22,12 @@ end;
 /
 prompt --application/set_environment
  
-prompt APPLICATION 111 - ore.ng(Development)
+prompt APPLICATION 111 - ore.ng
 --
 -- Application Export:
 --   Application:     111
---   Name:            ore.ng(Development)
---   Date and Time:   00:06 Sunday June 12, 2016
+--   Name:            ore.ng
+--   Date and Time:   06:10 Sunday June 12, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -97,7 +97,7 @@ wwv_flow_api.create_flow(
  p_id=>wwv_flow.g_flow_id
 ,p_display_id=>nvl(wwv_flow_application_install.get_application_id,111)
 ,p_owner=>nvl(wwv_flow_application_install.get_schema,'ORE')
-,p_name=>nvl(wwv_flow_application_install.get_application_name,'ore.ng(Development)')
+,p_name=>nvl(wwv_flow_application_install.get_application_name,'ore.ng')
 ,p_alias=>nvl(wwv_flow_application_install.get_application_alias,'ORENG')
 ,p_page_view_logging=>'YES'
 ,p_page_protection_enabled_y_n=>'Y'
@@ -163,7 +163,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_12=>'LOGO1'
 ,p_substitution_value_12=>'ore-logo-blue.png'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160607103109'
+,p_last_upd_yyyymmddhh24miss=>'20160612060519'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'https://ore.ng/')
 ,p_ui_type_name => null
 );

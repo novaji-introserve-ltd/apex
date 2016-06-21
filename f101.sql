@@ -27,7 +27,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 -- Application Export:
 --   Application:     101
 --   Name:            easytaxpayer.com
---   Date and Time:   00:00 Tuesday June 21, 2016
+--   Date and Time:   00:00 Wednesday June 22, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -37,11 +37,11 @@ prompt APPLICATION 101 - easytaxpayer.com
 
 -- Application Statistics:
 --   Pages:                     11
---     Items:                   16
+--     Items:                   23
 --     Validations:              2
---     Processes:               11
---     Regions:                 25
---     Buttons:                  5
+--     Processes:               16
+--     Regions:                 26
+--     Buttons:                  7
 --     Dynamic Actions:          1
 --   Shared Components:
 --     Logic:
@@ -50,7 +50,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 --     Navigation:
 --       Lists:                  4
 --       Breadcrumbs:            1
---         Entries:              4
+--         Entries:              5
 --     Security:
 --       Authentication:         2
 --     User Interface:
@@ -118,7 +118,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_01=>'IMG'
 ,p_substitution_value_01=>'http://easytaxpayer.com/img/'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160620180737'
+,p_last_upd_yyyymmddhh24miss=>'20160621172513'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -356,6 +356,13 @@ wwv_flow_api.create_menu_option(
 ,p_short_name=>'Edit Profile'
 ,p_link=>'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:::'
 ,p_page_id=>3
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(32198429553679021)
+,p_parent_id=>wwv_flow_api.id(30283634446544649)
+,p_short_name=>'Change Password'
+,p_link=>'f?p=&APP_ID.:10:&SESSION.::&DEBUG.:::'
+,p_page_id=>4
 );
 end;
 /
@@ -2957,6 +2964,17 @@ wwv_flow_api.create_template(
 ,p_name=>'Minimal Copy'
 ,p_is_popup=>false
 ,p_javascript_code_onload=>'apex.theme42.initializePage.noSideCol();'
+,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'',
+'.t_PageBody,.t-PageBody,.container,.t-Body, #t_PageBody, .t-Body-main{',
+'     margin: 0px 0px 0px 0px;',
+'     background-color: white;',
+'}',
+'t-Body-content{',
+'    background-color: white;    ',
+'    background-image: none;   ',
+'}',
+''))
 ,p_header_template=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<!DOCTYPE html>',
 '<meta http-equiv="x-ua-compatible" content="IE=edge" />',
@@ -8883,7 +8901,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160620162741'
+,p_last_upd_yyyymmddhh24miss=>'20160621160440'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30583998478216420)
@@ -8912,6 +8930,141 @@ wwv_flow_api.create_page_plug(
 ,p_menu_template_id=>wwv_flow_api.id(30277254044544615)
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 );
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(32180033729967106)
+,p_button_sequence=>70
+,p_button_plug_id=>wwv_flow_api.id(30583998478216420)
+,p_button_name=>'EDIT'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--large'
+,p_button_template_id=>wwv_flow_api.id(30276759288544615)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Update Profile'
+,p_button_position=>'BELOW_BOX'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(31762939253431049)
+,p_name=>'P3_USERNAME'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_api.id(30583998478216420)
+,p_prompt=>'Username'
+,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_field_template=>wwv_flow_api.id(30276347175544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_attribute_01=>'Y'
+,p_attribute_02=>'VALUE'
+,p_attribute_04=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(32179560621967101)
+,p_name=>'P3_NAME'
+,p_is_required=>true
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(30583998478216420)
+,p_prompt=>'Name'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_field_template=>wwv_flow_api.id(30276347175544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(32179693770967102)
+,p_name=>'P3_ORGANIZATION'
+,p_is_required=>true
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(30583998478216420)
+,p_prompt=>'Organization Name'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_field_template=>wwv_flow_api.id(30276347175544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(32179742393967103)
+,p_name=>'P3_PHONE'
+,p_is_required=>true
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_api.id(30583998478216420)
+,p_prompt=>'Phone Number'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_field_template=>wwv_flow_api.id(30276347175544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEL'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(32179895541967104)
+,p_name=>'P3_STATE'
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_api.id(30583998478216420)
+,p_prompt=>'State'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select name, id',
+'from states',
+'where id = :P3_STATE'))
+,p_cHeight=>1
+,p_field_template=>wwv_flow_api.id(30276347175544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_lov_display_extra=>'NO'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(32179906982967105)
+,p_name=>'P3_ROLE'
+,p_item_sequence=>60
+,p_item_plug_id=>wwv_flow_api.id(30583998478216420)
+,p_prompt=>'Role'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select name, id',
+'from roles',
+'where id = :P3_ROLE'))
+,p_cHeight=>1
+,p_field_template=>wwv_flow_api.id(30276347175544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_lov_display_extra=>'NO'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(31763041426431050)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_HEADER'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Retrieve profile '
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'begin',
+'',
+'select username, name, organization, phone, state_id, role_id into :P3_USERNAME, :P3_NAME, :P3_ORGANIZATION, :P3_PHONE, :P3_STATE, :P3_ROLE from users where lower(username) = lower(:app_user);',
+'END;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(32180162658967107)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Update profile'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'begin',
+' update users set name = :P3_NAME, organization = :P3_ORGANIZATION, phone = :P3_PHONE where lower(username) = lower(:app_user);',
+' end;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_success_message=>'Successfully updated profile.'
+);
 end;
 /
 prompt --application/pages/page_00004
@@ -8930,20 +9083,77 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
-,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160613213028'
+,p_last_updated_by=>'SUPPORT'
+,p_last_upd_yyyymmddhh24miss=>'20160621172513'
 );
 wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(30584006194216421)
-,p_plug_name=>'Change Password'
-,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+ p_id=>wwv_flow_api.id(32180236501967108)
+,p_plug_name=>'change Password'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(30255782108544603)
-,p_plug_display_sequence=>220
+,p_plug_display_sequence=>1
 ,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(32180977087967115)
+,p_plug_name=>'Breadcrumb bar'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30259094599544603)
+,p_plug_display_sequence=>220
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(30283250495544647)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(30277254044544615)
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(32180739934967113)
+,p_button_sequence=>40
+,p_button_plug_id=>wwv_flow_api.id(32180236501967108)
+,p_button_name=>'update'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--large'
+,p_button_template_id=>wwv_flow_api.id(30276759288544615)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Change Password'
+,p_button_position=>'BELOW_BOX'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(32180474518967110)
+,p_name=>'P4_PASSWD'
+,p_is_required=>true
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_api.id(32180236501967108)
+,p_prompt=>'Enter New Password'
+,p_display_as=>'NATIVE_PASSWORD'
+,p_cSize=>30
+,p_field_template=>wwv_flow_api.id(30276595016544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--large'
+,p_attribute_01=>'Y'
+,p_attribute_02=>'Y'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(32180806883967114)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'change password'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'begin',
+'',
+'update users set pwd = helpers.hash(:P4_PASSWD) where lower(username) = lower(:app_user);',
+'',
+'end;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(32180739934967113)
+,p_process_success_message=>'Password Successfully Updated.'
 );
 end;
 /
@@ -9246,7 +9456,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160620180737'
+,p_last_upd_yyyymmddhh24miss=>'20160621123559'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32084480838821795)
@@ -9340,59 +9550,54 @@ wwv_flow_api.create_page_process(
 'begin',
 ':P7_NEW_PASSWORD := v_new_password;',
 '',
-'AUTH.RESET_PASSWORD(',
-'P_USERNAME => :P7_USERNAME,',
-'P_PASSWD => :P7_NEW_PASSWORD);',
+'update users set pwd = helpers.hash(:P7_NEW_PASSWORD) WHERE username = :P7_USERNAME;',
 'end;'))
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_api.id(32084832791821796)
 );
 wwv_flow_api.create_page_process(
- p_id=>wwv_flow_api.id(31759494876431014)
+ p_id=>wwv_flow_api.id(31762555273431045)
 ,p_process_sequence=>20
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_SEND_EMAIL'
-,p_process_name=>'Send Email'
-,p_attribute_01=>'support@novajii.com'
-,p_attribute_02=>'&P7_USERNAME'
+,p_process_name=>'send email'
+,p_attribute_01=>'noreply@easytaxpayer.com'
+,p_attribute_02=>'&P7_USERNAME.'
 ,p_attribute_06=>'New Password'
 ,p_attribute_07=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'Dear Customer.',
-'',
-'Your New Password Detail',
-'',
-'New Password:    &P23_NEW_PASSWORD.',
+'Hi',
 '',
 '',
+'A password reset was initiated on your account',
 '',
-'Regards,',
+'',
+'New Password is &P7_NEW_PASSWORD.',
 '',
 '',
-'Support Services',
-'Novaji Introserve Limited',
-'support@novajii.com.'))
-,p_attribute_10=>'Y'
+'',
+'Sincerely',
+'The EasyTaxPayer Support'))
+,p_attribute_10=>'N'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_api.id(32084832791821796)
-,p_process_success_message=>'Your Password has been successfully reset check your email for new reset password.'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(31762671164431046)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Push email'
+,p_process_sql_clob=>'APEX_MAIL.PUSH_QUEUE;'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(32084832791821796)
 );
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(31759522127431015)
-,p_process_sequence=>30
+,p_process_sequence=>40
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_SESSION_STATE'
 ,p_process_name=>'Clear all page items'
 ,p_attribute_01=>'CLEAR_CACHE_CURRENT_PAGE'
-,p_error_display_location=>'INLINE_IN_NOTIFICATION'
-,p_process_when_button_id=>wwv_flow_api.id(32084832791821796)
-);
-wwv_flow_api.create_page_process(
- p_id=>wwv_flow_api.id(31759643813431016)
-,p_process_sequence=>40
-,p_process_point=>'AFTER_SUBMIT'
-,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'push email'
-,p_process_sql_clob=>'apex_mail.push_queue;'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_api.id(32084832791821796)
 );
@@ -9423,12 +9628,12 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160620180216'
+,p_last_upd_yyyymmddhh24miss=>'20160621145309'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31760315573431023)
 ,p_plug_name=>'Sign Up'
-,p_region_template_options=>'#DEFAULT#:js-showMaximizeButton:t-Region--removeHeader:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:js-showMaximizeButton:t-Region--removeHeader:t-Region--noBorder:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(30255782108544603)
 ,p_plug_display_sequence=>220
 ,p_include_in_reg_disp_sel_yn=>'Y'
@@ -9587,14 +9792,15 @@ wwv_flow_api.create_page_item(
 );
 wwv_flow_api.create_page_validation(
  p_id=>wwv_flow_api.id(31762410637431044)
-,p_validation_name=>'check email'
+,p_validation_name=>'check  password'
 ,p_validation_sequence=>10
-,p_validation=>':P8_PASSWD != :P8_PASSWD_1'
-,p_validation_type=>'SQL_EXPRESSION'
+,p_validation=>'P8_PASSWD'
+,p_validation2=>'&P8_PASSWD_1.'
+,p_validation_type=>'ITEM_IN_VALIDATION_EQ_STRING2'
 ,p_error_message=>'Your password field and Retype password don''t match. '
 ,p_always_execute=>'N'
 ,p_when_button_pressed=>wwv_flow_api.id(31760828512431028)
-,p_associated_item=>wwv_flow_api.id(31762084986431040)
+,p_associated_item=>wwv_flow_api.id(31761990334431039)
 ,p_error_display_location=>'INLINE_WITH_FIELD'
 );
 wwv_flow_api.create_page_process(
@@ -9605,14 +9811,15 @@ wwv_flow_api.create_page_process(
 ,p_process_name=>'sign Up'
 ,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'declare',
-'v_password_hash varchar2(200) := helpers.hash(:P8_PASSWD);',
+'v_password_hash varchar2(100) := helpers.hash(:P8_PASSWD);',
 '',
 '',
 'begin',
 '',
+'',
 ':P8_TAXPAYER := 5;',
 '',
-'insert into users (username, pwd, state_id, role_id, name, phone, ORGANIZATION) values(:P8_EMAIL, v_password_hash, :P8_STATE, :P8_TAXPAYER, :P8_NAME, :P8_PHONE, :P8_ORGANIZATION);',
+'insert into users (username, pwd, state_id, role_id, name, phone, ORGANIZATION) values(:P8_EMAIL, v_password_hash, :P8_STATE, :P8_TAXPAYER, :P8_NAME, :P8_MOBILE_NO, :P8_ORGANIZATION);',
 'end;'))
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_api.id(31760828512431028)
@@ -9624,11 +9831,31 @@ wwv_flow_api.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_SEND_EMAIL'
 ,p_process_name=>'send Email'
-,p_attribute_01=>'support@novajii.com'
+,p_attribute_01=>'noreply@easytaxpayer.com'
 ,p_attribute_02=>'&P8_EMAIL.'
 ,p_attribute_06=>'Successfully sign up'
 ,p_attribute_07=>'Welcome to EasyTaxPayer'
-,p_attribute_10=>'N'
+,p_attribute_10=>'Y'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(31760828512431028)
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(31762762720431047)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'push email'
+,p_process_sql_clob=>'APEX_MAIL.PUSH_QUEUE;'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(31760828512431028)
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(31762812824431048)
+,p_process_sequence=>40
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_SESSION_STATE'
+,p_process_name=>'clear Items'
+,p_attribute_01=>'CLEAR_CACHE_CURRENT_PAGE'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_api.id(31760828512431028)
 );
@@ -9758,7 +9985,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160620151842'
+,p_last_upd_yyyymmddhh24miss=>'20160621114943'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30282417514544645)
@@ -9769,10 +9996,8 @@ wwv_flow_api.create_page_plug(
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<a href="http://novajii.com:4000/apex/f?p=101:7:14227972912709:::::">Reset Password</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-||'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs'
-||'p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
-'<a href="http://novajii.com:4000/apex/f?p=101:8:14227972912709:::::" style="text-align: right;">Sign Up</a><br/><br/>'))
+'<a href="http://novajii.com:4000/apex/f?p=101:7:14227972912709:::::"> Forgot password?</a><br/><br/>',
+''))
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
@@ -9787,6 +10012,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_display_point=>'BODY'
+,p_plug_source=>'<br/><br/>Don''t have an account? <a href="http://novajii.com:4000/apex/f?p=101:8:14227972912709:::::" style="text-align: right;">Sign up »</a><br/><br/><br/>'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_footer=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<center><p>',

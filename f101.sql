@@ -27,7 +27,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 -- Application Export:
 --   Application:     101
 --   Name:            easytaxpayer.com
---   Date and Time:   00:00 Wednesday June 22, 2016
+--   Date and Time:   00:00 Thursday June 23, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -53,6 +53,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 --         Entries:              5
 --     Security:
 --       Authentication:         2
+--       Authorization:          6
 --     User Interface:
 --       Themes:                 1
 --       Templates:
@@ -103,8 +104,7 @@ wwv_flow_api.create_flow(
 ,p_authentication=>'PLUGIN'
 ,p_authentication_id=>wwv_flow_api.id(30285831681627528)
 ,p_application_tab_set=>0
-,p_logo_image=>'&IMG.logo-white.png'
-,p_logo_image_attributes=>'height=22px'
+,p_logo_image=>'http://easytaxpayer.com/img/white_tax_logo.png'
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=> nvl(wwv_flow_application_install.get_proxy,'')
 ,p_flow_version=>'release 1.0'
@@ -118,7 +118,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_01=>'IMG'
 ,p_substitution_value_01=>'http://easytaxpayer.com/img/'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160621172513'
+,p_last_upd_yyyymmddhh24miss=>'20160622180432'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -150,6 +150,13 @@ wwv_flow_api.create_list_item(
 ,p_list_item_link_text=>'Log Out'
 ,p_list_item_link_target=>'&LOGOUT_URL.'
 ,p_security_scheme=>'MUST_NOT_BE_PUBLIC_USER'
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(32365756853791961)
+,p_list_item_display_sequence=>20
+,p_list_item_link_text=>'Login'
+,p_list_item_link_target=>'f?p=&APP_ID.:101:&SESSION.::&DEBUG.::::'
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list(
@@ -235,7 +242,54 @@ end;
 /
 prompt --application/shared_components/security/authorizations
 begin
-null;
+wwv_flow_api.create_security_scheme(
+ p_id=>wwv_flow_api.id(32292753421815159)
+,p_name=>'Administration '
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>'return auth.user_role(:app_user) in (''admin'');'
+,p_error_message=>'You are not authorized to access this page'
+,p_caching=>'BY_USER_BY_SESSION'
+);
+wwv_flow_api.create_security_scheme(
+ p_id=>wwv_flow_api.id(32293325846845276)
+,p_name=>'IRS'
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>'return auth.user_role(:app_user) in (''irs'');'
+,p_error_message=>'You are not authorized to access this page'
+,p_caching=>'BY_USER_BY_SESSION'
+);
+wwv_flow_api.create_security_scheme(
+ p_id=>wwv_flow_api.id(32301064721860523)
+,p_name=>'Tax Payer'
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>'return auth.user_role(:app_user) in (''taxpayer'');'
+,p_error_message=>'You are not authorized to access this page'
+,p_caching=>'BY_USER_BY_SESSION'
+);
+wwv_flow_api.create_security_scheme(
+ p_id=>wwv_flow_api.id(32301589302873647)
+,p_name=>'OPERATOR'
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>'return auth.user_role(:app_user) in (''operator'');'
+,p_error_message=>'You are not authorized to access this page'
+,p_caching=>'BY_USER_BY_SESSION'
+);
+wwv_flow_api.create_security_scheme(
+ p_id=>wwv_flow_api.id(32301749963881491)
+,p_name=>'Switch'
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>'return auth.user_role(:app_user) in (''switch'');'
+,p_error_message=>'You are not authorized to access this page'
+,p_caching=>'BY_USER_BY_SESSION'
+);
+wwv_flow_api.create_security_scheme(
+ p_id=>wwv_flow_api.id(32366312564809141)
+,p_name=>'Null user'
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>'return auth.user_role(:app_user) not in (''admin'',''irs'', ''switch'', ''operator'', ''taxpayer'');'
+,p_error_message=>'You are not authorized to access this page'
+,p_caching=>'BY_USER_BY_SESSION'
+);
 end;
 /
 prompt --application/shared_components/navigation/navigation_bar
@@ -2965,7 +3019,6 @@ wwv_flow_api.create_template(
 ,p_is_popup=>false
 ,p_javascript_code_onload=>'apex.theme42.initializePage.noSideCol();'
 ,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'',
 '.t_PageBody,.t-PageBody,.container,.t-Body, #t_PageBody, .t-Body-main{',
 '     margin: 0px 0px 0px 0px;',
 '     background-color: white;',
@@ -2973,6 +3026,10 @@ wwv_flow_api.create_template(
 't-Body-content{',
 '    background-color: white;    ',
 '    background-image: none;   ',
+'}',
+'t-Header-navBar',
+'{',
+'    background-color:#6db343;',
 '}',
 ''))
 ,p_header_template=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
@@ -2997,7 +3054,7 @@ wwv_flow_api.create_template(
 '  #HEAD#',
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>',
 '</head>',
-'<body class="t-PageBody t-PageBody--hideLeft t-PageBody--hideActions no-anim #PAGE_CSS_CLASSES# t-PageBody--noNav" #ONLOAD# id="t_PageBody">',
+'<body class="t-PageBody t-PageBody--hideLeft t-PageBody--hideActions no-anim #PAGE_CSS_CLASSES# t-PageBody--noNav" #ONLOAD# id="t_PageBody" style="background-color:white;">',
 '#FORM_OPEN#',
 '<header class="t-Header" id="t_Header">',
 '  #REGION_POSITION_07#',
@@ -3005,10 +3062,10 @@ wwv_flow_api.create_template(
 '    <div class="t-Header-controls">',
 '      <button class="t-Button t-Button--icon t-Button--header t-Button--headerTree" id="t_Button_navControl" type="button"><span class="t-Icon fa-bars" aria-hidden="true"></span></button>',
 '    </div>',
-'    <div class="t-Header-logo">',
+'    <div class="t-Header-logo" style="background-color:#6DB343;">',
 '      <a href="#HOME_LINK#" class="t-Header-logo-link">#LOGO#</a>',
 '    </div>',
-'    <div class="t-Header-navBar">',
+'    <div class="t-Header-navBar" style="background-color:#6DB343;">',
 '      #NAVIGATION_BAR#',
 '    </div>',
 '  </div>',
@@ -8687,7 +8744,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160620162025'
+,p_last_upd_yyyymmddhh24miss=>'20160622173354'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29902712439802649)
@@ -8754,7 +8811,7 @@ wwv_flow_api.create_page_button(
 ,p_button_plug_id=>wwv_flow_api.id(30327031483345084)
 ,p_button_name=>'VALIDATE'
 ,p_button_action=>'DEFINED_BY_DA'
-,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--iconRight:t-Button--gapLeft:t-Button--gapRight'
+,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--success:t-Button--iconRight:t-Button--gapLeft:t-Button--gapRight'
 ,p_button_template_id=>wwv_flow_api.id(30276890737544615)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Validate'
@@ -8901,7 +8958,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160621160440'
+,p_last_upd_yyyymmddhh24miss=>'20160622174014'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30583998478216420)
@@ -8936,7 +8993,7 @@ wwv_flow_api.create_page_button(
 ,p_button_plug_id=>wwv_flow_api.id(30583998478216420)
 ,p_button_name=>'EDIT'
 ,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#:t-Button--large'
+,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--success'
 ,p_button_template_id=>wwv_flow_api.id(30276759288544615)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Update Profile'
@@ -9084,7 +9141,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160621172513'
+,p_last_upd_yyyymmddhh24miss=>'20160622174216'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32180236501967108)
@@ -9119,7 +9176,7 @@ wwv_flow_api.create_page_button(
 ,p_button_plug_id=>wwv_flow_api.id(32180236501967108)
 ,p_button_name=>'update'
 ,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#:t-Button--large'
+,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--success'
 ,p_button_template_id=>wwv_flow_api.id(30276759288544615)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Change Password'
@@ -9456,7 +9513,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160621123559'
+,p_last_upd_yyyymmddhh24miss=>'20160622174810'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32084480838821795)
@@ -9466,7 +9523,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_display_point=>'BODY'
-,p_plug_source=>'<a href="http://novajii.com:4000/apex/f?p=101:101:14227972912709:::::">Go back to login page</a><br/><br/>'
+,p_plug_source=>'<a href="http://novajii.com:4000/apex/f?p=101:101:14227972912709:::::" style="color:#6DB343">Go back to login page</a><br/><br/>'
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
@@ -9496,7 +9553,7 @@ wwv_flow_api.create_page_button(
 ,p_button_plug_id=>wwv_flow_api.id(32084480838821795)
 ,p_button_name=>'Reset'
 ,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--stretch'
+,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--success:t-Button--stretch'
 ,p_button_template_id=>wwv_flow_api.id(30276759288544615)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Reset Password'
@@ -9628,7 +9685,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160621145309'
+,p_last_upd_yyyymmddhh24miss=>'20160622180432'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31760315573431023)
@@ -9651,7 +9708,7 @@ wwv_flow_api.create_page_button(
 ,p_button_plug_id=>wwv_flow_api.id(31760315573431023)
 ,p_button_name=>'sign_up'
 ,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#:t-Button--large'
+,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--success'
 ,p_button_template_id=>wwv_flow_api.id(30276759288544615)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Sign Up'
@@ -9973,7 +10030,7 @@ wwv_flow_api.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_html_page_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<div class="top1">',
-'    <img src="&IMG.logo.png" />',
+'    <img src="http://easytaxpayer.com/img/green_tax_logo.png"   width="20%"/>',
 '</div>'))
 ,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '.top1{',
@@ -9985,7 +10042,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160621114943'
+,p_last_upd_yyyymmddhh24miss=>'20160622174622'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30282417514544645)
@@ -9996,7 +10053,7 @@ wwv_flow_api.create_page_plug(
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<a href="http://novajii.com:4000/apex/f?p=101:7:14227972912709:::::"> Forgot password?</a><br/><br/>',
+'<a href="http://novajii.com:4000/apex/f?p=101:7:14227972912709:::::" style="color:#6DB343"> Forgot password?</a><br/><br/>',
 ''))
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -10012,7 +10069,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_display_point=>'BODY'
-,p_plug_source=>'<br/><br/>Don''t have an account? <a href="http://novajii.com:4000/apex/f?p=101:8:14227972912709:::::" style="text-align: right;">Sign up »</a><br/><br/><br/>'
+,p_plug_source=>'<br/><br/>Don''t have an account? <a href="http://novajii.com:4000/apex/f?p=101:8:14227972912709:::::" style="text-align: right; color:#6DB343">Sign up »</a><br/><br/><br/>'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_footer=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<center><p>',
@@ -10027,7 +10084,7 @@ wwv_flow_api.create_page_button(
 ,p_button_plug_id=>wwv_flow_api.id(30282417514544645)
 ,p_button_name=>'LOGIN'
 ,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--stretch'
+,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--success:t-Button--stretch'
 ,p_button_template_id=>wwv_flow_api.id(30276759288544615)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Log In'

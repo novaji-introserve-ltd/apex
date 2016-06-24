@@ -27,7 +27,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 -- Application Export:
 --   Application:     101
 --   Name:            easytaxpayer.com
---   Date and Time:   00:00 Friday June 24, 2016
+--   Date and Time:   00:00 Saturday June 25, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -40,15 +40,15 @@ prompt APPLICATION 101 - easytaxpayer.com
 --     Items:                   25
 --     Validations:              2
 --     Processes:               20
---     Regions:                 27
---     Buttons:                 10
+--     Regions:                 32
+--     Buttons:                 11
 --     Dynamic Actions:          1
 --   Shared Components:
 --     Logic:
 --       Items:                  3
 --       Processes:              2
 --     Navigation:
---       Lists:                  4
+--       Lists:                  5
 --       Breadcrumbs:            1
 --         Entries:              5
 --     Security:
@@ -60,7 +60,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 --         Page:                14
 --         Region:              14
 --         Label:                5
---         List:                11
+--         List:                12
 --         Popup LOV:            1
 --         Calendar:             1
 --         Breadcrumb:           1
@@ -119,8 +119,8 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_01=>'http://easytaxpayer.com/img/'
 ,p_substitution_string_02=>'WHITE_LOGO'
 ,p_substitution_value_02=>' <img src="http://easytaxpayer.com/img/white_tax_logo.png" style="height:42px;padding-left:15px;vertical-align:middle"/>'
-,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160623184908'
+,p_last_updated_by=>'SUPPORT'
+,p_last_upd_yyyymmddhh24miss=>'20160624175459'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -204,6 +204,81 @@ wwv_flow_api.create_list_item(
 ,p_list_item_display_sequence=>20
 ,p_list_item_link_text=>'Change Password'
 ,p_list_item_link_target=>'f?p=&APP_ID.:4:&SESSION.:'
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list(
+ p_id=>wwv_flow_api.id(32588872467280891)
+,p_name=>'footer link'
+,p_list_status=>'PUBLIC'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(32589037871280892)
+,p_list_item_display_sequence=>10
+,p_list_item_link_text=>'Sign Up'
+,p_list_item_link_target=>'f?p=&APP_ID.:8:&SESSION.:'
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(32589485039280892)
+,p_list_item_display_sequence=>20
+,p_list_item_link_text=>'Log In'
+,p_list_item_link_target=>'f?p=&APP_ID.:12:&SESSION.:'
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(32589829806280892)
+,p_list_item_display_sequence=>30
+,p_list_item_link_text=>'Partners'
+,p_list_item_link_target=>'#'
+,p_list_item_current_for_pages=>'#'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(32590259782280893)
+,p_list_item_display_sequence=>40
+,p_list_item_link_text=>'About'
+,p_list_item_link_target=>'#'
+,p_list_item_current_for_pages=>'#'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(32590696888280893)
+,p_list_item_display_sequence=>50
+,p_list_item_link_text=>'privacy'
+,p_list_item_link_target=>'#'
+,p_list_item_current_for_pages=>'#'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(32592552568283930)
+,p_list_item_display_sequence=>60
+,p_list_item_link_text=>'Terms'
+,p_list_item_link_target=>'f?p=&APP_ID.:#:&SESSION.::&DEBUG.::::'
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(32592868965285773)
+,p_list_item_display_sequence=>70
+,p_list_item_link_text=>'Help'
+,p_list_item_link_target=>'f?p=&APP_ID.:#:&SESSION.::&DEBUG.::::'
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(32593112097287495)
+,p_list_item_display_sequence=>80
+,p_list_item_link_text=>'Cookies'
+,p_list_item_link_target=>'f?p=&APP_ID.:#:&SESSION.::&DEBUG.::::'
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(32593464331290742)
+,p_list_item_display_sequence=>90
+,p_list_item_link_text=>'Facebook'
+,p_list_item_link_target=>'f?p=&APP_ID.:#:&SESSION.::&DEBUG.::::'
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(32593706163292661)
+,p_list_item_display_sequence=>100
+,p_list_item_link_text=>'Twitter'
+,p_list_item_link_target=>'f?p=&APP_ID.:#:&SESSION.::&DEBUG.::::'
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 end;
@@ -3059,7 +3134,7 @@ wwv_flow_api.create_template(
 '  #THEME_STYLE_CSS#',
 '  #APPLICATION_CSS#',
 '  #PAGE_CSS#  ',
-'  #FAVICONS#',
+' #FAVICONS#',
 '  #HEAD#',
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>',
 '</head>',
@@ -3076,9 +3151,23 @@ wwv_flow_api.create_template(
 '      <a href="#HOME_LINK#" class="t-Header-logo-link">#LOGO#</a>',
 '    </div>',
 '-->',
+'    <style>',
+'        .alink a',
+'        {',
+'            text-decoration: none;',
+'            color: white',
+'        }',
+'        .alink a:hover',
+'        {',
+'            text-decoration: underline;',
+'            color: white',
+'        }',
+'        ',
+'    </style>',
 '    <div class="top1">',
 '    <span style="text-align:middle">&WHITE_LOGO.</span>',
-'    <span style="margin-left:70%;color:white;margin-bottom:20px">Home&nbsp;&nbsp;|&nbsp;&nbsp;About&nbsp;&nbsp;|&nbsp;&nbsp;Sign Up</span>',
+'        <span style="margin-left:70%;color:white;margin-bottom:20px" class="alink"><a href="http://novajii.com:4000/apex/f?p=101:12:12964308491094:::::">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">About</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://no'
+||'vajii.com:4000/apex/f?p=101:8:14227972912709:::::">Sign Up</a></span>',
 '</div>',
 '    <!--div class="t-Header-navBar" style="background-color:#6DB343;">',
 '      #NAVIGATION_BAR#',
@@ -4653,6 +4742,26 @@ wwv_flow_api.create_list_template(
 '<ul class="t-WizardSteps #COMPONENT_CSS_CLASSES#" id="#LIST_ID#">'))
 ,p_list_template_after_rows=>'</ul>'
 ,p_reference_id=>2008702338707394488
+);
+wwv_flow_api.create_list_template(
+ p_id=>wwv_flow_api.id(32443800699108113)
+,p_list_template_current=>'<li><a href="#LINK#">#TEXT#</a></li>'
+,p_list_template_noncurrent=>'<li><a href="#LINK#">#TEXT#</a></li>'
+,p_list_template_name=>'Horizontal List - Custom '
+,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'#horizontal ul{',
+'  list-style: none;',
+'}',
+'',
+'#horizontal li{',
+'  display: inline;',
+'}'))
+,p_theme_id=>42
+,p_theme_class_id=>3
+,p_list_template_before_rows=>'<div id="horizontal"><ul class="#COMPONENT_CSS_CLASSES#">'
+,p_list_template_after_rows=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+' </ul>',
+'</div>'))
 );
 end;
 /
@@ -9085,7 +9194,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'D'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160623115947'
+,p_last_upd_yyyymmddhh24miss=>'20160624115523'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29900232395802624)
@@ -9098,18 +9207,27 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_display_condition_type=>'USER_IS_NOT_PUBLIC_USER'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<style>',
+'    .list',
+'    {',
+'        color: #6DB343;',
+'        font-weight: bold;',
+'    }',
+'</style>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29901700923802639)
-,p_plug_name=>'Start Here'
+,p_plug_name=>'<span style="color: white; font-weight; bold;">Start Here</span>'
 ,p_parent_plug_id=>wwv_flow_api.id(29900232395802624)
 ,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
 ,p_component_template_options=>'#DEFAULT#:t-LinksList--showArrow'
 ,p_plug_template=>wwv_flow_api.id(30255782108544603)
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_grid_column_css_classes=>'list'
 ,p_plug_display_point=>'BODY'
 ,p_list_id=>wwv_flow_api.id(30323255077214485)
 ,p_plug_source_type=>'NATIVE_LIST'
@@ -9133,13 +9251,14 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30583875485216419)
-,p_plug_name=>'User Profile'
+,p_plug_name=>'<span style="color: white; font-weight; bold;">User Profile</span>'
 ,p_parent_plug_id=>wwv_flow_api.id(30583709355216418)
 ,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
 ,p_component_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_api.id(30255782108544603)
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_grid_column_css_classes=>'list'
 ,p_plug_display_point=>'BODY'
 ,p_list_id=>wwv_flow_api.id(31576436893322910)
 ,p_plug_source_type=>'NATIVE_LIST'
@@ -9165,7 +9284,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160620160446'
+,p_last_upd_yyyymmddhh24miss=>'20160624122537'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29900311777802625)
@@ -9178,7 +9297,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<h3>',
+'<h3 style="color:#6DB343">',
 '    Payment Summary',
 '</h3>'))
 ,p_attribute_01=>'N'
@@ -9193,9 +9312,17 @@ wwv_flow_api.create_page_plug(
 ,p_plug_template=>wwv_flow_api.id(30247650370544600)
 ,p_plug_display_sequence=>30
 ,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_grid_column_css_classes=>'chart'
 ,p_plug_display_point=>'BODY'
 ,p_plug_source_type=>'NATIVE_FLASH_CHART5'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<style>',
+'    .chart',
+'    {',
+'        color: #6DB343;',
+'    }',
+'</style>'))
 );
 wwv_flow_api.create_flash_chart5(
  p_id=>wwv_flow_api.id(30584513394216426)
@@ -9276,7 +9403,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160622173354'
+,p_last_upd_yyyymmddhh24miss=>'20160624123431'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29902712439802649)
@@ -9293,7 +9420,7 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29902866931802650)
-,p_plug_name=>'Test Result'
+,p_plug_name=>'<span style="color:#6db343">Test Result</span>'
 ,p_parent_plug_id=>wwv_flow_api.id(29902712439802649)
 ,p_region_template_options=>'#DEFAULT#:t-Alert--colorBG:t-Alert--horizontal:t-Alert--noIcon:t-Alert--info'
 ,p_plug_template=>wwv_flow_api.id(30246112388544595)
@@ -9317,7 +9444,15 @@ wwv_flow_api.create_page_plug(
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<h3>',
+'<style>',
+'    .validate',
+'    {',
+'        background-color : #6db343;',
+'        color: white;',
+'        font-weight: bold;',
+'    }',
+'</style>',
+'<h3 style="color:#6db343">',
 '   Check TCC/TIN Status',
 '</h3>'))
 ,p_attribute_01=>'N'
@@ -9348,6 +9483,7 @@ wwv_flow_api.create_page_button(
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Validate'
 ,p_button_position=>'BELOW_BOX'
+,p_button_css_classes=>'validate'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(29901837205802640)
@@ -9483,14 +9619,23 @@ wwv_flow_api.create_page(
 ,p_step_title=>'Edit Profile'
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
+,p_welcome_text=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<style>',
+'    .tax_btn',
+'    {',
+'	        background-color: #6DB343;',
+'        	color: white;',
+'	        font-weight: bold;',
+'        margin-right: 7px;',
+'    }',
+'</style>'))
 ,p_page_template_options=>'#DEFAULT#'
-,p_dialog_chained=>'Y'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160622174014'
+,p_last_upd_yyyymmddhh24miss=>'20160624125216'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30583998478216420)
@@ -9530,6 +9675,7 @@ wwv_flow_api.create_page_button(
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Update Profile'
 ,p_button_position=>'BELOW_BOX'
+,p_button_css_classes=>'tax_btn'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(31762939253431049)
@@ -9666,14 +9812,23 @@ wwv_flow_api.create_page(
 ,p_step_title=>'Change Password'
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
+,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'',
+'    .tax_btn',
+'    {',
+'	        background-color: #6DB343;',
+'        	color: white;',
+'	        font-weight: bold;',
+'        margin-left : 7px;',
+'    }',
+''))
 ,p_page_template_options=>'#DEFAULT#'
-,p_dialog_chained=>'Y'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160622174216'
+,p_last_upd_yyyymmddhh24miss=>'20160624125842'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32180236501967108)
@@ -9704,7 +9859,7 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(32180739934967113)
-,p_button_sequence=>40
+,p_button_sequence=>10
 ,p_button_plug_id=>wwv_flow_api.id(32180236501967108)
 ,p_button_name=>'update'
 ,p_button_action=>'SUBMIT'
@@ -9713,6 +9868,8 @@ wwv_flow_api.create_page_button(
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Change Password'
 ,p_button_position=>'BELOW_BOX'
+,p_button_alignment=>'LEFT'
+,p_button_css_classes=>'tax_btn'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(32180474518967110)
@@ -9724,7 +9881,7 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_PASSWORD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(30276595016544614)
-,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--large'
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
 ,p_attribute_01=>'Y'
 ,p_attribute_02=>'Y'
 );
@@ -9764,7 +9921,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160620162316'
+,p_last_upd_yyyymmddhh24miss=>'20160624123630'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31578684471336183)
@@ -9778,7 +9935,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<h3>',
+'<h3 style="color:#6db343;">',
 '    Payments',
 '</h3>'))
 ,p_attribute_01=>'N'
@@ -10037,41 +10194,145 @@ wwv_flow_api.create_page(
 '</div>'))
 ,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '.top1{',
-'    padding: 5px 0 5px 5px;',
+'    padding: 20px 0 20px 50px;',
+'    height:10%;',
+'    border-bottom: 0px solid green;',
+'    background-color:#6DB343;',
+'}',
+'',
+'.t-Footer{',
+'    width: 100%;',
+'    padding: 20px 0 auto 50px;',
+'}',
+'',
+'.reset_btn',
+'{',
+'    background-color: #6DB343;',
+'    color: white;',
+'    font-weight: bold;',
+'    margin-right: 7px;',
+'}',
+'',
+'.cancel_btn',
+'{',
+'    color: #6db343;',
+'    font-weight: bold;',
+'    margin-left: 7px;',
+'}',
+'',
+'.head_title',
+'{',
+'    margin-left: 10px;',
+'}',
+'.footer_ui{',
+'    padding: 10px 0 0 18px;',
+'    ',
+'}',
+'.footer_ui li{',
+'    padding: 0 10px 0 0;',
+'    text-decoration: none;',
+'    color: #6DB343;',
+'    font-size: 10px;',
+'}',
+'.footer_ui li a {',
+'    padding: 0 10px 0 0;',
+'    margin-left: 28px;',
+'    text-decoration: none;',
+'    color: #6DB343;',
+'    font-size: 1.2em;',
+'}',
+'.footer_ui li a:hover {',
+'    ',
+'    text-decoration:underline;',
+'  ',
 '}'))
-,p_step_template=>wwv_flow_api.id(32383297238735469)
+,p_step_template=>wwv_flow_api.id(30304480696041333)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160623170850'
+,p_last_upd_yyyymmddhh24miss=>'20160624173359'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32084480838821795)
 ,p_plug_name=>'<span style="color:#6DB343;">Reset Password</span>'
-,p_region_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(30255511792544603)
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noBorder:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(30255782108544603)
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_grid_column_span=>4
+,p_plug_display_column=>5
 ,p_plug_display_point=>'BODY'
-,p_plug_source=>'<a href="http://novajii.com:4000/apex/f?p=101:101:14227972912709:::::" style="color:#6DB343">Go back to login page</a><br/><br/>'
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3 class="head_title" style="color:#6db343;  margin-left: 7px;">',
+'   Reset Password',
+'</h3>'))
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(32181111172967117)
+,p_plug_name=>'footer Link'
+,p_region_sub_css_classes=>'footer_ui'
+,p_region_template_options=>'#DEFAULT#:t-Form--slimPadding'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30247650370544600)
+,p_plug_display_sequence=>220
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_grid_column_css_classes=>'footer'
+,p_plug_display_point=>'REGION_POSITION_05'
+,p_list_id=>wwv_flow_api.id(32588872467280891)
+,p_plug_source_type=>'NATIVE_LIST'
+,p_list_template_id=>wwv_flow_api.id(32443800699108113)
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(32181205349967118)
+,p_plug_name=>'footer'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noBorder:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(30255782108544603)
+,p_plug_display_sequence=>220
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'REGION_POSITION_05'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_footer=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<div style="margin-left:70px;">',
+'    <p style="font-size:13px;color:grey;">',
+'    Novaji Introserve Limited@&G_YEAR.',
+'</p>',
+'</div>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(32084832791821796)
-,p_button_sequence=>30
+,p_button_sequence=>10
 ,p_button_plug_id=>wwv_flow_api.id(32084480838821795)
 ,p_button_name=>'Reset'
 ,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--success:t-Button--stretch'
+,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--success'
 ,p_button_template_id=>wwv_flow_api.id(30276759288544615)
 ,p_button_is_hot=>'Y'
-,p_button_image_alt=>'<span style="color: white; font-weight: bold;">Reset Password</span>'
-,p_button_position=>'REGION_TEMPLATE_CREATE'
+,p_button_image_alt=>'Reset Password'
+,p_button_position=>'BELOW_BOX'
+,p_button_css_classes=>'reset_btn'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(32181001814967116)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_api.id(32084480838821795)
+,p_button_name=>'Cancel'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#:t-Button--large'
+,p_button_template_id=>wwv_flow_api.id(30276759288544615)
+,p_button_image_alt=>'Cancel'
+,p_button_position=>'BELOW_BOX'
+,p_button_alignment=>'LEFT'
+,p_button_redirect_url=>'f?p=&APP_ID.:12:&SESSION.::&DEBUG.:RP::'
+,p_button_css_classes=>'cancel_btn'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(31759098768431010)
@@ -10090,8 +10351,8 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>40
 ,p_cMaxlength=>100
-,p_field_template=>wwv_flow_api.id(30276295525544614)
-,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--large'
+,p_field_template=>wwv_flow_api.id(30276347175544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'N'
 ,p_attribute_04=>'TEXT'
@@ -10193,13 +10454,54 @@ wwv_flow_api.create_page(
 ,p_step_sub_title=>'Sign Up'
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
+,p_html_page_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<style>',
+'    .top1{',
+'    padding: 20px 0 20px 50px;',
+'    height:10%;',
+'    border-bottom: 0px solid green;',
+'    background-color:#6DB343;',
+'}',
+'',
+'</style>'))
+,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'.cancel_btn',
+'{',
+'    color: #6db343;',
+'    font-weight: bold;',
+'    margin-left: 7px;',
+'}',
+'.footer_ui{',
+'    padding: 10px 0 0 18px;',
+'    ',
+'}',
+'.footer_ui li{',
+'    padding: 0 10px 0 0;',
+'    text-decoration: none;',
+'    color: #6DB343;',
+'    font-size: 10px;',
+'}',
+'.footer_ui li a {',
+'    padding: 0 10px 0 0;',
+'    margin-left: 28px;',
+'    text-decoration: none;',
+'    color: #6DB343;',
+'    font-size: 1.2em;',
+'}',
+'.footer_ui li a:hover {',
+'    ',
+'    text-decoration:underline;',
+'  ',
+'}'))
+,p_step_template=>wwv_flow_api.id(30304480696041333)
+,p_page_css_classes=>'top1'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160622180432'
+,p_last_upd_yyyymmddhh24miss=>'20160624174004'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31760315573431023)
@@ -10212,7 +10514,60 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_column=>3
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_plug_header=>'<h3 align="center">Join EasyTaxPayer today.</h3>'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<style>',
+'    .title',
+'    {',
+'        color: #6DB343;',
+'        ',
+'    }',
+'</style>',
+'',
+'<h3 class="title" align="center">Join EasyTaxPayer today.</h3>',
+'',
+'<style>',
+'.signup_btn',
+'{',
+'    color: white;',
+'    font-weight: bold;',
+'    background-color: #6DB343;',
+'    margin-right: 7px;',
+'    width: 200px;',
+'}',
+'</style>'))
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(32181336932967119)
+,p_plug_name=>'footer Link'
+,p_region_sub_css_classes=>'footer_ui'
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30247650370544600)
+,p_plug_display_sequence=>230
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'REGION_POSITION_05'
+,p_list_id=>wwv_flow_api.id(32588872467280891)
+,p_plug_source_type=>'NATIVE_LIST'
+,p_list_template_id=>wwv_flow_api.id(32443800699108113)
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(32181401119967120)
+,p_plug_name=>'footer'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noBorder:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(30255782108544603)
+,p_plug_display_sequence=>230
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'REGION_POSITION_05'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_footer=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<div style="margin-left:70px;">',
+'    <p style="font-size:13px;color:grey;">',
+'    Novaji Introserve Limited@&G_YEAR.',
+'</p>',
+'</div>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -10227,6 +10582,7 @@ wwv_flow_api.create_page_button(
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Sign Up'
 ,p_button_position=>'BELOW_BOX'
+,p_button_css_classes=>'signup_btn'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(31760938247431029)
@@ -10239,7 +10595,8 @@ wwv_flow_api.create_page_button(
 ,p_button_image_alt=>'Cancel'
 ,p_button_position=>'BELOW_BOX'
 ,p_button_alignment=>'LEFT'
-,p_button_redirect_url=>'f?p=&APP_ID.:101:&SESSION.::&DEBUG.:RP::'
+,p_button_redirect_url=>'f?p=&APP_ID.:12:&SESSION.::&DEBUG.:RP::'
+,p_button_css_classes=>'cancel_btn'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(31760401750431024)
@@ -10568,18 +10925,56 @@ wwv_flow_api.create_page(
 '    ',
 '    padding: 10px 0 0 0;',
 '    margin-left: 15px;',
+'    color:#6DB343;',
 '  ',
 '}',
 '.forgot-password:hover{',
 '    text-decoration: underline;',
-'}'))
+'}',
+'',
+'.footer_ui{',
+'    padding: 10px 0 0 18px;',
+'}',
+'.footer_ui li{',
+'    padding: 0 10px 0 0;',
+'    text-decoration: none;',
+'    color: #6DB343;',
+'    font-size: 10px;',
+'}',
+'.footer_ui li a {',
+'    padding: 0 10px 0 0;',
+'    text-decoration: none;',
+'    color: #6DB343;',
+'    font-size: 1.2em;',
+'}',
+'.footer_ui li a:hover {',
+'    ',
+'    text-decoration:underline;',
+'  ',
+'}',
+''))
 ,p_step_template=>wwv_flow_api.id(30304480696041333)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
-,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160623184908'
+,p_last_updated_by=>'SUPPORT'
+,p_last_upd_yyyymmddhh24miss=>'20160624172504'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(32081760685713543)
+,p_plug_name=>'Footer Links'
+,p_region_sub_css_classes=>'footer_ui'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30259094599544603)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_05'
+,p_list_id=>wwv_flow_api.id(32588872467280891)
+,p_plug_source_type=>'NATIVE_LIST'
+,p_list_template_id=>wwv_flow_api.id(32443800699108113)
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32405534397257488)
@@ -10592,8 +10987,8 @@ wwv_flow_api.create_page_plug(
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_footer=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<div style="padding: 0 0 0 50px">',
-'    <p style="font-size:10px;color:grey">',
+'<div style="margin-left:70px;">',
+'    <p style="font-size:13px;color:grey;">',
 '    Novaji Introserve Limited@&G_YEAR.',
 '</p>',
 '</div>',
@@ -10618,12 +11013,32 @@ wwv_flow_api.create_page_plug(
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<h3 style="color:#6DB343;margin: 10px 0 0 15px">',
+'<style>',
+'    .top_title',
+'    {',
+'        color: #6db343;',
+'        margin: 10px 0 0 15px;',
+'    }',
+'</style>',
+'',
+'',
+'<h3  class="top_title">',
 '    Simplify Tax Collection..',
 '</h3>'))
 ,p_plug_footer=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<div style="margin:10px 0 0 15px">',
-'    Don''t have an account? <a href="http://novajii.com:4000/apex/f?p=101:8:14227972912709:::::" style="text-align: right; color:#6DB343;text-decoration:underline">Sign Up »</a><br/><br/><br/>',
+'<style>',
+'    .signup a',
+'    {',
+'        text-decoration: none;',
+'    }',
+'    .signup a:hover',
+'    {',
+'        text-decoration: underline;',
+'    }',
+'</style>',
+'',
+'<div style="margin:10px 0 0 15px" class="signup">',
+'    Don''t have an account? <a href="http://novajii.com:4000/apex/f?p=101:8:14227972912709:::::" style="text-align: right; color:#6DB343;">Sign Up »</a><br/><br/><br/>',
 '</div>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
@@ -10652,7 +11067,7 @@ wwv_flow_api.create_page_button(
 ,p_button_template_options=>'#DEFAULT#:t-Button--small:t-Button--noUI'
 ,p_button_template_id=>wwv_flow_api.id(30276759288544615)
 ,p_button_is_hot=>'Y'
-,p_button_image_alt=>'<span style="color:green">Forgot  Password</span>'
+,p_button_image_alt=>'<span style="color:#6db343">Forgot  Password?</span>'
 ,p_button_position=>'BODY'
 ,p_button_redirect_url=>'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:RP::'
 ,p_button_css_classes=>'forgot-password'

@@ -27,7 +27,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 -- Application Export:
 --   Application:     101
 --   Name:            easytaxpayer.com
---   Date and Time:   00:00 Saturday June 25, 2016
+--   Date and Time:   00:00 Sunday June 26, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -119,8 +119,8 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_01=>'http://easytaxpayer.com/img/'
 ,p_substitution_string_02=>'WHITE_LOGO'
 ,p_substitution_value_02=>' <img src="http://easytaxpayer.com/img/white_tax_logo.png" style="height:42px;padding-left:15px;vertical-align:middle"/>'
-,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160624175459'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160625231923'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -10500,8 +10500,8 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
-,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160624174004'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160625231445'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31760315573431023)
@@ -10523,7 +10523,7 @@ wwv_flow_api.create_page_plug(
 '    }',
 '</style>',
 '',
-'<h3 class="title" align="center">Join EasyTaxPayer today.</h3>',
+'<h3 class="title">Create an account</h3>',
 '',
 '<style>',
 '.signup_btn',
@@ -10958,8 +10958,8 @@ wwv_flow_api.create_page(
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
-,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160624172504'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160625231923'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32081760685713543)
@@ -10989,7 +10989,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_footer=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<div style="margin-left:70px;">',
 '    <p style="font-size:13px;color:grey;">',
-'    Novaji Introserve Limited@&G_YEAR.',
+'    Novaji Introserve.. Limited@&G_YEAR.',
 '</p>',
 '</div>',
 '',

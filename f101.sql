@@ -27,7 +27,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 -- Application Export:
 --   Application:     101
 --   Name:            easytaxpayer.com
---   Date and Time:   00:00 Monday June 27, 2016
+--   Date and Time:   00:00 Tuesday June 28, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -36,11 +36,11 @@ prompt APPLICATION 101 - easytaxpayer.com
 --
 
 -- Application Statistics:
---   Pages:                     12
+--   Pages:                     13
 --     Items:                   25
 --     Validations:              2
 --     Processes:               20
---     Regions:                 32
+--     Regions:                 29
 --     Buttons:                 11
 --     Dynamic Actions:          1
 --   Shared Components:
@@ -50,7 +50,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 --     Navigation:
 --       Lists:                  5
 --       Breadcrumbs:            1
---         Entries:              5
+--         Entries:              6
 --     Security:
 --       Authentication:         2
 --       Authorization:          6
@@ -119,8 +119,8 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_01=>'http://easytaxpayer.com/img/'
 ,p_substitution_string_02=>'WHITE_LOGO'
 ,p_substitution_value_02=>' <img src="http://easytaxpayer.com/img/white_tax_logo.png" style="height:42px;padding-left:15px;vertical-align:middle"/>'
-,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160625231923'
+,p_last_updated_by=>'SUPPORT'
+,p_last_upd_yyyymmddhh24miss=>'20160627173123'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -178,6 +178,13 @@ wwv_flow_api.create_list_item(
 ,p_list_item_display_sequence=>25
 ,p_list_item_link_text=>'View Payments'
 ,p_list_item_link_target=>'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::::'
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(32848784222725489)
+,p_list_item_display_sequence=>28
+,p_list_item_link_text=>'My Payment'
+,p_list_item_link_target=>'f?p=&APP_ID.:9:&SESSION.::&DEBUG.::::'
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list_item(
@@ -242,9 +249,9 @@ wwv_flow_api.create_list_item(
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(32590696888280893)
 ,p_list_item_display_sequence=>50
-,p_list_item_link_text=>'privacy'
+,p_list_item_link_text=>'Privacy'
 ,p_list_item_link_target=>'#'
-,p_list_item_current_for_pages=>'#'
+,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(32592552568283930)
@@ -500,6 +507,13 @@ wwv_flow_api.create_menu_option(
 ,p_short_name=>'Change Password'
 ,p_link=>'f?p=&APP_ID.:10:&SESSION.::&DEBUG.:::'
 ,p_page_id=>4
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(32850013010736125)
+,p_parent_id=>wwv_flow_api.id(30283634446544649)
+,p_short_name=>'My Payment'
+,p_link=>'f?p=&APP_ID.:9:&SESSION.'
+,p_page_id=>9
 );
 end;
 /
@@ -3101,15 +3115,32 @@ wwv_flow_api.create_template(
 ,p_name=>'Minimal - Login'
 ,p_is_popup=>false
 ,p_javascript_code_onload=>'apex.theme42.initializePage.noSideCol();'
-,p_css_file_urls=>'http://easytaxpayer.com/color.css'
+,p_css_file_urls=>'http://easytaxpayer.com/login.css'
 ,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'div.t-Body{',
+'    //background-image: url(http://localhost/ore.com.ng/images/bg2a.png);',
+'    //background-image: url(http://localhost/ore.com.ng/images/bg-family-friends-flat.png);',
+'    //background-image: url(https://ore.ng/images/bg-family-friends-flat.png);',
+'    //background-image: url(http://easytaxpayer.com/img/background_tax.png);',
+'    background-size: 100%;',
+'    background-color: white;',
+'    background-repeat: repeat-x;',
+'    margin: 0px 0px 0px 0px;',
+'}',
+'',
+'',
 '.t_PageBody,.t-PageBody,.container,.t-Body, #t_PageBody, .t-Body-main{',
-'     margin: 0px 0px 0px 0px;',
-'     background-color: white;',
+'     /*margin: 0px 0px 0px 0px;',
+'     background-color: white;*/',
+'    ',
 '}',
 't-Body-content{',
 '    background-color: white;    ',
-'    background-image: none;   ',
+'    background-image: none;  ',
+'    /*background-image: url(http://easytaxpayer.com/img/background_tax.png);',
+'    background-size: 100%;',
+'    background-repeat: repeat-x;',
+'    margin: 0px 0px 0px 0px;*/',
 '}',
 't-Header-navBar',
 '{',
@@ -3134,11 +3165,15 @@ wwv_flow_api.create_template(
 '  #THEME_STYLE_CSS#',
 '  #APPLICATION_CSS#',
 '  #PAGE_CSS#  ',
-' #FAVICONS#',
+' <!--#FAVICONS#-->',
+'    <link rel="shortcut icon" href="/i/favicon.ico">',
+'<link rel="icon" sizes="16x16" href="http://easytaxpayer.com/img/favicon-16x16.png">',
+'<link rel="icon" sizes="32x32" href="http://easytaxpayer.com/img/favicon-32x32.png">',
+'<link rel="apple-touch-icon" sizes="180x180" href="http://easytaxpayer.com/img/favicon-180x180.png">',
 '  #HEAD#',
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>',
 '</head>',
-'<body class="t-PageBody t-PageBody--hideLeft t-PageBody--hideActions no-anim #PAGE_CSS_CLASSES# t-PageBody--noNav" #ONLOAD# id="t_PageBody" style="background-color:white;">',
+'<body class="t-PageBody t-PageBody--hideLeft t-PageBody--hideActions no-anim #PAGE_CSS_CLASSES# t-PageBody--noNav" #ONLOAD# id="t_PageBody" style=";">',
 '#FORM_OPEN#',
 '<header class="t-Header" id="t_Header">',
 '  #REGION_POSITION_07#',
@@ -3172,33 +3207,41 @@ wwv_flow_api.create_template(
 '    <!--div class="t-Header-navBar" style="background-color:#6DB343;">',
 '      #NAVIGATION_BAR#',
 '    </div-->',
-'  </div>',
 '</header>',
 '    '))
 ,p_box=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<div class="t-Body" style="color:#6DB343;">',
-'  <div class="t-Body-main" style="color:#6DB343;">',
+'  <div class="t-Body-main" style="color:#6DB343; ">',
 '      <div class="t-Body-title" id="t_Body_title">',
 '        #REGION_POSITION_01#',
 '      </div>',
-'      <div class="t-Body-content" id="t_Body_content">',
+'      <div class="t-Body-content" id="t_Body_content" >',
 '        #SUCCESS_MESSAGE##NOTIFICATION_MESSAGE##GLOBAL_NOTIFICATION#',
 '        <div class="t-Body-contentInner">',
 '          #BODY#',
 '        </div>',
+'        <!--',
 '        <footer class="t-Footer">',
-'          <!-- #APP_VERSION# -->',
+'           #APP_VERSION#',
 '          #CUSTOMIZE#',
-'          <!-- #SCREEN_READER_TOGGLE# -->',
+'           #SCREEN_READER_TOGGLE# ',
 '          #REGION_POSITION_05#',
 '        </footer>',
+'        -->',
 '      </div>',
 '  </div>',
 '</div>',
 '<div class="t-Body-inlineDialogs">',
 '  #REGION_POSITION_04#',
-'</div>'))
+'</div>',
+''))
 ,p_footer_template=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<footer style="padding: 0 0 0 0;margin: 0 0 0 0; width:100%;background-color:white">',
+'        ',
+'          #CUSTOMIZE#',
+'          <!-- #SCREEN_READER_TOGGLE# -->',
+'          #REGION_POSITION_05#',
+'</footer>',
 '#FORM_CLOSE#',
 '#DEVELOPER_TOOLBAR#',
 '#APEX_JAVASCRIPT#',
@@ -3548,7 +3591,9 @@ wwv_flow_api.create_template(
 ,p_name=>'Minimal - Main'
 ,p_is_popup=>false
 ,p_javascript_code_onload=>'apex.theme42.initializePage.noSideCol();'
-,p_css_file_urls=>'http://easytaxpayer.com/color.css'
+,p_css_file_urls=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'http://easytaxpayer.com/color.css',
+'http://easytaxpayer.com/login.css'))
 ,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '.t_PageBody,.t-PageBody,.container,.t-Body, #t_PageBody, .t-Body-main{',
 '     margin: 0px 0px 0px 0px;',
@@ -3581,7 +3626,12 @@ wwv_flow_api.create_template(
 '  #THEME_STYLE_CSS#',
 '  #APPLICATION_CSS#',
 '  #PAGE_CSS#  ',
-'  #FAVICONS#',
+'  <!--#FAVICONS#-->',
+'  <link rel="shortcut icon" href="/i/favicon.ico">',
+'<link rel="icon" sizes="16x16" href="http://easytaxpayer.com/img/favicon-16x16.png">',
+'<link rel="icon" sizes="32x32" href="http://easytaxpayer.com/img/favicon-32x32.png">',
+'<link rel="apple-touch-icon" sizes="180x180" href="http://easytaxpayer.com/img/favicon-180x180.png">',
+'',
 '  #HEAD#',
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>',
 '</head>',
@@ -4751,6 +4801,7 @@ wwv_flow_api.create_list_template(
 ,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '#horizontal ul{',
 '  list-style: none;',
+'',
 '}',
 '',
 '#horizontal li{',
@@ -9194,7 +9245,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'D'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160624115523'
+,p_last_upd_yyyymmddhh24miss=>'20160627153226'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29900232395802624)
@@ -9265,6 +9316,44 @@ wwv_flow_api.create_page_plug(
 ,p_list_template_id=>wwv_flow_api.id(30271774223544611)
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 );
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(32181561974967121)
+,p_plug_name=>'Footer'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30247650370544600)
+,p_plug_display_sequence=>220
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'REGION_POSITION_05'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<script>',
+'   ',
+'</script>'))
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(32181662229967122)
+,p_plug_name=>'links'
+,p_parent_plug_id=>wwv_flow_api.id(32181561974967121)
+,p_region_sub_css_classes=>'footer_ui'
+,p_region_template_options=>'#DEFAULT#:t-Region--noPadding:t-Region--removeHeader:t-Region--noBorder:t-Region--scrollBody'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30255782108544603)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_list_id=>wwv_flow_api.id(32588872467280891)
+,p_plug_source_type=>'NATIVE_LIST'
+,p_list_template_id=>wwv_flow_api.id(32443800699108113)
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_footer=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<div>',
+'    <p style="font-size:10px;color:grey; margin-left: 20px">',
+'    Novaji Introserve@&G_YEAR.',
+'    </p>',
+'</div>'))
+);
 end;
 /
 prompt --application/pages/page_00001
@@ -9278,13 +9367,14 @@ wwv_flow_api.create_page(
 ,p_step_sub_title=>'Home'
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
+,p_javascript_file_urls=>'http://easytaxpayer.com/login.css'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160624122537'
+,p_last_upd_yyyymmddhh24miss=>'20160627142038'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29900311777802625)
@@ -10210,49 +10300,28 @@ wwv_flow_api.create_page(
 '    background-color: #6DB343;',
 '    color: white;',
 '    font-weight: bold;',
-'    margin-right: 7px;',
+'    margin-right: 10px;',
 '}',
 '',
 '.cancel_btn',
 '{',
 '    color: #6db343;',
 '    font-weight: bold;',
-'    margin-left: 7px;',
+'    margin-left: 10px;',
 '}',
 '',
 '.head_title',
 '{',
 '    margin-left: 10px;',
 '}',
-'.footer_ui{',
-'    padding: 10px 0 0 18px;',
-'    ',
-'}',
-'.footer_ui li{',
-'    padding: 0 10px 0 0;',
-'    text-decoration: none;',
-'    color: #6DB343;',
-'    font-size: 10px;',
-'}',
-'.footer_ui li a {',
-'    padding: 0 10px 0 0;',
-'    margin-left: 28px;',
-'    text-decoration: none;',
-'    color: #6DB343;',
-'    font-size: 1.2em;',
-'}',
-'.footer_ui li a:hover {',
-'    ',
-'    text-decoration:underline;',
-'  ',
-'}'))
+''))
 ,p_step_template=>wwv_flow_api.id(30304480696041333)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160624173359'
+,p_last_upd_yyyymmddhh24miss=>'20160627162130'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32084480838821795)
@@ -10270,40 +10339,6 @@ wwv_flow_api.create_page_plug(
 '<h3 class="head_title" style="color:#6db343;  margin-left: 7px;">',
 '   Reset Password',
 '</h3>'))
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(32181111172967117)
-,p_plug_name=>'footer Link'
-,p_region_sub_css_classes=>'footer_ui'
-,p_region_template_options=>'#DEFAULT#:t-Form--slimPadding'
-,p_component_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(30247650370544600)
-,p_plug_display_sequence=>220
-,p_include_in_reg_disp_sel_yn=>'Y'
-,p_plug_grid_column_css_classes=>'footer'
-,p_plug_display_point=>'REGION_POSITION_05'
-,p_list_id=>wwv_flow_api.id(32588872467280891)
-,p_plug_source_type=>'NATIVE_LIST'
-,p_list_template_id=>wwv_flow_api.id(32443800699108113)
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(32181205349967118)
-,p_plug_name=>'footer'
-,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noBorder:t-Region--scrollBody'
-,p_plug_template=>wwv_flow_api.id(30255782108544603)
-,p_plug_display_sequence=>220
-,p_include_in_reg_disp_sel_yn=>'Y'
-,p_plug_display_point=>'REGION_POSITION_05'
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_plug_footer=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<div style="margin-left:70px;">',
-'    <p style="font-size:13px;color:grey;">',
-'    Novaji Introserve Limited@&G_YEAR.',
-'</p>',
-'</div>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -10454,54 +10489,26 @@ wwv_flow_api.create_page(
 ,p_step_sub_title=>'Sign Up'
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
-,p_html_page_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<style>',
-'    .top1{',
-'    padding: 20px 0 20px 50px;',
-'    height:10%;',
-'    border-bottom: 0px solid green;',
-'    background-color:#6DB343;',
-'}',
-'',
-'</style>'))
+,p_css_file_urls=>'http://easytaxpayer.com/login.css'
 ,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '.cancel_btn',
 '{',
-'    color: #6db343;',
-'    font-weight: bold;',
-'    margin-left: 7px;',
-'}',
-'.footer_ui{',
-'    padding: 10px 0 0 18px;',
+'    color: #6DB343;',
 '    ',
 '}',
-'.footer_ui li{',
-'    padding: 0 10px 0 0;',
-'    text-decoration: none;',
-'    color: #6DB343;',
-'    font-size: 10px;',
-'}',
-'.footer_ui li a {',
-'    padding: 0 10px 0 0;',
-'    margin-left: 28px;',
-'    text-decoration: none;',
-'    color: #6DB343;',
-'    font-size: 1.2em;',
-'}',
-'.footer_ui li a:hover {',
-'    ',
-'    text-decoration:underline;',
-'  ',
+'.signup_btn',
+'{',
+'    color: white;',
+'    background-color: #6DB343;',
 '}'))
 ,p_step_template=>wwv_flow_api.id(30304480696041333)
-,p_page_css_classes=>'top1'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
-,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160625231445'
+,p_last_updated_by=>'SUPPORT'
+,p_last_upd_yyyymmddhh24miss=>'20160627161404'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31760315573431023)
@@ -10525,49 +10532,7 @@ wwv_flow_api.create_page_plug(
 '',
 '<h3 class="title">Create an account</h3>',
 '',
-'<style>',
-'.signup_btn',
-'{',
-'    color: white;',
-'    font-weight: bold;',
-'    background-color: #6DB343;',
-'    margin-right: 7px;',
-'    width: 200px;',
-'}',
-'</style>'))
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(32181336932967119)
-,p_plug_name=>'footer Link'
-,p_region_sub_css_classes=>'footer_ui'
-,p_region_template_options=>'#DEFAULT#'
-,p_component_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(30247650370544600)
-,p_plug_display_sequence=>230
-,p_include_in_reg_disp_sel_yn=>'Y'
-,p_plug_display_point=>'REGION_POSITION_05'
-,p_list_id=>wwv_flow_api.id(32588872467280891)
-,p_plug_source_type=>'NATIVE_LIST'
-,p_list_template_id=>wwv_flow_api.id(32443800699108113)
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(32181401119967120)
-,p_plug_name=>'footer'
-,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noBorder:t-Region--scrollBody'
-,p_plug_template=>wwv_flow_api.id(30255782108544603)
-,p_plug_display_sequence=>230
-,p_include_in_reg_disp_sel_yn=>'Y'
-,p_plug_display_point=>'REGION_POSITION_05'
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_plug_footer=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<div style="margin-left:70px;">',
-'    <p style="font-size:13px;color:grey;">',
-'    Novaji Introserve Limited@&G_YEAR.',
-'</p>',
-'</div>'))
+''))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -10789,6 +10754,41 @@ wwv_flow_api.create_page_process(
 );
 end;
 /
+prompt --application/pages/page_00009
+begin
+wwv_flow_api.create_page(
+ p_id=>9
+,p_user_interface_id=>wwv_flow_api.id(30281936301544630)
+,p_name=>'My Payment'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'My Payment'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_help_text=>'No help is available for this page.'
+,p_last_updated_by=>'SUPPORT'
+,p_last_upd_yyyymmddhh24miss=>'20160627171341'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(32849673218736124)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30259094599544603)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(30283250495544647)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(30277254044544615)
+,p_plug_query_row_template=>1
+);
+end;
+/
 prompt --application/pages/page_00010
 begin
 wwv_flow_api.create_page(
@@ -10899,58 +10899,17 @@ wwv_flow_api.create_page(
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'AUTO_FIRST_ITEM'
 ,p_autocomplete_on_off=>'OFF'
+,p_css_file_urls=>'http://easytaxpayer.com/login.css'
 ,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'.top1{',
-'    padding: 20px 0 20px 50px;',
-'    height:10%;',
-'    border-bottom: 0px solid green;',
-'    background-color:#6DB343;',
+'.pad-btn',
+'{',
+'    background-color: #6DB343;',
+'    color: white;',
+'    font-weight: bold;',
 '}',
-'',
-'.t-Footer{',
-'    width: 100%;',
-'    padding: 20px 0 auto 50px;',
-'}',
-'',
-'.pad-btn{',
-'',
-'    margin-left: 15px;',
-'    margin-right: 7%;',
-'    width:93%;',
-'    color:white;',
-'    background-color:#6DB343;',
-'}',
-'',
-'.forgot-password {',
-'    ',
-'    padding: 10px 0 0 0;',
-'    margin-left: 15px;',
-'    color:#6DB343;',
-'  ',
-'}',
-'.forgot-password:hover{',
-'    text-decoration: underline;',
-'}',
-'',
-'.footer_ui{',
-'    padding: 10px 0 0 18px;',
-'}',
-'.footer_ui li{',
-'    padding: 0 10px 0 0;',
-'    text-decoration: none;',
-'    color: #6DB343;',
-'    font-size: 10px;',
-'}',
-'.footer_ui li a {',
-'    padding: 0 10px 0 0;',
-'    text-decoration: none;',
-'    color: #6DB343;',
-'    font-size: 1.2em;',
-'}',
-'.footer_ui li a:hover {',
-'    ',
-'    text-decoration:underline;',
-'  ',
+'.sign_fm',
+'{',
+'    background-color: transparent;',
 '}',
 ''))
 ,p_step_template=>wwv_flow_api.id(30304480696041333)
@@ -10958,48 +10917,13 @@ wwv_flow_api.create_page(
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
-,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160625231923'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(32081760685713543)
-,p_plug_name=>'Footer Links'
-,p_region_sub_css_classes=>'footer_ui'
-,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
-,p_component_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(30259094599544603)
-,p_plug_display_sequence=>10
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_plug_display_point=>'REGION_POSITION_05'
-,p_list_id=>wwv_flow_api.id(32588872467280891)
-,p_plug_source_type=>'NATIVE_LIST'
-,p_list_template_id=>wwv_flow_api.id(32443800699108113)
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(32405534397257488)
-,p_plug_name=>'Footer'
-,p_region_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(30247650370544600)
-,p_plug_display_sequence=>10
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_plug_display_point=>'REGION_POSITION_05'
-,p_plug_query_row_template=>1
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_plug_footer=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<div style="margin-left:70px;">',
-'    <p style="font-size:13px;color:grey;">',
-'    Novaji Introserve.. Limited@&G_YEAR.',
-'</p>',
-'</div>',
-'',
-''))
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
+,p_last_updated_by=>'SUPPORT'
+,p_last_upd_yyyymmddhh24miss=>'20160627154427'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32405909123257491)
 ,p_plug_name=>'Sign In'
+,p_region_css_classes=>'sign_fm'
 ,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noBorder:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(30255782108544603)
 ,p_plug_display_sequence=>10

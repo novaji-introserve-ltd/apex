@@ -27,7 +27,7 @@ prompt APPLICATION 112 - ruby.banking.app
 -- Application Export:
 --   Application:     112
 --   Name:            ruby.banking.app
---   Date and Time:   00:00 Monday June 27, 2016
+--   Date and Time:   00:00 Tuesday June 28, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -40,7 +40,7 @@ prompt APPLICATION 112 - ruby.banking.app
 --     Items:                  180
 --     Validations:             18
 --     Processes:               70
---     Regions:                120
+--     Regions:                121
 --     Buttons:                113
 --     Dynamic Actions:         14
 --   Shared Components:
@@ -121,7 +121,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_03=>'DOWNLOADCSV'
 ,p_substitution_value_03=>'<span class="fa fa-file-excel-o"></span><span class="download">Download</span>'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160625230256'
+,p_last_upd_yyyymmddhh24miss=>'20160627101118'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -20068,7 +20068,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160625170355'
+,p_last_upd_yyyymmddhh24miss=>'20160627101118'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31003637319521025)
@@ -20117,7 +20117,7 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32082168586713547)
-,p_plug_name=>'Savings Balance <br> &P16_SAVING_BALANCE.  &NGN.'
+,p_plug_name=>'Total Savings<br> &P16_SAVING_BALANCE.  &NGN.'
 ,p_parent_plug_id=>wwv_flow_api.id(32082248355713548)
 ,p_icon_css_classes=>'fa-money'
 ,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
@@ -20134,7 +20134,7 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32082457811713550)
-,p_plug_name=>'Cash Security <br/>  &P16_CASH_SECURITY.  &NGN.'
+,p_plug_name=>'Total Cash Security <br/>  &P16_CASH_SECURITY.  &NGN.'
 ,p_parent_plug_id=>wwv_flow_api.id(32082248355713548)
 ,p_icon_css_classes=>'fa-anchor'
 ,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
@@ -20187,10 +20187,10 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32494042342014506)
-,p_plug_name=>'Loan Outstanding<br/>  &P16_OUTSTANDING.  &NGN.'
+,p_plug_name=>'Current Loan Outstanding<br/>  &P16_OUTSTANDING.  &NGN.'
 ,p_parent_plug_id=>wwv_flow_api.id(32082248355713548)
 ,p_icon_css_classes=>'fa-exclamation-triangle'
-,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
+,p_region_template_options=>'#DEFAULT#:t-Alert--colorBG:t-Alert--horizontal:t-Alert--customIcons:t-Alert--warning'
 ,p_plug_template=>wwv_flow_api.id(30642275121989930)
 ,p_plug_display_sequence=>50
 ,p_include_in_reg_disp_sel_yn=>'N'
@@ -20400,6 +20400,114 @@ wwv_flow_api.create_report_columns(
 ,p_column_display_sequence=>2
 ,p_hidden_column=>'Y'
 ,p_derived_column=>'N'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(32775390524934311)
+,p_name=>'Cash Securities'
+,p_parent_plug_id=>wwv_flow_api.id(32494130267014507)
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>50
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight'
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select member_id,group_id,credit_officer_id, amount, loan_id,title,disbursed_date ',
+'from cash_security where member_id = :p16_id order by loan_id desc'))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_display_when_condition=>'P16_ID'
+,p_display_condition_type=>'ITEM_IS_NOT_NULL'
+,p_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>',
+'    <span class="fa fa-bar-chart"></span>&nbsp;Cash Security',
+'</h3>'))
+,p_ajax_enabled=>'Y'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_num_rows=>15
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_show_nulls_as=>'-'
+,p_query_no_data_found=>'No data found'
+,p_query_num_rows_type=>'ROW_RANGES_IN_SELECT_LIST'
+,p_pagination_display_position=>'TOP_AND_BOTTOM_RIGHT'
+,p_csv_output=>'Y'
+,p_csv_output_link_text=>'Download'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_exp_separator=>','
+,p_plug_query_exp_enclosed_by=>'"'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32775788897934315)
+,p_query_column_id=>1
+,p_column_alias=>'MEMBER_ID'
+,p_column_display_sequence=>3
+,p_column_heading=>'Member'
+,p_use_as_row_header=>'N'
+,p_display_as=>'TEXT_FROM_LOV'
+,p_named_lov=>wwv_flow_api.id(31674125145879241)
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32775471814934312)
+,p_query_column_id=>2
+,p_column_alias=>'GROUP_ID'
+,p_column_display_sequence=>1
+,p_column_heading=>'Group '
+,p_use_as_row_header=>'N'
+,p_display_as=>'TEXT_FROM_LOV'
+,p_named_lov=>wwv_flow_api.id(30938724757402817)
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32775616441934314)
+,p_query_column_id=>3
+,p_column_alias=>'CREDIT_OFFICER_ID'
+,p_column_display_sequence=>2
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32775935699934317)
+,p_query_column_id=>4
+,p_column_alias=>'AMOUNT'
+,p_column_display_sequence=>4
+,p_column_heading=>'Amount'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32776023223934318)
+,p_query_column_id=>5
+,p_column_alias=>'LOAN_ID'
+,p_column_display_sequence=>5
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32776113078934319)
+,p_query_column_id=>6
+,p_column_alias=>'TITLE'
+,p_column_display_sequence=>6
+,p_column_heading=>'Title'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32776287885934320)
+,p_query_column_id=>7
+,p_column_alias=>'DISBURSED_DATE'
+,p_column_display_sequence=>7
+,p_column_heading=>'Disbursed date'
+,p_use_as_row_header=>'N'
+,p_column_format=>'dd/mm/yy'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(30986472202521006)
@@ -20930,6 +21038,9 @@ wwv_flow_api.create_page_item(
 ,p_display_when_type=>'ITEM_IS_NOT_NULL'
 ,p_attribute_01=>'Y'
 );
+end;
+/
+begin
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(32082365363713549)
 ,p_name=>'P16_CASH_SECURITY'
@@ -21040,9 +21151,6 @@ wwv_flow_api.create_page_validation(
 ,p_associated_item=>wwv_flow_api.id(30993460620521011)
 ,p_error_display_location=>'INLINE_WITH_FIELD_AND_NOTIFICATION'
 );
-end;
-/
-begin
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(30994287110521012)
 ,p_process_sequence=>10

@@ -27,7 +27,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 -- Application Export:
 --   Application:     101
 --   Name:            easytaxpayer.com
---   Date and Time:   00:00 Wednesday June 29, 2016
+--   Date and Time:   00:00 Thursday June 30, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -40,7 +40,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 --     Items:                   25
 --     Validations:              2
 --     Processes:               20
---     Regions:                 31
+--     Regions:                 32
 --     Buttons:                 11
 --     Dynamic Actions:          1
 --   Shared Components:
@@ -53,7 +53,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 --         Entries:              6
 --     Security:
 --       Authentication:         2
---       Authorization:          6
+--       Authorization:          8
 --     User Interface:
 --       Themes:                 1
 --       Templates:
@@ -120,7 +120,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_02=>'WHITE_LOGO'
 ,p_substitution_value_02=>' <img src="http://easytaxpayer.com/img/white_tax_logo.png" style="height:42px;padding-left:15px;vertical-align:middle"/>'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160628165821'
+,p_last_upd_yyyymmddhh24miss=>'20160629161606'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -163,7 +163,8 @@ wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(30323444381214486)
 ,p_list_item_display_sequence=>10
 ,p_list_item_link_text=>'Home'
-,p_list_item_link_target=>'f?p=&APP_ID.:1:&SESSION.:'
+,p_list_item_link_target=>'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'
+,p_security_scheme=>wwv_flow_api.id(32965113872283058)
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list_item(
@@ -171,6 +172,7 @@ wwv_flow_api.create_list_item(
 ,p_list_item_display_sequence=>20
 ,p_list_item_link_text=>'Validate TIN'
 ,p_list_item_link_target=>'f?p=&APP_ID.:2:&SESSION.::&DEBUG.::::'
+,p_security_scheme=>'!'||wwv_flow_api.id(32976046393894516)
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list_item(
@@ -178,13 +180,15 @@ wwv_flow_api.create_list_item(
 ,p_list_item_display_sequence=>25
 ,p_list_item_link_text=>'View Payments'
 ,p_list_item_link_target=>'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::::'
+,p_security_scheme=>wwv_flow_api.id(32976046393894516)
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(32848784222725489)
 ,p_list_item_display_sequence=>28
-,p_list_item_link_text=>'My Payment'
+,p_list_item_link_text=>'My Payments'
 ,p_list_item_link_target=>'f?p=&APP_ID.:9:&SESSION.::&DEBUG.::::'
+,p_security_scheme=>wwv_flow_api.id(32965113872283058)
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list_item(
@@ -320,50 +324,90 @@ end;
 prompt --application/shared_components/security/authorizations
 begin
 wwv_flow_api.create_security_scheme(
- p_id=>wwv_flow_api.id(32292753421815159)
-,p_name=>'Administration '
+ p_id=>wwv_flow_api.id(32964096689140007)
+,p_name=>'Admin Only'
 ,p_scheme_type=>'NATIVE_FUNCTION_BODY'
-,p_attribute_01=>'return auth.user_role(:app_user) in (''admin'');'
-,p_error_message=>'You are not authorized to access this page'
+,p_attribute_01=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'if AUTH.USER_ROLE(:app_user) in (''admin'') then  return true;',
+'else return false;',
+'end if;'))
+,p_error_message=>'Page access restricted to Admin users only'
 ,p_caching=>'BY_USER_BY_SESSION'
 );
 wwv_flow_api.create_security_scheme(
- p_id=>wwv_flow_api.id(32293325846845276)
+ p_id=>wwv_flow_api.id(32964254329186969)
 ,p_name=>'IRS'
 ,p_scheme_type=>'NATIVE_FUNCTION_BODY'
-,p_attribute_01=>'return auth.user_role(:app_user) in (''irs'');'
+,p_attribute_01=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'if AUTH.USER_ROLE(:app_user) in (''irs'') then  return true;',
+'else return false;',
+'end if;'))
 ,p_error_message=>'You are not authorized to access this page'
 ,p_caching=>'BY_USER_BY_SESSION'
 );
 wwv_flow_api.create_security_scheme(
- p_id=>wwv_flow_api.id(32301064721860523)
-,p_name=>'Tax Payer'
-,p_scheme_type=>'NATIVE_FUNCTION_BODY'
-,p_attribute_01=>'return auth.user_role(:app_user) in (''taxpayer'');'
-,p_error_message=>'You are not authorized to access this page'
-,p_caching=>'BY_USER_BY_SESSION'
-);
-wwv_flow_api.create_security_scheme(
- p_id=>wwv_flow_api.id(32301589302873647)
-,p_name=>'OPERATOR'
-,p_scheme_type=>'NATIVE_FUNCTION_BODY'
-,p_attribute_01=>'return auth.user_role(:app_user) in (''operator'');'
-,p_error_message=>'You are not authorized to access this page'
-,p_caching=>'BY_USER_BY_SESSION'
-);
-wwv_flow_api.create_security_scheme(
- p_id=>wwv_flow_api.id(32301749963881491)
+ p_id=>wwv_flow_api.id(32964411643232613)
 ,p_name=>'Switch'
 ,p_scheme_type=>'NATIVE_FUNCTION_BODY'
-,p_attribute_01=>'return auth.user_role(:app_user) in (''switch'');'
+,p_attribute_01=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'if AUTH.USER_ROLE(:app_user) in (''switch'') then  return true;',
+'else return false;',
+'end if;'))
 ,p_error_message=>'You are not authorized to access this page'
 ,p_caching=>'BY_USER_BY_SESSION'
 );
 wwv_flow_api.create_security_scheme(
- p_id=>wwv_flow_api.id(32366312564809141)
-,p_name=>'Null user'
+ p_id=>wwv_flow_api.id(32964645123260293)
+,p_name=>'Operator'
 ,p_scheme_type=>'NATIVE_FUNCTION_BODY'
-,p_attribute_01=>'return auth.user_role(:app_user) not in (''admin'',''irs'', ''switch'', ''operator'', ''taxpayer'');'
+,p_attribute_01=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'if AUTH.USER_ROLE(:app_user) in (''operator'') then  return true;',
+'else return false;',
+'end if;'))
+,p_error_message=>'You are not authorized to access this page'
+,p_caching=>'BY_USER_BY_SESSION'
+);
+wwv_flow_api.create_security_scheme(
+ p_id=>wwv_flow_api.id(32964821077264311)
+,p_name=>'Taxpayer Only'
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'if AUTH.USER_ROLE(:app_user) in (''taxpayer'') then  return true;',
+'else return false;',
+'end if;'))
+,p_error_message=>'You are not authorized to access this page'
+,p_caching=>'BY_USER_BY_SESSION'
+);
+wwv_flow_api.create_security_scheme(
+ p_id=>wwv_flow_api.id(32965113872283058)
+,p_name=>'All Users'
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'if AUTH.USER_ROLE(:app_user) in (''admin'',''taxpayer'',''switch'',''operator'',''irs'') then  return true;',
+'else return false;',
+'end if;'))
+,p_error_message=>'You are not authorized to access this page'
+,p_caching=>'BY_USER_BY_SESSION'
+);
+wwv_flow_api.create_security_scheme(
+ p_id=>wwv_flow_api.id(32965420042304037)
+,p_name=>'Switch /Admin/Operator'
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'if AUTH.USER_ROLE(:app_user) in (''operator'', ''admin'', ''switch'') then  return true;',
+'else return false;',
+'end if;'))
+,p_error_message=>'You are not authorized to access this page'
+,p_caching=>'BY_USER_BY_SESSION'
+);
+wwv_flow_api.create_security_scheme(
+ p_id=>wwv_flow_api.id(32976046393894516)
+,p_name=>'Switch/Admin/Operator/IRS'
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'if AUTH.USER_ROLE(:app_user) in (''operator'', ''admin'', ''switch'', ''irs'') then  return true;',
+'else return false;',
+'end if;'))
 ,p_error_message=>'You are not authorized to access this page'
 ,p_caching=>'BY_USER_BY_SESSION'
 );
@@ -9504,7 +9548,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160628165821'
+,p_last_upd_yyyymmddhh24miss=>'20160629161218'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29902712439802649)
@@ -9653,7 +9697,7 @@ wwv_flow_api.create_page_item(
 '',
 'select name into v_role_name from roles where id = v_role;',
 '',
-'if v_role_name in (''admin'', ''switch'') then',
+'if v_role_name in (''admin'', ''switch'', ''operator'') then',
 'return ''Select name, id from states order by name'';',
 'else ',
 'return ''Select name, id from states where id =''|| v_state_id;',
@@ -10027,13 +10071,13 @@ wwv_flow_api.create_page(
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
 ,p_page_template_options=>'#DEFAULT#'
-,p_dialog_chained=>'Y'
+,p_required_role=>wwv_flow_api.id(32976046393894516)
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160628152303'
+,p_last_upd_yyyymmddhh24miss=>'20160629161014'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31761242309431032)
@@ -10079,6 +10123,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_required_role=>wwv_flow_api.id(32964254329186969)
 ,p_prn_content_disposition=>'ATTACHMENT'
 ,p_prn_document_header=>'APEX'
 ,p_prn_units=>'INCHES'
@@ -10208,6 +10253,151 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_is_default=>'Y'
 ,p_display_rows=>50
 ,p_report_columns=>'ID:MOBILE_NUMBER:PAYMENT_NUMBER:UTIN_NUMBER:STATE_ID:PAYMENT_DATE:STATUS_ID'
+,p_flashback_enabled=>'N'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(32862550894529921)
+,p_plug_name=>'All Payment'
+,p_parent_plug_id=>wwv_flow_api.id(32862473468529920)
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30255234212544602)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select id,mobile_number,amount,payment_number,utin_number,state_id,payment_date,status_id ',
+'from payments'))
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_required_role=>wwv_flow_api.id(32965420042304037)
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_document_header=>'APEX'
+,p_prn_units=>'INCHES'
+,p_prn_paper_size=>'LETTER'
+,p_prn_width=>8.5
+,p_prn_height=>11
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#9bafde'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'normal'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#efefef'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(32862619746529922)
+,p_max_row_count=>'1000000'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'N'
+,p_show_notify=>'Y'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_owner=>'SUPPORT'
+,p_internal_uid=>32862619746529922
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(32862711142529923)
+,p_db_column_name=>'ID'
+,p_display_order=>10
+,p_column_identifier=>'A'
+,p_column_label=>'Id'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(32862835367529924)
+,p_db_column_name=>'MOBILE_NUMBER'
+,p_display_order=>20
+,p_column_identifier=>'B'
+,p_column_label=>'Mobile number'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(32862942548529925)
+,p_db_column_name=>'AMOUNT'
+,p_display_order=>30
+,p_column_identifier=>'C'
+,p_column_label=>'Amount'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(32863046545529926)
+,p_db_column_name=>'PAYMENT_NUMBER'
+,p_display_order=>40
+,p_column_identifier=>'D'
+,p_column_label=>'Payment number'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(32863152758529927)
+,p_db_column_name=>'UTIN_NUMBER'
+,p_display_order=>50
+,p_column_identifier=>'E'
+,p_column_label=>'Utin number'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(32863278871529928)
+,p_db_column_name=>'STATE_ID'
+,p_display_order=>60
+,p_column_identifier=>'F'
+,p_column_label=>'State'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'LOV_ESCAPE_SC'
+,p_column_alignment=>'RIGHT'
+,p_rpt_named_lov=>wwv_flow_api.id(30401730596175422)
+,p_rpt_show_filter_lov=>'1'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(32863362850529929)
+,p_db_column_name=>'PAYMENT_DATE'
+,p_display_order=>70
+,p_column_identifier=>'G'
+,p_column_label=>'Payment date'
+,p_column_type=>'DATE'
+,p_column_alignment=>'CENTER'
+,p_format_mask=>'dd/mm/yyyy'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(32863412537529930)
+,p_db_column_name=>'STATUS_ID'
+,p_display_order=>80
+,p_column_identifier=>'H'
+,p_column_label=>'Status'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'LOV_ESCAPE_SC'
+,p_column_alignment=>'RIGHT'
+,p_rpt_named_lov=>wwv_flow_api.id(31591840549494685)
+,p_rpt_show_filter_lov=>'1'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(32970593846386609)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'329706'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'ID:MOBILE_NUMBER:AMOUNT:PAYMENT_NUMBER:UTIN_NUMBER:STATE_ID:PAYMENT_DATE:STATUS_ID'
 ,p_flashback_enabled=>'N'
 );
 end;
@@ -10513,12 +10703,14 @@ wwv_flow_api.create_page(
 '.cancel_btn',
 '{',
 '    color: #6DB343;',
+'    margin-right: 20px;',
 '    ',
 '}',
 '.signup_btn',
 '{',
 '    color: white;',
 '    background-color: #6DB343;',
+'    margin-left: 20px;',
 '}'))
 ,p_step_template=>wwv_flow_api.id(30304480696041333)
 ,p_page_template_options=>'#DEFAULT#'
@@ -10527,7 +10719,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160627161404'
+,p_last_upd_yyyymmddhh24miss=>'20160629100609'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31760315573431023)
@@ -10545,6 +10737,7 @@ wwv_flow_api.create_page_plug(
 '    .title',
 '    {',
 '        color: #6DB343;',
+'        margin-left: 10px;',
 '        ',
 '    }',
 '</style>',

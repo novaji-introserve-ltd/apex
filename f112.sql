@@ -27,7 +27,7 @@ prompt APPLICATION 112 - ruby.banking.app
 -- Application Export:
 --   Application:     112
 --   Name:            ruby.banking.app
---   Date and Time:   00:00 Wednesday June 29, 2016
+--   Date and Time:   00:00 Thursday June 30, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -36,19 +36,19 @@ prompt APPLICATION 112 - ruby.banking.app
 --
 
 -- Application Statistics:
---   Pages:                     46
---     Items:                  182
+--   Pages:                     47
+--     Items:                  184
 --     Validations:             19
 --     Processes:               70
---     Regions:                121
+--     Regions:                124
 --     Buttons:                113
---     Dynamic Actions:         15
+--     Dynamic Actions:         16
 --   Shared Components:
 --     Logic:
 --     Navigation:
 --       Lists:                  2
 --       Breadcrumbs:            1
---         Entries:             39
+--         Entries:             40
 --     Security:
 --       Authentication:         2
 --       Authorization:          3
@@ -121,7 +121,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_03=>'DOWNLOADCSV'
 ,p_substitution_value_03=>'<span class="fa fa-file-excel-o"></span><span class="download">Download</span>'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160628183000'
+,p_last_upd_yyyymmddhh24miss=>'20160629003413'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -286,7 +286,7 @@ wwv_flow_api.create_list_item(
 ,p_list_item_icon=>'fa-table'
 ,p_security_scheme=>wwv_flow_api.id(30935547790298660)
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
-,p_list_item_current_for_pages=>'1,24,36,41,42,43,45'
+,p_list_item_current_for_pages=>'1,24,36,41,42,43,45,47'
 );
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(32070659551551592)
@@ -1207,6 +1207,13 @@ wwv_flow_api.create_menu_option(
 ,p_short_name=>'Balance Sheet'
 ,p_link=>'f?p=&APP_ID.:46:&SESSION.'
 ,p_page_id=>46
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(32943278222137716)
+,p_parent_id=>wwv_flow_api.id(31555529318269082)
+,p_short_name=>'Cashbook Journal'
+,p_link=>'f?p=&APP_ID.:47:&SESSION.'
+,p_page_id=>47
 );
 end;
 /
@@ -15168,7 +15175,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160628183000'
+,p_last_upd_yyyymmddhh24miss=>'20160629002908'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30679887200989998)
@@ -15498,7 +15505,7 @@ wwv_flow_api.create_page_button(
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Cash Journal'
 ,p_button_position=>'BODY'
-,p_button_redirect_url=>'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:RP::'
+,p_button_redirect_url=>'f?p=&APP_ID.:47:&SESSION.::&DEBUG.:RP::'
 ,p_button_css_classes=>'link'
 ,p_grid_new_row=>'Y'
 );
@@ -15697,7 +15704,7 @@ wwv_flow_api.create_page_button(
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Cash Book R'
 ,p_button_position=>'BODY'
-,p_button_redirect_url=>'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:RP::'
+,p_button_redirect_url=>'f?p=&APP_ID.:47:&SESSION.::&DEBUG.:RP::'
 ,p_button_css_classes=>'link'
 ,p_grid_new_row=>'Y'
 );
@@ -28151,6 +28158,298 @@ wwv_flow_api.create_page_item(
 ,p_source_type=>'FUNCTION'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'Y'
+);
+end;
+/
+prompt --application/pages/page_00047
+begin
+wwv_flow_api.create_page(
+ p_id=>47
+,p_user_interface_id=>wwv_flow_api.id(30678093337989972)
+,p_name=>'Cashbook Journal'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'Cashbook Journal'
+,p_step_sub_title=>'Cashbook Journal'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_help_text=>'No help is available for this page.'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160629003413'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(32777297542934330)
+,p_plug_name=>'Search'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--scrollBody:t-Form--labelsAbove'
+,p_plug_template=>wwv_flow_api.id(31261378455831956)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>',
+'    <span class="fa fa-search"></span>&nbsp;Period',
+'</h3>'))
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(32927494538137694)
+,p_name=>'Cashbook Journal'
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'#DEFAULT#:t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select DT,',
+'       OPENING_BALANCE,',
+'       INSTALLMENTS,',
+'       SAVINGS,',
+'       UPFRONT,',
+'       EQUITY,',
+'       TOTAL_DEPOSIT,',
+'       DISBURSEMENT, ''|''  as "&nbsp;",',
+'       TOTAL_WITHDRAWAL,',
+'       CLOSING_BALANCE,',
+'       DELTA',
+'  from DAILY_CASHBOOK ',
+'  where trunc(dt) between :p47_from and :p47_to',
+'  order by dt desc',
+'  '))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>',
+'    <span class="fa fa-book"></span>&nbsp;Cash Journal',
+'</h3>'))
+,p_ajax_enabled=>'Y'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_num_rows=>30
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_num_rows_type=>'ROW_RANGES_IN_SELECT_LIST'
+,p_query_row_count_max=>500
+,p_pagination_display_position=>'TOP_AND_BOTTOM_RIGHT'
+,p_csv_output=>'Y'
+,p_csv_output_link_text=>'Download'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32928165777137699)
+,p_query_column_id=>1
+,p_column_alias=>'DT'
+,p_column_display_sequence=>1
+,p_column_heading=>'Date'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32928579519137700)
+,p_query_column_id=>2
+,p_column_alias=>'OPENING_BALANCE'
+,p_column_display_sequence=>2
+,p_column_heading=>'Opening Balance'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32928995338137700)
+,p_query_column_id=>3
+,p_column_alias=>'INSTALLMENTS'
+,p_column_display_sequence=>3
+,p_column_heading=>'Installments'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32929319556137700)
+,p_query_column_id=>4
+,p_column_alias=>'SAVINGS'
+,p_column_display_sequence=>4
+,p_column_heading=>'Savings'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32929787378137700)
+,p_query_column_id=>5
+,p_column_alias=>'UPFRONT'
+,p_column_display_sequence=>5
+,p_column_heading=>'Upfront'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32930119358137701)
+,p_query_column_id=>6
+,p_column_alias=>'EQUITY'
+,p_column_display_sequence=>6
+,p_column_heading=>'Equity'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32930521039137701)
+,p_query_column_id=>7
+,p_column_alias=>'TOTAL_DEPOSIT'
+,p_column_display_sequence=>7
+,p_column_heading=>'Total'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32930985867137701)
+,p_query_column_id=>8
+,p_column_alias=>'DISBURSEMENT'
+,p_column_display_sequence=>9
+,p_column_heading=>'Disbursement'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32777961198934337)
+,p_query_column_id=>9
+,p_column_alias=>'&nbsp;'
+,p_column_display_sequence=>8
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32931349752137701)
+,p_query_column_id=>10
+,p_column_alias=>'TOTAL_WITHDRAWAL'
+,p_column_display_sequence=>10
+,p_column_heading=>'Total'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32931790024137702)
+,p_query_column_id=>11
+,p_column_alias=>'CLOSING_BALANCE'
+,p_column_display_sequence=>11
+,p_column_heading=>'Closing Balance'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(32932103703137702)
+,p_query_column_id=>12
+,p_column_alias=>'DELTA'
+,p_column_display_sequence=>12
+,p_column_heading=>'Gain/Loss'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(32942812744137716)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30655173462989940)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(30679303014989995)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(30673328750989954)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(32777394729934331)
+,p_name=>'P47_FROM'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(32777297542934330)
+,p_item_default=>'to_char(''01-''||to_char(sysdate,''MON-YYYY''))'
+,p_item_default_type=>'PLSQL_EXPRESSION'
+,p_prompt=>'From'
+,p_source=>'P47_FROM'
+,p_source_type=>'ITEM'
+,p_display_as=>'NATIVE_DATE_PICKER'
+,p_cSize=>30
+,p_field_template=>wwv_flow_api.id(30672380578989951)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_attribute_04=>'button'
+,p_attribute_05=>'N'
+,p_attribute_07=>'NONE'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(32777439751934332)
+,p_name=>'P47_TO'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(32777297542934330)
+,p_item_default=>'sysdate'
+,p_item_default_type=>'PLSQL_EXPRESSION'
+,p_prompt=>'To'
+,p_source=>'P47_TO'
+,p_source_type=>'ITEM'
+,p_display_as=>'NATIVE_DATE_PICKER'
+,p_cSize=>30
+,p_begin_on_new_line=>'N'
+,p_field_template=>wwv_flow_api.id(30672380578989951)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_attribute_04=>'button'
+,p_attribute_05=>'N'
+,p_attribute_07=>'NONE'
+);
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(32777708399934335)
+,p_name=>'Reload Page'
+,p_event_sequence=>10
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P47_FROM,P47_TO'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(32777878105934336)
+,p_event_id=>wwv_flow_api.id(32777708399934335)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_SUBMIT_PAGE'
+,p_attribute_02=>'Y'
 );
 end;
 /

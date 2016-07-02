@@ -27,7 +27,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 -- Application Export:
 --   Application:     101
 --   Name:            easytaxpayer.com
---   Date and Time:   00:00 Saturday July 2, 2016
+--   Date and Time:   00:00 Sunday July 3, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -40,7 +40,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 --     Items:                   39
 --     Validations:              2
 --     Processes:               24
---     Regions:                 41
+--     Regions:                 43
 --     Buttons:                 16
 --     Dynamic Actions:          1
 --   Shared Components:
@@ -120,7 +120,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_02=>'WHITE_LOGO'
 ,p_substitution_value_02=>' <img src="http://easytaxpayer.com/img/white_tax_logo.png" style="height:42px;padding-left:15px;vertical-align:middle"/>'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160701232414'
+,p_last_upd_yyyymmddhh24miss=>'20160702125957'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -3214,8 +3214,9 @@ wwv_flow_api.create_template(
 '    background-position : 80% 100%;',
 '    background-repeat: repeat-x;',
 '    margin: 0px 0px 0px 0px;',
-'    opacity:0.7;',
+'    /*opacity:0.7;',
 '  filter:alpha(opacity=70); ',
+'    */',
 '}',
 '',
 'div.t-Login-region{',
@@ -12028,7 +12029,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160701213127'
+,p_last_upd_yyyymmddhh24miss=>'20160702124923'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32778153903934339)
@@ -12060,22 +12061,20 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_plug_header=>'<br/><br/></br/>'
+,p_plug_header=>'<br/><br/><br/>'
 ,p_plug_footer=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<style>',
-'    .signup a',
-'    {',
-'        text-decoration: none;',
-'    }',
-'    .signup a:hover',
-'    {',
-'        text-decoration: underline;',
-'    }',
-'</style>',
-'',
-'<div style="margin:10px 0 0 20px" class="signup">',
-'    Don''t have an account? <a href="http://novajii.com:4000/apex/f?p=101:8:14227972912709:::::" style="text-align: right; color:#6DB343;">Sign Up »</a><br/><br/><br/>',
-'</div>'))
+'<!-- All CSS must be in a single file -->',
+'<div style="margin:5px 0 0 20px" class="signup">',
+'    <p>',
+'        Don''t have an account? <a href="f?p=&APP_ID.:8" style="text-align: right; color:#6DB343;">Sign Up »</a>',
+'    </p>',
+'</div>',
+' <p class="social" style="margin:10px 0 0 20px">',
+'      <span class="fa fa-facebook-square fa-lg"></span>&nbsp;',
+'      <span class="fa fa-twitter-square fa-lg"></span>&nbsp;',
+'         <span class="fa fa-google-plus-square fa-lg"></span>',
+' </p>',
+''))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -12347,13 +12346,55 @@ wwv_flow_api.create_page(
 ,p_step_title=>'Partners'
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
+,p_step_template=>wwv_flow_api.id(30304480696041333)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
-,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160701170347'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160702125957'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33125174950734372)
+,p_plug_name=>'Container'
+,p_region_css_classes=>'transp'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
+,p_region_attributes=>'class="transp"'
+,p_plug_template=>wwv_flow_api.id(30255782108544603)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_new_grid_row=>false
+,p_plug_grid_column_span=>10
+,p_plug_display_column=>2
+,p_plug_display_point=>'BODY'
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33125471786734379)
+,p_plug_name=>'Left'
+,p_parent_plug_id=>wwv_flow_api.id(33125174950734372)
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noBorder:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(30255782108544603)
+,p_plug_display_sequence=>19
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_grid_column_span=>7
+,p_plug_display_point=>'BODY'
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3 class="open_sans">',
+'  Our Partners',
+'</h3>',
+'<div>',
+'    <img src="&IMG.nibss.png" class="partner" />   <img src="&IMG.mtn.png" class="partner"/>',
+'</div>',
+''))
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
 );
 end;
 /

@@ -27,7 +27,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 -- Application Export:
 --   Application:     101
 --   Name:            easytaxpayer.com
---   Date and Time:   00:00 Monday July 4, 2016
+--   Date and Time:   00:00 Tuesday July 5, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -36,12 +36,12 @@ prompt APPLICATION 101 - easytaxpayer.com
 --
 
 -- Application Statistics:
---   Pages:                     20
---     Items:                   39
+--   Pages:                     21
+--     Items:                   44
 --     Validations:              2
---     Processes:               24
---     Regions:                 43
---     Buttons:                 16
+--     Processes:               26
+--     Regions:                 45
+--     Buttons:                 17
 --     Dynamic Actions:          1
 --   Shared Components:
 --     Logic:
@@ -50,7 +50,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 --     Navigation:
 --       Lists:                  5
 --       Breadcrumbs:            1
---         Entries:             12
+--         Entries:             13
 --     Security:
 --       Authentication:         2
 --       Authorization:          8
@@ -119,8 +119,8 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_01=>'http://easytaxpayer.com/img/'
 ,p_substitution_string_02=>'WHITE_LOGO'
 ,p_substitution_value_02=>' <img src="http://easytaxpayer.com/img/white_tax_logo.png" style="height:42px;padding-left:15px;vertical-align:middle"/>'
-,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160702125957'
+,p_last_updated_by=>'SUPPORT'
+,p_last_upd_yyyymmddhh24miss=>'20160704162252'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -189,6 +189,23 @@ wwv_flow_api.create_list_item(
 ,p_list_item_link_text=>'My Payments'
 ,p_list_item_link_target=>'f?p=&APP_ID.:9:&SESSION.::&DEBUG.::::'
 ,p_security_scheme=>wwv_flow_api.id(32965113872283058)
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(33191176301987844)
+,p_list_item_display_sequence=>29
+,p_list_item_link_text=>'Administrator'
+,p_list_item_link_target=>'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'
+,p_security_scheme=>wwv_flow_api.id(32964096689140007)
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(33192639967010899)
+,p_list_item_display_sequence=>40
+,p_list_item_link_text=>'Change Role'
+,p_list_item_link_target=>'f?p=&APP_ID.:20:&SESSION.::&DEBUG.::::'
+,p_parent_list_item_id=>wwv_flow_api.id(33191176301987844)
+,p_security_scheme=>wwv_flow_api.id(32964096689140007)
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list_item(
@@ -601,6 +618,13 @@ wwv_flow_api.create_menu_option(
 ,p_short_name=>'Cookies'
 ,p_link=>'f?p=&APP_ID.:19:&SESSION.'
 ,p_page_id=>19
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(33192314922006538)
+,p_parent_id=>wwv_flow_api.id(30283634446544649)
+,p_short_name=>'Change Role'
+,p_link=>'f?p=&APP_ID.:20:&SESSION.'
+,p_page_id=>20
 );
 end;
 /
@@ -3208,13 +3232,18 @@ wwv_flow_api.create_template(
 '    //background-image: url(http://localhost/ore.com.ng/images/bg2a.png);',
 '    //background-image: url(http://localhost/ore.com.ng/images/bg-family-friends-flat.png);',
 '    //background-image: url(https://ore.ng/images/bg-family-friends-flat.png);',
-'    background-image: url(http://easytaxpayer.com/img/login1.jpg);',
-'    background-size: 100%;',
-'    background-color: white;',
-'    background-position : 80% 100%;',
-'    background-repeat: repeat-x;',
-'    margin: 0px 0px 0px 0px;',
-'    /*opacity:0.7;',
+'    //background-image: url(http://easytaxpayer.com/img/login1.jpg);',
+'   // background-size: 100%;',
+'    //background-color: white;',
+'   // background-position : 80% 100%;',
+'    //background-repeat: repeat-x;',
+'   // margin: 0px 0px 0px 0px;',
+'    background: url(http://easytaxpayer.com/img/login1.jpg) no-repeat center center fixed; ',
+'  -webkit-background-size: cover;',
+'  -moz-background-size: cover;',
+'  -o-background-size: cover;',
+'  background-size: cover;',
+'   /* opacity:0.7;',
 '  filter:alpha(opacity=70); ',
 '    */',
 '}',
@@ -3268,7 +3297,6 @@ wwv_flow_api.create_template(
 '  #APPLICATION_CSS#',
 '  #PAGE_CSS#  ',
 ' <!--#FAVICONS#-->',
-'    <link rel="shortcut icon" href="/i/favicon.ico">',
 '<link rel="icon" sizes="16x16" href="http://easytaxpayer.com/img/favicon-16x16.png">',
 '<link rel="icon" sizes="32x32" href="http://easytaxpayer.com/img/favicon-32x32.png">',
 '<link rel="apple-touch-icon" sizes="180x180" href="http://easytaxpayer.com/img/favicon-180x180.png">',
@@ -3303,8 +3331,7 @@ wwv_flow_api.create_template(
 '    </style>',
 '    <div class="top1">',
 '    <span style="text-align:middle">&WHITE_LOGO.</span>',
-'        <span style="margin-left:70%;color:white;margin-bottom:20px" class="alink"><a href="http://novajii.com:4000/apex/f?p=101:12:12964308491094:::::">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">About</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://no'
-||'vajii.com:4000/apex/f?p=101:8:14227972912709:::::">Sign Up</a></span>',
+'        <span style="margin-left:70%;color:white;margin-bottom:20px" class="alink"><a href="f?p=&APP_ID.:12">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="f?p=&APP_ID.:15">About</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="f?p=&APP_ID.:8">Sign Up</a></span>',
 '</div>',
 '    <!--div class="t-Header-navBar" style="background-color:#6DB343;">',
 '      #NAVIGATION_BAR#',
@@ -3697,6 +3724,14 @@ wwv_flow_api.create_template(
 'http://easytaxpayer.com/color.css',
 'http://easytaxpayer.com/login.css'))
 ,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'div.t-Body',
+'{',
+'    background: url(http://easytaxpayer.com/img/home.png) no-repeat center center fixed; ',
+'  -webkit-background-size: cover;',
+'  -moz-background-size: cover;',
+'  -o-background-size: cover;',
+'  background-size: cover;',
+'}',
 '.t_PageBody,.t-PageBody,.container,.t-Body, #t_PageBody, .t-Body-main{',
 '     margin: 0px 0px 0px 0px;',
 '     background-color: white;',
@@ -3736,7 +3771,6 @@ wwv_flow_api.create_template(
 '  #APPLICATION_CSS#',
 '  #PAGE_CSS#  ',
 '  <!--#FAVICONS#-->',
-'  <link rel="shortcut icon" href="/i/favicon.ico">',
 '<link rel="icon" sizes="16x16" href="http://easytaxpayer.com/img/favicon-16x16.png">',
 '<link rel="icon" sizes="32x32" href="http://easytaxpayer.com/img/favicon-32x32.png">',
 '<link rel="apple-touch-icon" sizes="180x180" href="http://easytaxpayer.com/img/favicon-180x180.png">',
@@ -9807,7 +9841,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160701172250'
+,p_last_upd_yyyymmddhh24miss=>'20160704155924'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29900311777802625)
@@ -12414,8 +12448,8 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
-,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160701232414'
+,p_last_updated_by=>'SUPPORT'
+,p_last_upd_yyyymmddhh24miss=>'20160704120509'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(33105391079189751)
@@ -12443,7 +12477,7 @@ wwv_flow_api.create_page_plug(
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_grid_column_span=>5
 ,p_plug_display_point=>'BODY'
-,p_plug_source=>'<img src="&IMG.android_smartphone-512.fw.png" style="padding: 30px 0 0 60px;height:450px" />'
+,p_plug_source=>'<img src="&IMG.android_smartphone-512.fw.png" style="padding: 28px 0 0 20px;height:450px" />'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
@@ -12557,13 +12591,14 @@ wwv_flow_api.create_page(
 ,p_step_title=>'Terms'
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
+,p_step_template=>wwv_flow_api.id(30304480696041333)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160701170549'
+,p_last_upd_yyyymmddhh24miss=>'20160704101759'
 );
 end;
 /
@@ -12597,13 +12632,14 @@ wwv_flow_api.create_page(
 ,p_step_title=>'Cookies'
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
+,p_step_template=>wwv_flow_api.id(30304480696041333)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160701170314'
+,p_last_upd_yyyymmddhh24miss=>'20160704114227'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(33027271563994235)
@@ -12613,18 +12649,208 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_sequence=>20
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_new_grid_row=>false
+,p_plug_grid_column_span=>8
+,p_plug_display_column=>3
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<div style="color:#6db343; margin: 10px 10px 10px 10px;">',
+'<p>',
+'    ',
+'    Cookies are small pieces of text used to store information on web browsers. Cookies are used to store and receive identifiers and other information on computers, phones, and other devices.<br/> Other technologies, including data we store on your '
+||'web browser or device, identifiers associated with your device, and other software, are used for similar purposes. <br/>In this policy, we refer to all of these technologies as “cookies.” <br/><br/></p>',
+'    ',
+'',
+'',
+'',
+'<h3 style="color:#6db343;">Why do we use cookies?</h3>',
 '<p style="color:#6DB343; ">',
-'    This website uses cookies to allow us to see how the site is used. The cookies cannot identify you. If you continue to use this site we will assume that you are happy with this.',
-'</p>'))
+'Cookies help us provide, protect and improve the EasyTaxPayer Services, such as by personalizing content, tailoring and measuring ads, and providing a safer experience. While the cookies that we use may change from time to time as we improve and upda'
+||'te the EasyTaxPayer Services, they generally fall into the below categories of use:<br><br/>',
+'<b>Authentication</b><br/>',
+'We use cookies to verify your account and determine when you’re logged in so we can make it easier for you to access the EasyTaxPayer Services and show you the appropriate experience and features.<br/>',
+'For example: We use cookies to keep you logged in as you navigate between EasyTaxPayer pages. Cookies also help us remember your browser so you do not have to keep logging into EasyTaxPayer and so you can more easily log into EasyTaxPayer via third-p'
+||'arty apps and websites.<br/><br/>',
+'',
+'<h3 style="color:#6db343;">Security, site and product integrity</h3>',
+'',
+'We use cookies to enable the functionality that helps us provide the EasyTaxPayer Services.<br/><br/>',
+'',
+'For example: Cookies help us store preferences, know when you’ve seen or interacted with EasyTaxPayer Services’ content, and provide you with customized content and experiences. For instance, cookies allow us to make suggestions to you and other. If '
+||'you are a page administrator, cookies allow you to switch between posting from your  EasyTaxPayer account and the page.',
+'</p>',
+'</div>'))
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<H3 style="color:#6DB343; align-text:center">',
+'<H3 style="color:#6DB343; margin-left:10px; margin-right:10px;">',
 '  Cookies on the About Cookies website  ',
 '</H3>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
+);
+end;
+/
+prompt --application/pages/page_00020
+begin
+wwv_flow_api.create_page(
+ p_id=>20
+,p_user_interface_id=>wwv_flow_api.id(30281936301544630)
+,p_name=>'Change Role'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'Change Role'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'.tax_btn',
+'{',
+'    color: white;',
+'    background-color: #6db343;',
+'    font-weight: bold;',
+'    margin-right: 10px;',
+'}'))
+,p_page_template_options=>'#DEFAULT#'
+,p_required_role=>wwv_flow_api.id(32964096689140007)
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_help_text=>'No help is available for this page.'
+,p_last_updated_by=>'SUPPORT'
+,p_last_upd_yyyymmddhh24miss=>'20160704152144'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33027838354994241)
+,p_plug_name=>'Change Role'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(30255782108544603)
+,p_plug_display_sequence=>11
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_new_grid_row=>false
+,p_plug_display_point=>'BODY'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>'<h3 style="color:#6db343; margin-left: 10px">Change User Role</h3>'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33191942644006537)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30259094599544603)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(30283250495544647)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(30277254044544615)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(33028560069994248)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(33027838354994241)
+,p_button_name=>'Update'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--success'
+,p_button_template_id=>wwv_flow_api.id(30276759288544615)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Update Role'
+,p_button_position=>'BELOW_BOX'
+,p_button_css_classes=>'tax_btn'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33028059001994243)
+,p_name=>'P20_USERNAME'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(33027838354994241)
+,p_prompt=>'Username'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_lov=>'select username as display, id from users order by display'
+,p_cHeight=>1
+,p_field_template=>wwv_flow_api.id(30276347175544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_lov_display_extra=>'NO'
+,p_attribute_01=>'SUBMIT'
+,p_attribute_03=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33028123057994244)
+,p_name=>'P20_ROLE_ID'
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_api.id(33027838354994241)
+,p_prompt=>'Role'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_lov=>'Select name, id from roles order by name'
+,p_cHeight=>1
+,p_field_template=>wwv_flow_api.id(30276347175544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_lov_display_extra=>'NO'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33028252028994245)
+,p_name=>'P20_NAME'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_api.id(33027838354994241)
+,p_prompt=>'Name'
+,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_field_template=>wwv_flow_api.id(30276347175544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_attribute_01=>'Y'
+,p_attribute_02=>'VALUE'
+,p_attribute_04=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33028393539994246)
+,p_name=>'P20_ORGANIZATION'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_api.id(33027838354994241)
+,p_prompt=>'Organization'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_field_template=>wwv_flow_api.id(30276347175544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33028696883994249)
+,p_name=>'P20_ID'
+,p_item_sequence=>60
+,p_item_plug_id=>wwv_flow_api.id(33027838354994241)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'Y'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(33028786291994250)
+,p_process_sequence=>20
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Update Role'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'begin',
+'',
+'update users set organization = :P20_ORGANIZATION, role_id = :P20_ROLE_ID where id = :P20_ID;',
+'',
+'end;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(33028560069994248)
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(33027500742994238)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'retrieve user'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'begin',
+'',
+'select  id, name, role_id, organization into :P20_ID, :P20_NAME,:P20_ROLE_ID, :P20_ORGANIZATION',
+'from users where id = :P20_USERNAME;',
+'end;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
 end;
 /

@@ -27,7 +27,7 @@ prompt APPLICATION 112 - ruby.banking.app
 -- Application Export:
 --   Application:     112
 --   Name:            ruby.banking.app
---   Date and Time:   00:00 Tuesday July 5, 2016
+--   Date and Time:   00:00 Wednesday July 6, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -36,11 +36,11 @@ prompt APPLICATION 112 - ruby.banking.app
 --
 
 -- Application Statistics:
---   Pages:                     48
---     Items:                  184
+--   Pages:                     49
+--     Items:                  186
 --     Validations:             19
 --     Processes:               70
---     Regions:                138
+--     Regions:                140
 --     Buttons:                114
 --     Dynamic Actions:         16
 --   Shared Components:
@@ -118,10 +118,10 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_01=>'₦'
 ,p_substitution_string_02=>'CONTACT_ADMIN'
 ,p_substitution_value_02=>'Operation Failed. <br>Contact System Admin about this'
-,p_substitution_string_03=>'DOWNLOADCSV'
+,p_substitution_string_03=>'DOWNLOAD'
 ,p_substitution_value_03=>'<span class="fa fa-file-excel-o"></span><span class="download">Download</span>'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160704185621'
+,p_last_upd_yyyymmddhh24miss=>'20160705165510'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -24412,7 +24412,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160704184620'
+,p_last_upd_yyyymmddhh24miss=>'20160705165510'
 );
 wwv_flow_api.create_report_region(
  p_id=>wwv_flow_api.id(31793733294216200)
@@ -24428,70 +24428,45 @@ wwv_flow_api.create_report_region(
 '"ID",',
 '"ID" ID_DISPLAY,',
 '"NAME"',
-'from "#OWNER#"."ACCOUNT_TYPE"',
+'from "#OWNER#"."ACCOUNT_TYPE" order by name',
 ''))
-,p_source_type=>'NATIVE_TABFORM'
+,p_source_type=>'NATIVE_SQL_REPORT'
 ,p_header=>'<h3>Account Types</h3>'
-,p_ajax_enabled=>'N'
+,p_ajax_enabled=>'Y'
 ,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_num_rows=>10
+,p_query_num_rows=>15
 ,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_show_nulls_as=>'(null)'
-,p_query_no_data_found=>'No data found.'
-,p_query_num_rows_type=>'ROW_RANGES_IN_SELECT_LIST'
-,p_query_row_count_max=>500
+,p_query_show_nulls_as=>'-'
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
 );
 wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(31800099239216208)
+ p_id=>wwv_flow_api.id(33298590480358005)
 ,p_query_column_id=>1
-,p_column_alias=>'CHECK$01'
-,p_column_display_sequence=>1
-,p_column_heading=>'Select Row'
-,p_display_as=>'CHECKBOX'
-,p_derived_column=>'Y'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(31794420455216202)
-,p_query_column_id=>2
 ,p_column_alias=>'ID'
-,p_column_display_sequence=>2
-,p_column_heading=>'Id'
-,p_disable_sort_column=>'N'
-,p_hidden_column=>'Y'
-,p_display_as=>'HIDDEN'
-,p_column_width=>16
-,p_pk_col_source_type=>'T'
-,p_ref_schema=>'REAGOVAT'
-,p_ref_table_name=>'ACCOUNT_TYPE'
-,p_ref_column_name=>'ID'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(31794806878216203)
-,p_query_column_id=>3
-,p_column_alias=>'ID_DISPLAY'
-,p_column_display_sequence=>3
+,p_column_display_sequence=>1
 ,p_hidden_column=>'Y'
 ,p_derived_column=>'N'
-,p_ref_schema=>'REAGOVAT'
-,p_ref_table_name=>'ACCOUNT_TYPE'
-,p_ref_column_name=>'ID_DISPLAY'
 );
 wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(31795241241216203)
-,p_query_column_id=>4
+ p_id=>wwv_flow_api.id(33298641935358006)
+,p_query_column_id=>2
+,p_column_alias=>'ID_DISPLAY'
+,p_column_display_sequence=>2
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33298713647358007)
+,p_query_column_id=>3
 ,p_column_alias=>'NAME'
-,p_column_display_sequence=>4
-,p_column_heading=>'Name'
+,p_column_display_sequence=>3
+,p_column_heading=>'Account Type'
 ,p_use_as_row_header=>'N'
-,p_disable_sort_column=>'N'
-,p_display_as=>'TEXT'
-,p_report_column_width=>200
-,p_column_width=>32
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
-,p_ref_schema=>'REAGOVAT'
-,p_ref_table_name=>'ACCOUNT_TYPE'
-,p_ref_column_name=>'NAME'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31800975405216210)
@@ -24521,6 +24496,7 @@ wwv_flow_api.create_page_button(
 ,p_button_position=>'BOTTOM'
 ,p_button_redirect_url=>'javascript:apex.widget.tabular.addRow();'
 ,p_button_execute_validations=>'N'
+,p_button_condition_type=>'NEVER'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(31796644854216205)
@@ -24533,6 +24509,7 @@ wwv_flow_api.create_page_button(
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Apply Changes'
 ,p_button_position=>'REGION_TEMPLATE_CHANGE'
+,p_button_condition_type=>'NEVER'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(31796599122216205)
@@ -24558,6 +24535,7 @@ wwv_flow_api.create_page_button(
 ,p_button_position=>'REGION_TEMPLATE_DELETE'
 ,p_button_redirect_url=>'javascript:apex.confirm(htmldb_delete_message,''MULTI_ROW_DELETE'');'
 ,p_button_execute_validations=>'N'
+,p_button_condition_type=>'NEVER'
 );
 wwv_flow_api.create_page_branch(
  p_id=>wwv_flow_api.id(31800411005216208)
@@ -26670,7 +26648,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160704184934'
+,p_last_upd_yyyymmddhh24miss=>'20160705165000'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32604308715690210)
@@ -26695,27 +26673,27 @@ wwv_flow_api.create_report_region(
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--scrollBody:t-Form--labelsAbove'
 ,p_component_template_options=>'#DEFAULT#:t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlightOff:t-Report--noBorders'
-,p_grid_column_span=>6
 ,p_display_point=>'BODY'
 ,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select account_id,sum(amount) credit,null debit',
+'select  account_id,sum(amount) credit,null debit,case when account_id is null then ''report-total'' else ''report-row'' end style',
 'from journal_items where transaction_type=1  and date_created between :p40_start and :p40_end',
 'group by rollup (account_id)',
 'union all ',
-'select account_id ,null credit,sum(amount) debit',
+'select account_id ,null credit,sum(amount) debit,case when account_id is null then ''report-total'' else ''report-row'' end style',
 'from journal_items where transaction_type=2 and date_created between :p40_start and :p40_end',
 'group by rollup (account_id)'))
 ,p_source_type=>'NATIVE_SQL_REPORT'
 ,p_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<h3>',
-'    Trial Balance',
+'    <span class="fa fa-book"></span>&nbsp;Trial Balance',
 '</h3>'))
 ,p_ajax_enabled=>'Y'
 ,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_num_rows=>100
+,p_query_num_rows=>500
 ,p_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_query_no_data_found=>'No data found'
-,p_csv_output=>'N'
+,p_csv_output=>'Y'
+,p_csv_output_link_text=>'&DOWNLOAD.'
 ,p_prn_output=>'N'
 ,p_prn_format=>'PDF'
 ,p_prn_output_link_text=>'Print'
@@ -26749,7 +26727,10 @@ wwv_flow_api.create_report_region(
 ,p_prn_page_header_alignment=>'CENTER'
 ,p_prn_page_footer_alignment=>'CENTER'
 ,p_sort_null=>'L'
-,p_plug_query_strip_html=>'N'
+,p_plug_query_exp_filename=>'Trial-Balance'
+,p_plug_query_exp_separator=>','
+,p_plug_query_exp_enclosed_by=>'"'
+,p_plug_query_strip_html=>'Y'
 );
 wwv_flow_api.create_report_columns(
  p_id=>wwv_flow_api.id(32663217711442526)
@@ -26773,7 +26754,9 @@ wwv_flow_api.create_report_columns(
 ,p_column_heading=>'Credit'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G990D00'
-,p_heading_alignment=>'LEFT'
+,p_column_html_expression=>'<span class="#STYLE#">#CREDIT#</span>'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'RIGHT'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
@@ -26786,10 +26769,20 @@ wwv_flow_api.create_report_columns(
 ,p_column_heading=>'Debit'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G990D00'
-,p_heading_alignment=>'LEFT'
+,p_column_html_expression=>'<span class="#STYLE#">#DEBIT#</span>'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'RIGHT'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33150389183489849)
+,p_query_column_id=>4
+,p_column_alias=>'STYLE'
+,p_column_display_sequence=>4
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32774553784934303)
@@ -26798,12 +26791,11 @@ wwv_flow_api.create_page_plug(
 ,p_plug_template=>wwv_flow_api.id(31261378455831956)
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'Y'
-,p_plug_grid_column_span=>6
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<h3>',
-'    Set Period',
+'     <span class="fa fa-search"></span>&nbsp;Set Period',
 '</h3>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
@@ -26817,10 +26809,11 @@ wwv_flow_api.create_page_button(
 ,p_button_template_options=>'t-Button--large:t-Button--gapRight'
 ,p_button_template_id=>wwv_flow_api.id(30672878552989954)
 ,p_button_is_hot=>'Y'
-,p_button_image_alt=>'Search'
+,p_button_image_alt=>'Go'
 ,p_button_position=>'BODY'
 ,p_button_cattributes=>'style="margin-left:8px"'
-,p_grid_new_row=>'Y'
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'Y'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(32496979368014535)
@@ -26835,7 +26828,7 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_DATE_PICKER'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(30672380578989951)
-,p_item_template_options=>'#DEFAULT#'
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs'
 ,p_attribute_04=>'button'
 ,p_attribute_05=>'N'
 ,p_attribute_07=>'NONE'
@@ -26854,7 +26847,7 @@ wwv_flow_api.create_page_item(
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
 ,p_field_template=>wwv_flow_api.id(30672380578989951)
-,p_item_template_options=>'#DEFAULT#'
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs'
 ,p_attribute_04=>'button'
 ,p_attribute_05=>'N'
 ,p_attribute_07=>'NONE'
@@ -27619,7 +27612,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160704182923'
+,p_last_upd_yyyymmddhh24miss=>'20160705131141'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32778771172934345)
@@ -27638,686 +27631,203 @@ wwv_flow_api.create_page_plug(
 ,p_attribute_02=>'HTML'
 );
 wwv_flow_api.create_report_region(
- p_id=>wwv_flow_api.id(32778860146934346)
-,p_name=>'Total Assets'
-,p_parent_plug_id=>wwv_flow_api.id(32778771172934345)
-,p_template=>wwv_flow_api.id(31261378455831956)
-,p_display_sequence=>30
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
-,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
-,p_grid_column_span=>6
-,p_display_point=>'BODY'
-,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select ''Total assets'' title,acct.t_assets_by_year(''2016'')  total from dual',
-'',
-''))
-,p_source_type=>'NATIVE_SQL_REPORT'
-,p_ajax_enabled=>'N'
-,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_headings_type=>'NO_HEADINGS'
-,p_query_num_rows=>500
-,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No data found.'
-,p_query_row_count_max=>500
-,p_csv_output=>'N'
-,p_prn_output=>'N'
-,p_sort_null=>'L'
-,p_plug_query_strip_html=>'N'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(32779148249934349)
-,p_query_column_id=>1
-,p_column_alias=>'TITLE'
-,p_column_display_sequence=>1
-,p_column_heading=>'Title'
-,p_use_as_row_header=>'N'
-,p_column_html_expression=>'<b>#TITLE#</b>'
-,p_disable_sort_column=>'N'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(32779294633934350)
-,p_query_column_id=>2
-,p_column_alias=>'TOTAL'
-,p_column_display_sequence=>2
-,p_column_heading=>'Total'
-,p_use_as_row_header=>'N'
-,p_column_format=>'999G999G999G999G990D00'
-,p_column_alignment=>'RIGHT'
-,p_heading_alignment=>'LEFT'
-,p_disable_sort_column=>'N'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_region(
  p_id=>wwv_flow_api.id(33132433138248305)
-,p_name=>'Assets'
+,p_name=>'P&L Report'
 ,p_parent_plug_id=>wwv_flow_api.id(32778771172934345)
 ,p_template=>wwv_flow_api.id(31261378455831956)
 ,p_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
-,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
-,p_grid_column_span=>6
+,p_component_template_options=>'#DEFAULT#:t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
 ,p_display_point=>'BODY'
 ,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'SELECT *  FROM ',
-'(SELECT account_name,account_year,total_credit',
-'  FROM account_analysis where  account_code like ''1%'')',
-'PIVOT',
-'(',
-'  sum(total_credit)',
-'  FOR account_year IN (2016)',
-')',
-'',
-'order by account_name',
-'',
+'select * from (select a.name,acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
+'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_month(a.id,to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,0 seq,''report-row'' style',
+'  from  account a where a.code like ''1%'' ',
+'  ',
+'  union all',
+'  select  ''Total assets'' title,acct.t_account_by_month_by_code(''1%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
+'        acct.t_account_by_month_by_code(''1%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_month_by_code(''1%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,1 seq,''report-total'' style',
+'  from  dual',
+'  order by seq)',
+'  ',
+'  union all ',
+'  select * from (select a.name,acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
+'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_month(a.id,to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,0 seq,''report-row'' style',
+'  from  account a where a.code like ''2%'' ',
+'  ',
+'  union all',
+'  select  ''Total Liabilities'' title,acct.t_account_by_month_by_code(''2%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY''))*(-1) x,',
+'        acct.t_account_by_month_by_code(''2%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) * (-1) y,',
+'        acct.t_account_by_month_by_code(''2%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) *(-1) z,1 seq,''report-total'' style',
+'  from  dual',
+'  order by seq)',
+'  ',
+'  union all ',
+'  select  ''Total Net Assets'' title,acct.t_account_by_month_by_code(''1%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) - ',
+'  acct.t_account_by_month_by_code(''2%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
+'        acct.t_account_by_month_by_code(''1%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) - ',
+'        acct.t_account_by_month_by_code(''2%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_month_by_code(''1%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) -',
+'        acct.t_account_by_month_by_code(''2%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,1 seq,''report-total'' style',
+'  from  dual',
+'  ',
+'  union all ',
+'  ',
+'  select * from (select a.name,acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
+'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_month(a.id,to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,0 seq,''report-row'' style',
+'  from  account a where a.code like ''3%'' ',
+'  ',
+'  union all',
+'  select  ''Total Equity'' title,acct.t_account_by_month_by_code(''3%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
+'        acct.t_account_by_month_by_code(''3%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_month_by_code(''3%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,1 seq,''report-total'' style',
+'  from  dual',
+'  order by seq)',
+'  ',
+'  union all',
+'  ',
+'  select * from (select a.name,acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
+'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_month(a.id,to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,0 seq,''report-row'' style',
+'  from  account a where a.code like ''4%'' ',
+'  ',
+'  union all',
+'  select  ''Total Expenses'' title,acct.t_account_by_month_by_code(''4%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY''))*(-1) x,',
+'        acct.t_account_by_month_by_code(''4%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) * (-1) y,',
+'        acct.t_account_by_month_by_code(''4%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) *(-1) z,1 seq,''report-total'' style',
+'  from  dual',
+'  order by seq)',
+'  ',
+'  union all ',
+'  select * from (select a.name,acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
+'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_month(a.id,to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,0 seq,''report-row'' style',
+'  from  account a where a.code like ''5%'' ',
+'  ',
+'  union all',
+'  select  ''Total income'' title,acct.t_account_by_month_by_code(''5%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
+'        acct.t_account_by_month_by_code(''5%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_month_by_code(''5%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,1 seq,''report-total'' style',
+'  from  dual',
+'  order by seq)',
+'  ',
+'  union all',
+'  ',
+'  select  ''Profit/Loss for period'' title,',
+'  ( acct.t_account_by_month_by_code(''1%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) - ',
+'  acct.t_account_by_month_by_code(''2%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) ) + ',
+'  acct.t_account_by_month_by_code(''3%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) - ',
+'  acct.t_account_by_month_by_code(''4%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) + ',
+'  acct.t_account_by_month_by_code(''5%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
+'        ( acct.t_account_by_month_by_code(''1%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) - ',
+'        acct.t_account_by_month_by_code(''2%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) ) +',
+'        acct.t_account_by_month_by_code(''3%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) -',
+'        acct.t_account_by_month_by_code(''4%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) +',
+'        acct.t_account_by_month_by_code(''5%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
+'        ( acct.t_account_by_month_by_code(''1%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) -',
+'        acct.t_account_by_month_by_code(''2%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) ) +',
+'        acct.t_account_by_month_by_code(''3%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) -',
+'        acct.t_account_by_month_by_code(''4%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) +',
+'        acct.t_account_by_month_by_code(''5%'',to_char(trunc(sysdate,''MON''),''MON YYYY''))z,1 seq,''report-total'' style',
+'  from  dual',
+'  ',
 ''))
 ,p_source_type=>'NATIVE_SQL_REPORT'
 ,p_ajax_enabled=>'N'
 ,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_headings=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'return null||'':''||to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')||'':''||',
+'       to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'') ||'':''||',
+'       to_char(trunc(sysdate,''MON''),''MON YYYY'');',
+''))
+,p_query_headings_type=>'FUNCTION_BODY_RETURNING_COLON_DELIMITED_LIST'
 ,p_query_num_rows=>500
 ,p_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_query_no_data_found=>'No data found.'
 ,p_query_row_count_max=>500
-,p_csv_output=>'N'
+,p_csv_output=>'Y'
+,p_csv_output_link_text=>'&DOWNLOAD.'
 ,p_prn_output=>'N'
 ,p_sort_null=>'L'
+,p_plug_query_exp_filename=>'PL-Statetement'
+,p_plug_query_exp_separator=>','
+,p_plug_query_exp_enclosed_by=>'"'
 ,p_plug_query_strip_html=>'N'
 );
 wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33133123950248309)
+ p_id=>wwv_flow_api.id(33149256806489838)
 ,p_query_column_id=>1
-,p_column_alias=>'ACCOUNT_NAME'
+,p_column_alias=>'NAME'
 ,p_column_display_sequence=>1
-,p_column_heading=>'&nbsp;'
+,p_column_heading=>'Name'
 ,p_use_as_row_header=>'N'
+,p_column_html_expression=>'<span class="#STYLE#">#NAME#</span>'
 ,p_heading_alignment=>'LEFT'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
 );
 wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33133569470248309)
+ p_id=>wwv_flow_api.id(33149378844489839)
 ,p_query_column_id=>2
-,p_column_alias=>'2016'
+,p_column_alias=>'X'
 ,p_column_display_sequence=>2
-,p_column_heading=>'2016'
+,p_column_heading=>'X'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G990D00'
+,p_column_html_expression=>'<span class="#STYLE#">#X#</span>'
 ,p_column_alignment=>'RIGHT'
 ,p_heading_alignment=>'RIGHT'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
 );
-wwv_flow_api.create_report_region(
- p_id=>wwv_flow_api.id(33145503647489801)
-,p_name=>'Liabilities'
-,p_parent_plug_id=>wwv_flow_api.id(32778771172934345)
-,p_template=>wwv_flow_api.id(31261378455831956)
-,p_display_sequence=>40
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
-,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
-,p_grid_column_span=>6
-,p_display_point=>'BODY'
-,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'SELECT *  FROM ',
-'(SELECT account_name,account_year,total_credit',
-'  FROM account_analysis where account_code like ''2%'')',
-'PIVOT',
-'(',
-'  sum(total_credit)',
-'  FOR account_year IN (2016)',
-')',
-'',
-'order by account_name',
-'',
-''))
-,p_source_type=>'NATIVE_SQL_REPORT'
-,p_ajax_enabled=>'N'
-,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_headings_type=>'NO_HEADINGS'
-,p_query_num_rows=>500
-,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No data found.'
-,p_query_row_count_max=>500
-,p_csv_output=>'N'
-,p_prn_output=>'N'
-,p_sort_null=>'L'
-,p_plug_query_strip_html=>'N'
-);
 wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33145607652489802)
-,p_query_column_id=>1
-,p_column_alias=>'ACCOUNT_NAME'
-,p_column_display_sequence=>1
-,p_column_heading=>'Account Name'
-,p_use_as_row_header=>'N'
-,p_heading_alignment=>'LEFT'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33145769239489803)
-,p_query_column_id=>2
-,p_column_alias=>'2016'
-,p_column_display_sequence=>2
-,p_column_heading=>'2016'
+ p_id=>wwv_flow_api.id(33149460021489840)
+,p_query_column_id=>3
+,p_column_alias=>'Y'
+,p_column_display_sequence=>3
+,p_column_heading=>'Y'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G990D00'
-,p_column_alignment=>'RIGHT'
-,p_heading_alignment=>'LEFT'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_region(
- p_id=>wwv_flow_api.id(33145801087489804)
-,p_name=>'Liabilities Total'
-,p_parent_plug_id=>wwv_flow_api.id(32778771172934345)
-,p_template=>wwv_flow_api.id(31261378455831956)
-,p_display_sequence=>60
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
-,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
-,p_grid_column_span=>6
-,p_display_point=>'BODY'
-,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select ''Total liabilities'' title,acct.t_liabilities_by_year(''2016'')*(-1) total from dual',
-'',
-''))
-,p_source_type=>'NATIVE_SQL_REPORT'
-,p_ajax_enabled=>'N'
-,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_headings_type=>'NO_HEADINGS'
-,p_query_num_rows=>500
-,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No data found.'
-,p_query_row_count_max=>500
-,p_csv_output=>'N'
-,p_prn_output=>'N'
-,p_sort_null=>'L'
-,p_plug_query_strip_html=>'N'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33145938674489805)
-,p_query_column_id=>1
-,p_column_alias=>'TITLE'
-,p_column_display_sequence=>1
-,p_column_heading=>'Title'
-,p_use_as_row_header=>'N'
-,p_column_html_expression=>'<b>#TITLE#</b>'
-,p_disable_sort_column=>'N'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33146034442489806)
-,p_query_column_id=>2
-,p_column_alias=>'TOTAL'
-,p_column_display_sequence=>2
-,p_column_heading=>'Total'
-,p_use_as_row_header=>'N'
-,p_column_format=>'999G999G999G999G990D00'
-,p_column_alignment=>'RIGHT'
-,p_heading_alignment=>'LEFT'
-,p_disable_sort_column=>'N'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_region(
- p_id=>wwv_flow_api.id(33146116089489807)
-,p_name=>'Net Assets'
-,p_parent_plug_id=>wwv_flow_api.id(32778771172934345)
-,p_template=>wwv_flow_api.id(31261378455831956)
-,p_display_sequence=>70
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
-,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
-,p_grid_column_span=>6
-,p_display_point=>'BODY'
-,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select ''Net assets'' title,acct.t_net_assets_by_year(''2016'') total from dual',
-'',
-''))
-,p_source_type=>'NATIVE_SQL_REPORT'
-,p_ajax_enabled=>'N'
-,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_headings_type=>'NO_HEADINGS'
-,p_query_num_rows=>500
-,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No data found.'
-,p_query_row_count_max=>500
-,p_csv_output=>'N'
-,p_prn_output=>'N'
-,p_sort_null=>'L'
-,p_plug_query_strip_html=>'N'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33146221701489808)
-,p_query_column_id=>1
-,p_column_alias=>'TITLE'
-,p_column_display_sequence=>1
-,p_column_heading=>'Title'
-,p_use_as_row_header=>'N'
-,p_column_html_expression=>'<b>#TITLE#</b>'
-,p_disable_sort_column=>'N'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33146320890489809)
-,p_query_column_id=>2
-,p_column_alias=>'TOTAL'
-,p_column_display_sequence=>2
-,p_column_heading=>'Total'
-,p_use_as_row_header=>'N'
-,p_column_format=>'999G999G999G999G990D00'
-,p_column_alignment=>'RIGHT'
-,p_heading_alignment=>'LEFT'
-,p_disable_sort_column=>'N'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_region(
- p_id=>wwv_flow_api.id(33146455302489810)
-,p_name=>'Equity'
-,p_parent_plug_id=>wwv_flow_api.id(32778771172934345)
-,p_template=>wwv_flow_api.id(31261378455831956)
-,p_display_sequence=>80
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
-,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
-,p_grid_column_span=>6
-,p_display_point=>'BODY'
-,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'SELECT *  FROM ',
-'(SELECT account_name,account_year,total_credit',
-'  FROM account_analysis where  account_code like ''3%'')',
-'PIVOT',
-'(',
-'  sum(total_credit)',
-'  FOR account_year IN (2016)',
-')',
-'',
-'order by account_name',
-'',
-''))
-,p_source_type=>'NATIVE_SQL_REPORT'
-,p_ajax_enabled=>'N'
-,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_headings_type=>'NO_HEADINGS'
-,p_query_num_rows=>500
-,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No data found.'
-,p_query_row_count_max=>500
-,p_csv_output=>'N'
-,p_prn_output=>'N'
-,p_sort_null=>'L'
-,p_plug_query_strip_html=>'N'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33146561953489811)
-,p_query_column_id=>1
-,p_column_alias=>'ACCOUNT_NAME'
-,p_column_display_sequence=>1
-,p_column_heading=>'&nbsp;'
-,p_use_as_row_header=>'N'
-,p_heading_alignment=>'LEFT'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33146606920489812)
-,p_query_column_id=>2
-,p_column_alias=>'2016'
-,p_column_display_sequence=>2
-,p_column_heading=>'2016'
-,p_use_as_row_header=>'N'
-,p_column_format=>'999G999G999G999G990D00'
+,p_column_html_expression=>'<span class="#STYLE#">#Y#</span>'
 ,p_column_alignment=>'RIGHT'
 ,p_heading_alignment=>'RIGHT'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
 );
-wwv_flow_api.create_report_region(
- p_id=>wwv_flow_api.id(33146779848489813)
-,p_name=>'Other Operating Income'
-,p_parent_plug_id=>wwv_flow_api.id(32778771172934345)
-,p_template=>wwv_flow_api.id(31261378455831956)
-,p_display_sequence=>100
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
-,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
-,p_grid_column_span=>6
-,p_display_point=>'BODY'
-,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select ''Total equity'' title,acct.t_equity_by_year(''2016'') total from dual',
-'',
-''))
-,p_source_type=>'NATIVE_SQL_REPORT'
-,p_ajax_enabled=>'N'
-,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_headings_type=>'NO_HEADINGS'
-,p_query_num_rows=>500
-,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No data found.'
-,p_query_row_count_max=>500
-,p_csv_output=>'N'
-,p_prn_output=>'N'
-,p_sort_null=>'L'
-,p_plug_query_strip_html=>'N'
-);
 wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33146848544489814)
-,p_query_column_id=>1
-,p_column_alias=>'TITLE'
-,p_column_display_sequence=>1
-,p_column_heading=>'Title'
-,p_use_as_row_header=>'N'
-,p_column_html_expression=>'<b>#TITLE#</b>'
-,p_disable_sort_column=>'N'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33146918886489815)
-,p_query_column_id=>2
-,p_column_alias=>'TOTAL'
-,p_column_display_sequence=>2
-,p_column_heading=>'Total'
+ p_id=>wwv_flow_api.id(33149523027489841)
+,p_query_column_id=>4
+,p_column_alias=>'Z'
+,p_column_display_sequence=>4
+,p_column_heading=>'Z'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G990D00'
-,p_column_alignment=>'RIGHT'
-,p_heading_alignment=>'LEFT'
-,p_disable_sort_column=>'N'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_region(
- p_id=>wwv_flow_api.id(33147315604489819)
-,p_name=>'Expenses'
-,p_parent_plug_id=>wwv_flow_api.id(32778771172934345)
-,p_template=>wwv_flow_api.id(31261378455831956)
-,p_display_sequence=>110
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
-,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
-,p_grid_column_span=>6
-,p_display_point=>'BODY'
-,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'SELECT *  FROM ',
-'(SELECT account_name,account_year,total_credit',
-'  FROM account_analysis where account_code like ''4%'')',
-'PIVOT',
-'(',
-'  sum(total_credit)',
-'  FOR account_year IN (2016)',
-')',
-'',
-'order by account_name',
-'',
-''))
-,p_source_type=>'NATIVE_SQL_REPORT'
-,p_ajax_enabled=>'N'
-,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_headings_type=>'NO_HEADINGS'
-,p_query_num_rows=>500
-,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No data found.'
-,p_query_row_count_max=>500
-,p_csv_output=>'N'
-,p_prn_output=>'N'
-,p_sort_null=>'L'
-,p_plug_query_strip_html=>'N'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33147477088489820)
-,p_query_column_id=>1
-,p_column_alias=>'ACCOUNT_NAME'
-,p_column_display_sequence=>1
-,p_column_heading=>'Account Name'
-,p_use_as_row_header=>'N'
-,p_heading_alignment=>'LEFT'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33147526146489821)
-,p_query_column_id=>2
-,p_column_alias=>'2016'
-,p_column_display_sequence=>2
-,p_column_heading=>'2016'
-,p_use_as_row_header=>'N'
-,p_column_format=>'999G999G999G999G990D00'
-,p_column_alignment=>'RIGHT'
-,p_heading_alignment=>'LEFT'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_region(
- p_id=>wwv_flow_api.id(33147622816489822)
-,p_name=>'Total Expenses'
-,p_parent_plug_id=>wwv_flow_api.id(32778771172934345)
-,p_template=>wwv_flow_api.id(31261378455831956)
-,p_display_sequence=>130
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
-,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
-,p_grid_column_span=>6
-,p_display_point=>'BODY'
-,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select ''Total expenses'' title,acct.t_expenses_by_year(''2016'')*(-1) total from dual',
-'',
-''))
-,p_source_type=>'NATIVE_SQL_REPORT'
-,p_ajax_enabled=>'N'
-,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_headings_type=>'NO_HEADINGS'
-,p_query_num_rows=>500
-,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No data found.'
-,p_query_row_count_max=>500
-,p_csv_output=>'N'
-,p_prn_output=>'N'
-,p_sort_null=>'L'
-,p_plug_query_strip_html=>'N'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33147717024489823)
-,p_query_column_id=>1
-,p_column_alias=>'TITLE'
-,p_column_display_sequence=>1
-,p_column_heading=>'Title'
-,p_use_as_row_header=>'N'
-,p_column_html_expression=>'<b>#TITLE#</b>'
-,p_disable_sort_column=>'N'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33147877853489824)
-,p_query_column_id=>2
-,p_column_alias=>'TOTAL'
-,p_column_display_sequence=>2
-,p_column_heading=>'Total'
-,p_use_as_row_header=>'N'
-,p_column_format=>'999G999G999G999G990D00'
-,p_column_alignment=>'RIGHT'
-,p_heading_alignment=>'LEFT'
-,p_disable_sort_column=>'N'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_region(
- p_id=>wwv_flow_api.id(33147911700489825)
-,p_name=>'Income'
-,p_parent_plug_id=>wwv_flow_api.id(32778771172934345)
-,p_template=>wwv_flow_api.id(31261378455831956)
-,p_display_sequence=>150
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
-,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
-,p_grid_column_span=>6
-,p_display_point=>'BODY'
-,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'SELECT *  FROM ',
-'(SELECT account_name,account_year,total_credit',
-'  FROM account_analysis where  account_code like ''5%'')',
-'PIVOT',
-'(',
-'  sum(total_credit)',
-'  FOR account_year IN (2016)',
-')',
-'',
-'order by account_name',
-'',
-''))
-,p_source_type=>'NATIVE_SQL_REPORT'
-,p_ajax_enabled=>'N'
-,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_headings_type=>'NO_HEADINGS'
-,p_query_num_rows=>500
-,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No data found.'
-,p_query_row_count_max=>500
-,p_csv_output=>'N'
-,p_prn_output=>'N'
-,p_sort_null=>'L'
-,p_plug_query_strip_html=>'N'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33148001277489826)
-,p_query_column_id=>1
-,p_column_alias=>'ACCOUNT_NAME'
-,p_column_display_sequence=>1
-,p_column_heading=>'&nbsp;'
-,p_use_as_row_header=>'N'
-,p_heading_alignment=>'LEFT'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33148174802489827)
-,p_query_column_id=>2
-,p_column_alias=>'2016'
-,p_column_display_sequence=>2
-,p_column_heading=>'2016'
-,p_use_as_row_header=>'N'
-,p_column_format=>'999G999G999G999G990D00'
+,p_column_html_expression=>'<span class="#STYLE#">#Z#</span>'
 ,p_column_alignment=>'RIGHT'
 ,p_heading_alignment=>'RIGHT'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
 );
-wwv_flow_api.create_report_region(
- p_id=>wwv_flow_api.id(33148583225489831)
-,p_name=>'Total Income'
-,p_parent_plug_id=>wwv_flow_api.id(32778771172934345)
-,p_template=>wwv_flow_api.id(31261378455831956)
-,p_display_sequence=>160
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
-,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
-,p_grid_column_span=>6
-,p_display_point=>'BODY'
-,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select ''Total income'' title,acct.t_income_by_year(''2016'') total from dual',
-'',
-''))
-,p_source_type=>'NATIVE_SQL_REPORT'
-,p_ajax_enabled=>'N'
-,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_headings_type=>'NO_HEADINGS'
-,p_query_num_rows=>500
-,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No data found.'
-,p_query_row_count_max=>500
-,p_csv_output=>'N'
-,p_prn_output=>'N'
-,p_sort_null=>'L'
-,p_plug_query_strip_html=>'N'
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33150144670489847)
+,p_query_column_id=>5
+,p_column_alias=>'SEQ'
+,p_column_display_sequence=>5
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
 );
 wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33148640659489832)
-,p_query_column_id=>1
-,p_column_alias=>'TITLE'
-,p_column_display_sequence=>1
-,p_column_heading=>'Title'
-,p_use_as_row_header=>'N'
-,p_column_html_expression=>'<b>#TITLE#</b>'
-,p_disable_sort_column=>'N'
+ p_id=>wwv_flow_api.id(33150208793489848)
+,p_query_column_id=>6
+,p_column_alias=>'STYLE'
+,p_column_display_sequence=>6
+,p_hidden_column=>'Y'
 ,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33148780158489833)
-,p_query_column_id=>2
-,p_column_alias=>'TOTAL'
-,p_column_display_sequence=>2
-,p_column_heading=>'Total'
-,p_use_as_row_header=>'N'
-,p_column_format=>'999G999G999G999G990D00'
-,p_column_alignment=>'RIGHT'
-,p_heading_alignment=>'LEFT'
-,p_disable_sort_column=>'N'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_region(
- p_id=>wwv_flow_api.id(33148894937489834)
-,p_name=>'Profit Loss'
-,p_parent_plug_id=>wwv_flow_api.id(32778771172934345)
-,p_template=>wwv_flow_api.id(31261378455831956)
-,p_display_sequence=>170
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
-,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
-,p_grid_column_span=>6
-,p_display_point=>'BODY'
-,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select ''Profit/Loss for the period'' title,acct.t_profit_by_year(''2016'') total from dual',
-'',
-''))
-,p_source_type=>'NATIVE_SQL_REPORT'
-,p_ajax_enabled=>'N'
-,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_headings_type=>'NO_HEADINGS'
-,p_query_num_rows=>500
-,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No data found.'
-,p_query_row_count_max=>500
-,p_csv_output=>'N'
-,p_prn_output=>'N'
-,p_sort_null=>'L'
-,p_plug_query_strip_html=>'N'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33148951890489835)
-,p_query_column_id=>1
-,p_column_alias=>'TITLE'
-,p_column_display_sequence=>1
-,p_column_heading=>'Title'
-,p_use_as_row_header=>'N'
-,p_column_html_expression=>'<b>#TITLE#</b>'
-,p_disable_sort_column=>'N'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
-);
-wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33149061040489836)
-,p_query_column_id=>2
-,p_column_alias=>'TOTAL'
-,p_column_display_sequence=>2
-,p_column_heading=>'Total'
-,p_use_as_row_header=>'N'
-,p_column_format=>'999G999G999G999G990D00'
-,p_column_alignment=>'RIGHT'
-,p_heading_alignment=>'LEFT'
-,p_disable_sort_column=>'N'
-,p_derived_column=>'N'
-,p_include_in_export=>'Y'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(33134655056248314)
@@ -28333,6 +27843,18 @@ wwv_flow_api.create_page_plug(
 ,p_menu_template_id=>wwv_flow_api.id(30673328750989954)
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33149164841489837)
+,p_name=>'P44_LAST_DATE'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(32778771172934345)
+,p_item_default=>'SYSDATE'
+,p_item_default_type=>'PLSQL_EXPRESSION'
+,p_source=>'P44_LAST_DATE'
+,p_source_type=>'ITEM'
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'Y'
 );
 end;
 /
@@ -28666,7 +28188,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160704185210'
+,p_last_upd_yyyymmddhh24miss=>'20160705164553'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32742821158706242)
@@ -28694,7 +28216,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<h3>',
-'    Balance Sheet -  As At &P46_DATE.',
+'    <span class="fa fa-book"></span>&nbsp;Balance Sheet -  as at &P46_DATE.',
 '    </h3>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
@@ -28714,7 +28236,7 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_report_region(
  p_id=>wwv_flow_api.id(32743222862706243)
-,p_name=>'Assets'
+,p_name=>'Balance Sheet'
 ,p_parent_plug_id=>wwv_flow_api.id(32664275409442536)
 ,p_template=>wwv_flow_api.id(30643706521989934)
 ,p_display_sequence=>10
@@ -28723,24 +28245,127 @@ wwv_flow_api.create_report_region(
 ,p_component_template_options=>'#DEFAULT#:t-Report--stretch:t-Report--staticRowColors:t-Report--rowHighlight:t-Report--noBorders'
 ,p_display_point=>'BODY'
 ,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select nvl(a.name,''====Total Assets'') name,sum(j.amount) total ',
-'from journal_items  j,account a ',
-'where j.account_id=a.id and a.type_id IN (',
-'select t.id from account_type t where upper(t.name) IN (''ASSETS'',''INCOME'')',
+'select 0 seq,',
+'        ''ASSETS'' as name,',
+'        null as x,',
+'        null as y,',
+'        null as z,',
+'        ''report-total nopad'' style',
+'from dual',
+'',
+'union all',
+'',
+'select  1 as seq,',
+'        a.name as name,',
+'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MM''),-2),''MON YYYY'')) x,',
+'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MM''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_month(a.id,to_char(trunc(sysdate,''MM''),''MON YYYY'')) z,',
+'        ''report-row'' style',
+'        from  account a where a.type_id IN (',
+'select t.id from account_type t where upper(t.name) IN (''ASSETS'')',
 ')',
-'group by rollup(a.name) order by total asc'))
+'',
+'union all ',
+'',
+'select  2 as seq,',
+'        ''Total Assets'' as name,',
+'        acct.t_account_by_type_by_month(''assets'',to_char(add_months(trunc(sysdate,''MM''),-2),''MON YYYY'')) x,',
+'         acct.t_account_by_type_by_month(''assets'',to_char(add_months(trunc(sysdate,''MM''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_type_by_month(''assets'',to_char(trunc(sysdate,''MM''),''MON YYYY'')) z, ',
+'        ''report-total'' style',
+'        from dual ',
+'',
+'UNION ALL ',
+'select 3 seq,',
+'        ''LIABILITIES'' as name,',
+'        null as x,',
+'        null as y,',
+'        null as z,',
+'        ''report-total nopad'' style',
+'from dual ',
+'',
+'union all',
+'',
+'select  4 as seq,',
+'        a.name as name,',
+'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MM''),-2),''MON YYYY'')) x,',
+'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MM''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_month(a.id,to_char(trunc(sysdate,''MM''),''MON YYYY'')) z,',
+'        ''report-row'' style',
+'        from  account a where a.type_id IN (',
+'select t.id from account_type t where upper(t.name) IN (''LIABILITIES'')',
+')',
+'',
+'union all ',
+'',
+'select  5 as seq,',
+'        ''Total Liabilities'' as name,',
+'        acct.t_account_by_type_by_month(''liabilities'',to_char(add_months(trunc(sysdate,''MM''),-2),''MON YYYY'')) x,',
+'         acct.t_account_by_type_by_month(''liabilities'',to_char(add_months(trunc(sysdate,''MM''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_type_by_month(''liabilities'',to_char(trunc(sysdate,''MM''),''MON YYYY'')) z, ',
+'        ''report-total'' style',
+'        from dual ',
+'',
+'UNION ALL ',
+'select 6 seq,',
+'        ''EQUITY'' as name,',
+'        null as x,',
+'        null as y,',
+'        null as z,',
+'        ''report-total nopad'' style',
+'from dual ',
+'',
+'union all',
+'',
+'select  7 as seq,',
+'        a.name as name,',
+'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MM''),-2),''MON YYYY'')) x,',
+'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MM''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_month(a.id,to_char(trunc(sysdate,''MM''),''MON YYYY'')) z,',
+'        ''report-row'' style',
+'        from  account a where a.type_id IN (',
+'select t.id from account_type t where upper(t.name) IN (''EQUITY'')',
+')',
+'',
+'union all ',
+'',
+'select  8 as seq,',
+'        ''Total Equity'' as name,',
+'        acct.t_account_by_type_by_month(''equity'',to_char(add_months(trunc(sysdate,''MM''),-2),''MON YYYY'')) x,',
+'         acct.t_account_by_type_by_month(''equity'',to_char(add_months(trunc(sysdate,''MM''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_type_by_month(''equity'',to_char(trunc(sysdate,''MM''),''MON YYYY'')) z, ',
+'        ''report-total'' style',
+'        from dual',
+'union all',
+' ',
+'',
+'select  9 as seq,',
+'        ''Total Equity and Liabilities'' as name,',
+'        acct.t_account_by_type_by_month(''equity'',to_char(add_months(trunc(sysdate,''MM''),-2),''MON YYYY'')) + ',
+'        acct.t_account_by_type_by_month(''liabilities'',to_char(add_months(trunc(sysdate,''MM''),-2),''MON YYYY'')) x,',
+'         acct.t_account_by_type_by_month(''equity'',to_char(add_months(trunc(sysdate,''MM''),-1),''MON YYYY'')) +',
+'         acct.t_account_by_type_by_month(''liabilities'',to_char(add_months(trunc(sysdate,''MM''),-1),''MON YYYY'')) y,',
+'        acct.t_account_by_type_by_month(''equity'',to_char(trunc(sysdate,''MM''),''MON YYYY'')) + ',
+'        acct.t_account_by_type_by_month(''liabilities'',to_char(trunc(sysdate,''MM''),''MON YYYY'')) z, ',
+'        ''report-total nopad'' style',
+'        from dual ',
+'',
+'order by 1'))
 ,p_source_type=>'NATIVE_SQL_REPORT'
-,p_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<h3>',
-'    Assets',
-'</h3>'))
-,p_ajax_enabled=>'Y'
+,p_ajax_enabled=>'N'
 ,p_query_row_template=>wwv_flow_api.id(30660670762989944)
-,p_query_headings_type=>'NO_HEADINGS'
-,p_query_num_rows=>100
+,p_query_headings=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'return null||'':''||',
+'       to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')||'':''||',
+'       to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'') ||'':''||',
+'       to_char(trunc(sysdate,''MON''),''MON YYYY'');',
+''))
+,p_query_headings_type=>'FUNCTION_BODY_RETURNING_COLON_DELIMITED_LIST'
+,p_query_num_rows=>500
 ,p_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_query_no_data_found=>'No data found'
-,p_csv_output=>'N'
+,p_csv_output=>'Y'
+,p_csv_output_link_text=>'&DOWNLOAD.'
 ,p_prn_output=>'N'
 ,p_prn_format=>'PDF'
 ,p_prn_output_link_text=>'Print'
@@ -28774,30 +28399,80 @@ wwv_flow_api.create_report_region(
 ,p_prn_page_header_alignment=>'CENTER'
 ,p_prn_page_footer_alignment=>'CENTER'
 ,p_sort_null=>'L'
-,p_plug_query_strip_html=>'N'
+,p_plug_query_exp_filename=>'Balance -Sheet'
+,p_plug_query_exp_separator=>','
+,p_plug_query_exp_enclosed_by=>'"'
+,p_plug_query_strip_html=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33298472736358004)
+,p_query_column_id=>1
+,p_column_alias=>'SEQ'
+,p_column_display_sequence=>6
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
 );
 wwv_flow_api.create_report_columns(
  p_id=>wwv_flow_api.id(32665174920442545)
-,p_query_column_id=>1
+,p_query_column_id=>2
 ,p_column_alias=>'NAME'
 ,p_column_display_sequence=>1
 ,p_column_heading=>'Account Name'
 ,p_use_as_row_header=>'N'
+,p_column_html_expression=>'<span class="#STYLE#">#NAME#</span>'
 ,p_heading_alignment=>'LEFT'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
 );
 wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(32665292357442546)
-,p_query_column_id=>2
-,p_column_alias=>'TOTAL'
+ p_id=>wwv_flow_api.id(33150457722489850)
+,p_query_column_id=>3
+,p_column_alias=>'X'
 ,p_column_display_sequence=>2
-,p_column_heading=>'Total  &NGN.'
+,p_column_heading=>'X'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G990D00'
-,p_heading_alignment=>'LEFT'
+,p_column_html_expression=>'<span class="#STYLE#">#X#</span>'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'RIGHT'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33298116215358001)
+,p_query_column_id=>4
+,p_column_alias=>'Y'
+,p_column_display_sequence=>3
+,p_column_heading=>'Y'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_html_expression=>'<span class="#STYLE#">#Y#</span>'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'RIGHT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33298283367358002)
+,p_query_column_id=>5
+,p_column_alias=>'Z'
+,p_column_display_sequence=>4
+,p_column_heading=>'Z'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_html_expression=>'<span class="#STYLE#">#Z#</span>'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'RIGHT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33298305747358003)
+,p_query_column_id=>6
+,p_column_alias=>'STYLE'
+,p_column_display_sequence=>5
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32664351090442537)
@@ -28807,9 +28482,9 @@ wwv_flow_api.create_page_plug(
 ,p_plug_template=>wwv_flow_api.id(30643706521989934)
 ,p_plug_display_sequence=>30
 ,p_include_in_reg_disp_sel_yn=>'N'
-,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_display_condition_type=>'NEVER'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -28943,10 +28618,10 @@ wwv_flow_api.create_page_item(
 ,p_name=>'P46_DATE'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_api.id(32774395465934301)
-,p_item_default=>'to_char(sysdate,''fmDD fmMonth, YYYY'')'
+,p_item_default=>'to_char(sysdate,''FMMonth DD, YYYY'')'
 ,p_item_default_type=>'PLSQL_EXPRESSION'
 ,p_format_mask=>'fmDD fmMonth, YYYY'
-,p_source=>'to_char(sysdate,''fmDD fmMonth, YYYY'')'
+,p_source=>'to_char(sysdate,''FMMonth DD, YYYY'')'
 ,p_source_type=>'FUNCTION'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'Y'
@@ -29243,6 +28918,741 @@ wwv_flow_api.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_SUBMIT_PAGE'
 ,p_attribute_02=>'Y'
+);
+end;
+/
+prompt --application/pages/page_00048
+begin
+wwv_flow_api.create_page(
+ p_id=>48
+,p_user_interface_id=>wwv_flow_api.id(30678093337989972)
+,p_name=>'Profit and Loss Statement - Original'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'Profit and Loss Statement - Original'
+,p_step_sub_title=>'Profit and Loss Statement - Original'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_help_text=>'No help is available for this page.'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160705092923'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33243484576430331)
+,p_plug_name=>'Container'
+,p_region_template_options=>'js-showMaximizeButton:t-Region--hideHeader:t-Region--stacked:t-Region--scrollBody:t-Form--labelsAbove'
+,p_plug_template=>wwv_flow_api.id(31261378455831956)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>',
+'    <span class="fa fa-book"></span>&nbsp;Profit & Loss Statement',
+'</h3>'))
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(33244280785430333)
+,p_name=>'Total Income'
+,p_parent_plug_id=>wwv_flow_api.id(33243484576430331)
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>160
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
+,p_grid_column_span=>6
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select ''Total income'' title,acct.t_income_by_year(''2016'') total from dual',
+'',
+''))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_ajax_enabled=>'N'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_headings_type=>'NO_HEADINGS'
+,p_query_num_rows=>500
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_row_count_max=>500
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33244698105430334)
+,p_query_column_id=>1
+,p_column_alias=>'TITLE'
+,p_column_display_sequence=>1
+,p_column_heading=>'Title'
+,p_use_as_row_header=>'N'
+,p_column_html_expression=>'<b>#TITLE#</b>'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33245042042430335)
+,p_query_column_id=>2
+,p_column_alias=>'TOTAL'
+,p_column_display_sequence=>2
+,p_column_heading=>'Total'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'LEFT'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(33245451697430335)
+,p_name=>'Assets'
+,p_parent_plug_id=>wwv_flow_api.id(33243484576430331)
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
+,p_grid_column_span=>6
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'SELECT *  FROM ',
+'(SELECT account_name,account_year,total_credit',
+'  FROM account_analysis where  account_code like ''1%'')',
+'PIVOT',
+'(',
+'  sum(total_credit)',
+'  FOR account_year IN (2016)',
+')',
+'',
+'order by account_name',
+'',
+''))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_ajax_enabled=>'N'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_headings=>'return ''&nbsp; : DEC <br/>2016'';'
+,p_query_headings_type=>'FUNCTION_BODY_RETURNING_COLON_DELIMITED_LIST'
+,p_query_num_rows=>500
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_row_count_max=>500
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33245873776430335)
+,p_query_column_id=>1
+,p_column_alias=>'ACCOUNT_NAME'
+,p_column_display_sequence=>1
+,p_column_heading=>'&nbsp;'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33246240510430336)
+,p_query_column_id=>2
+,p_column_alias=>'2016'
+,p_column_display_sequence=>2
+,p_column_heading=>'2016'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'RIGHT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(33246692076430336)
+,p_name=>'Total Assets'
+,p_parent_plug_id=>wwv_flow_api.id(33243484576430331)
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>30
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
+,p_grid_column_span=>6
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select ''Total assets'' title,acct.t_assets_by_year(''2016'')  total from dual',
+'',
+''))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_ajax_enabled=>'N'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_headings_type=>'NO_HEADINGS'
+,p_query_num_rows=>500
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_row_count_max=>500
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33247027318430336)
+,p_query_column_id=>1
+,p_column_alias=>'TITLE'
+,p_column_display_sequence=>1
+,p_column_heading=>'Title'
+,p_use_as_row_header=>'N'
+,p_column_html_expression=>'<b>#TITLE#</b>'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33247406741430336)
+,p_query_column_id=>2
+,p_column_alias=>'TOTAL'
+,p_column_display_sequence=>2
+,p_column_heading=>'Total'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'LEFT'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(33247854021430337)
+,p_name=>'Liabilities'
+,p_parent_plug_id=>wwv_flow_api.id(33243484576430331)
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>40
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
+,p_grid_column_span=>6
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'SELECT *  FROM ',
+'(SELECT account_name,account_year,total_credit',
+'  FROM account_analysis where account_code like ''2%'')',
+'PIVOT',
+'(',
+'  sum(total_credit)',
+'  FOR account_year IN (2016)',
+')',
+'',
+'order by account_name',
+'',
+''))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_ajax_enabled=>'N'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_headings_type=>'NO_HEADINGS'
+,p_query_num_rows=>500
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_row_count_max=>500
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33248298505430337)
+,p_query_column_id=>1
+,p_column_alias=>'ACCOUNT_NAME'
+,p_column_display_sequence=>1
+,p_column_heading=>'Account Name'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33248682339430337)
+,p_query_column_id=>2
+,p_column_alias=>'2016'
+,p_column_display_sequence=>2
+,p_column_heading=>'2016'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(33249038001430338)
+,p_name=>'Liabilities Total'
+,p_parent_plug_id=>wwv_flow_api.id(33243484576430331)
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>60
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
+,p_grid_column_span=>6
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select ''Total liabilities'' title,acct.t_liabilities_by_year(''2016'')*(-1) total from dual',
+'',
+''))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_ajax_enabled=>'N'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_headings_type=>'NO_HEADINGS'
+,p_query_num_rows=>500
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_row_count_max=>500
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33249492888430338)
+,p_query_column_id=>1
+,p_column_alias=>'TITLE'
+,p_column_display_sequence=>1
+,p_column_heading=>'Title'
+,p_use_as_row_header=>'N'
+,p_column_html_expression=>'<b>#TITLE#</b>'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33249876519430338)
+,p_query_column_id=>2
+,p_column_alias=>'TOTAL'
+,p_column_display_sequence=>2
+,p_column_heading=>'Total'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'LEFT'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(33250256713430339)
+,p_name=>'Net Assets'
+,p_parent_plug_id=>wwv_flow_api.id(33243484576430331)
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>70
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
+,p_grid_column_span=>6
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select ''Net assets'' title,acct.t_net_assets_by_year(''2016'') total from dual',
+'',
+''))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_ajax_enabled=>'N'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_headings_type=>'NO_HEADINGS'
+,p_query_num_rows=>500
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_row_count_max=>500
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33250648379430339)
+,p_query_column_id=>1
+,p_column_alias=>'TITLE'
+,p_column_display_sequence=>1
+,p_column_heading=>'Title'
+,p_use_as_row_header=>'N'
+,p_column_html_expression=>'<b>#TITLE#</b>'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33251025922430339)
+,p_query_column_id=>2
+,p_column_alias=>'TOTAL'
+,p_column_display_sequence=>2
+,p_column_heading=>'Total'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'LEFT'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(33251427563430340)
+,p_name=>'Other Operating Income'
+,p_parent_plug_id=>wwv_flow_api.id(33243484576430331)
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>100
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
+,p_grid_column_span=>6
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select ''Total equity'' title,acct.t_equity_by_year(''2016'') total from dual',
+'',
+''))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_ajax_enabled=>'N'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_headings_type=>'NO_HEADINGS'
+,p_query_num_rows=>500
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_row_count_max=>500
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33252239823430340)
+,p_query_column_id=>1
+,p_column_alias=>'TITLE'
+,p_column_display_sequence=>1
+,p_column_heading=>'Title'
+,p_use_as_row_header=>'N'
+,p_column_html_expression=>'<b>#TITLE#</b>'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33251828056430340)
+,p_query_column_id=>2
+,p_column_alias=>'TOTAL'
+,p_column_display_sequence=>2
+,p_column_heading=>'Total'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'LEFT'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(33252687401430340)
+,p_name=>'Expenses'
+,p_parent_plug_id=>wwv_flow_api.id(33243484576430331)
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>110
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
+,p_grid_column_span=>6
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'SELECT *  FROM ',
+'(SELECT account_name,account_year,total_credit',
+'  FROM account_analysis where account_code like ''4%'')',
+'PIVOT',
+'(',
+'  sum(total_credit)',
+'  FOR account_year IN (2016)',
+')',
+'',
+'order by account_name',
+'',
+''))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_ajax_enabled=>'N'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_headings_type=>'NO_HEADINGS'
+,p_query_num_rows=>500
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_row_count_max=>500
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33253030492430341)
+,p_query_column_id=>1
+,p_column_alias=>'ACCOUNT_NAME'
+,p_column_display_sequence=>1
+,p_column_heading=>'Account Name'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33253445984430341)
+,p_query_column_id=>2
+,p_column_alias=>'2016'
+,p_column_display_sequence=>2
+,p_column_heading=>'2016'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(33253895098430341)
+,p_name=>'Total Expenses'
+,p_parent_plug_id=>wwv_flow_api.id(33243484576430331)
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>130
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
+,p_grid_column_span=>6
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select ''Total expenses'' title,acct.t_expenses_by_year(''2016'')*(-1) total from dual',
+'',
+''))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_ajax_enabled=>'N'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_headings_type=>'NO_HEADINGS'
+,p_query_num_rows=>500
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_row_count_max=>500
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33254247039430342)
+,p_query_column_id=>1
+,p_column_alias=>'TITLE'
+,p_column_display_sequence=>1
+,p_column_heading=>'Title'
+,p_use_as_row_header=>'N'
+,p_column_html_expression=>'<b>#TITLE#</b>'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33254698907430342)
+,p_query_column_id=>2
+,p_column_alias=>'TOTAL'
+,p_column_display_sequence=>2
+,p_column_heading=>'Total'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'LEFT'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(33255090175430342)
+,p_name=>'Income'
+,p_parent_plug_id=>wwv_flow_api.id(33243484576430331)
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>150
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
+,p_grid_column_span=>6
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'SELECT *  FROM ',
+'(SELECT account_name,account_year,total_credit',
+'  FROM account_analysis where  account_code like ''5%'')',
+'PIVOT',
+'(',
+'  sum(total_credit)',
+'  FOR account_year IN (2016)',
+')',
+'',
+'order by account_name',
+'',
+''))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_ajax_enabled=>'N'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_headings_type=>'NO_HEADINGS'
+,p_query_num_rows=>500
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_row_count_max=>500
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33255457650430343)
+,p_query_column_id=>1
+,p_column_alias=>'ACCOUNT_NAME'
+,p_column_display_sequence=>1
+,p_column_heading=>'&nbsp;'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33255890223430343)
+,p_query_column_id=>2
+,p_column_alias=>'2016'
+,p_column_display_sequence=>2
+,p_column_heading=>'2016'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'RIGHT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(33256241771430344)
+,p_name=>'Equity'
+,p_parent_plug_id=>wwv_flow_api.id(33243484576430331)
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>80
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
+,p_grid_column_span=>6
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'SELECT *  FROM ',
+'(SELECT account_name,account_year,total_credit',
+'  FROM account_analysis where  account_code like ''3%'')',
+'PIVOT',
+'(',
+'  sum(total_credit)',
+'  FOR account_year IN (2016)',
+')',
+'',
+'order by account_name',
+'',
+''))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_ajax_enabled=>'N'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_headings_type=>'NO_HEADINGS'
+,p_query_num_rows=>500
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_row_count_max=>500
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33256692690430344)
+,p_query_column_id=>1
+,p_column_alias=>'ACCOUNT_NAME'
+,p_column_display_sequence=>1
+,p_column_heading=>'&nbsp;'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33257073031430344)
+,p_query_column_id=>2
+,p_column_alias=>'2016'
+,p_column_display_sequence=>2
+,p_column_heading=>'2016'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'RIGHT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(33257402650430344)
+,p_name=>'Profit Loss'
+,p_parent_plug_id=>wwv_flow_api.id(33243484576430331)
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>170
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--noBorder:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
+,p_grid_column_span=>6
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select ''Profit/Loss for the period'' title,acct.t_profit_by_year(''2016'') total from dual',
+'',
+''))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_ajax_enabled=>'N'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_headings_type=>'NO_HEADINGS'
+,p_query_num_rows=>500
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_row_count_max=>500
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33257887858430345)
+,p_query_column_id=>1
+,p_column_alias=>'TITLE'
+,p_column_display_sequence=>1
+,p_column_heading=>'Title'
+,p_use_as_row_header=>'N'
+,p_column_html_expression=>'<b>#TITLE#</b>'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33258223345430345)
+,p_query_column_id=>2
+,p_column_alias=>'TOTAL'
+,p_column_display_sequence=>2
+,p_column_heading=>'Total'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_alignment=>'RIGHT'
+,p_heading_alignment=>'LEFT'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33243845518430331)
+,p_name=>'P48_LAST_DATE'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(33243484576430331)
+,p_item_default=>'SYSDATE'
+,p_item_default_type=>'PLSQL_EXPRESSION'
+,p_source=>'P48_LAST_DATE'
+,p_source_type=>'ITEM'
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'Y'
 );
 end;
 /

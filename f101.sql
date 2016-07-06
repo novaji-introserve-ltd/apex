@@ -27,7 +27,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 -- Application Export:
 --   Application:     101
 --   Name:            easytaxpayer.com
---   Date and Time:   00:00 Wednesday July 6, 2016
+--   Date and Time:   00:00 Thursday July 7, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -37,11 +37,11 @@ prompt APPLICATION 101 - easytaxpayer.com
 
 -- Application Statistics:
 --   Pages:                     21
---     Items:                   44
+--     Items:                   45
 --     Validations:              2
 --     Processes:               26
---     Regions:                 45
---     Buttons:                 17
+--     Regions:                 47
+--     Buttons:                 18
 --     Dynamic Actions:          1
 --   Shared Components:
 --     Logic:
@@ -63,7 +63,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 --         List:                12
 --         Popup LOV:            1
 --         Calendar:             1
---         Breadcrumb:           1
+--         Breadcrumb:           2
 --         Button:               3
 --         Report:               9
 --       LOVs:                   2
@@ -119,8 +119,8 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_01=>'http://easytaxpayer.com/img/'
 ,p_substitution_string_02=>'WHITE_LOGO'
 ,p_substitution_value_02=>' <img src="http://easytaxpayer.com/img/white_tax_logo.png" style="height:42px;padding-left:15px;vertical-align:middle"/>'
-,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160704162252'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160706221944'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -5907,6 +5907,18 @@ wwv_flow_api.create_menu_template(
 ,p_reference_id=>4070916542570059325
 ,p_translate_this_template=>'N'
 );
+wwv_flow_api.create_menu_template(
+ p_id=>wwv_flow_api.id(33355025647521847)
+,p_name=>'Custom Breadcrumb'
+,p_before_first=>'<ul class="#COMPONENT_CSS_CLASSES#">'
+,p_current_page_option=>'<li class=" is-active"><span>#NAME#</span></li>'
+,p_non_current_page_option=>'<li><a href="#LINK#">#NAME#</a></li>'
+,p_after_last=>'</ul>'
+,p_max_levels=>6
+,p_start_with_node=>'PARENT_TO_LEAF'
+,p_theme_id=>42
+,p_theme_class_id=>3
+);
 end;
 /
 prompt --application/shared_components/user_interface/templates/popuplov
@@ -9840,16 +9852,45 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
-,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160704155924'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160706221944'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(30283762452544650)
+,p_plug_name=>'Breadcrumbs'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30259094599544603)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(30283250495544647)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(30277254044544615)
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33299592875358015)
+,p_plug_name=>'Container'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30247650370544600)
+,p_plug_display_sequence=>30
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_new_grid_row=>false
+,p_plug_display_point=>'BODY'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29900311777802625)
 ,p_plug_name=>'Payments'
+,p_parent_plug_id=>wwv_flow_api.id(33299592875358015)
 ,p_region_template_options=>'#DEFAULT#:js-showMaximizeButton:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(30255782108544603)
 ,p_plug_display_sequence=>11
-,p_include_in_reg_disp_sel_yn=>'Y'
+,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -9995,18 +10036,19 @@ wwv_flow_api.create_flash_chart5_series(
 ,p_show_action_link=>'N'
 );
 wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(30283762452544650)
-,p_plug_name=>'Breadcrumbs'
-,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
-,p_component_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(30259094599544603)
-,p_plug_display_sequence=>10
+ p_id=>wwv_flow_api.id(33299318788358013)
+,p_plug_name=>'Make Payment'
+,p_parent_plug_id=>wwv_flow_api.id(33299592875358015)
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30247650370544600)
+,p_plug_display_sequence=>1
 ,p_include_in_reg_disp_sel_yn=>'N'
-,p_plug_display_point=>'REGION_POSITION_01'
-,p_menu_id=>wwv_flow_api.id(30283250495544647)
-,p_plug_source_type=>'NATIVE_BREADCRUMB'
-,p_menu_template_id=>wwv_flow_api.id(30277254044544615)
-,p_plug_query_row_template=>1
+,p_plug_new_grid_row=>false
+,p_plug_display_point=>'BODY'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_required_role=>wwv_flow_api.id(32964821077264311)
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(32864094518529936)
@@ -10035,6 +10077,20 @@ wwv_flow_api.create_page_button(
 ,p_button_position=>'ABOVE_BOX'
 ,p_button_css_classes=>'search_btn'
 ,p_icon_css_classes=>'fa-search'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(33299404237358014)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(33299318788358013)
+,p_button_name=>'PAY'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--iconLeft:t-Button--stretch'
+,p_button_template_id=>wwv_flow_api.id(30276890737544615)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Pay Tax Now'
+,p_button_position=>'BODY'
+,p_icon_css_classes=>'fa-credit-card'
+,p_grid_new_row=>'Y'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(32863727333529933)
@@ -10409,8 +10465,8 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
-,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160701123125'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160706213402'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30583998478216420)
@@ -10422,6 +10478,10 @@ wwv_flow_api.create_page_plug(
 ,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>',
+'    <span class="fa fa-edit"></span>&nbsp;Edit Profile',
+'</h3>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -10455,7 +10515,7 @@ wwv_flow_api.create_page_button(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(31762939253431049)
 ,p_name=>'P3_USERNAME'
-,p_item_sequence=>40
+,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_api.id(30583998478216420)
 ,p_prompt=>'Username'
 ,p_display_as=>'NATIVE_DISPLAY_ONLY'
@@ -10469,7 +10529,7 @@ wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(32179560621967101)
 ,p_name=>'P3_NAME'
 ,p_is_required=>true
-,p_item_sequence=>10
+,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_api.id(30583998478216420)
 ,p_prompt=>'Name'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
@@ -10485,7 +10545,7 @@ wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(32179693770967102)
 ,p_name=>'P3_ORGANIZATION'
 ,p_is_required=>true
-,p_item_sequence=>20
+,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_api.id(30583998478216420)
 ,p_prompt=>'Organization Name'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
@@ -10501,7 +10561,7 @@ wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(32179742393967103)
 ,p_name=>'P3_PHONE'
 ,p_is_required=>true
-,p_item_sequence=>30
+,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_api.id(30583998478216420)
 ,p_prompt=>'Phone Number'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
@@ -10516,7 +10576,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(32179895541967104)
 ,p_name=>'P3_STATE'
-,p_item_sequence=>50
+,p_item_sequence=>60
 ,p_item_plug_id=>wwv_flow_api.id(30583998478216420)
 ,p_prompt=>'State'
 ,p_display_as=>'NATIVE_SELECT_LIST'
@@ -10534,7 +10594,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(32179906982967105)
 ,p_name=>'P3_ROLE'
-,p_item_sequence=>60
+,p_item_sequence=>70
 ,p_item_plug_id=>wwv_flow_api.id(30583998478216420)
 ,p_prompt=>'Role'
 ,p_display_as=>'NATIVE_SELECT_LIST'
@@ -10549,6 +10609,28 @@ wwv_flow_api.create_page_item(
 ,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'
 );
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33299230631358012)
+,p_name=>'P3_PAYER_ID'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(30583998478216420)
+,p_use_cache_before_default=>'NO'
+,p_item_default=>':p3_payer_id'
+,p_item_default_type=>'PLSQL_EXPRESSION'
+,p_prompt=>'Payer ID'
+,p_source=>'PAYER_ID'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'style="font-size:121%"'
+,p_read_only_when_type=>'ALWAYS'
+,p_field_template=>wwv_flow_api.id(30276347175544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(31763041426431050)
 ,p_process_sequence=>10
@@ -10558,7 +10640,8 @@ wwv_flow_api.create_page_process(
 ,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'begin',
 '',
-'select username, name, organization, phone, state_id, role_id into :P3_USERNAME, :P3_NAME, :P3_ORGANIZATION, :P3_PHONE, :P3_STATE, :P3_ROLE from users where lower(username) = lower(:app_user);',
+'select payer_id,username, name, organization, phone, state_id, role_id into :p3_payer_id,:P3_USERNAME, :P3_NAME, :P3_ORGANIZATION, :P3_PHONE, :P3_STATE, :P3_ROLE ',
+'from users where lower(username) = lower(:app_user);',
 'END;'))
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );

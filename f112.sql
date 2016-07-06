@@ -27,7 +27,7 @@ prompt APPLICATION 112 - ruby.banking.app
 -- Application Export:
 --   Application:     112
 --   Name:            ruby.banking.app
---   Date and Time:   00:00 Wednesday July 6, 2016
+--   Date and Time:   00:00 Thursday July 7, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -36,11 +36,11 @@ prompt APPLICATION 112 - ruby.banking.app
 --
 
 -- Application Statistics:
---   Pages:                     49
---     Items:                  186
+--   Pages:                     50
+--     Items:                  188
 --     Validations:             19
 --     Processes:               70
---     Regions:                140
+--     Regions:                139
 --     Buttons:                114
 --     Dynamic Actions:         16
 --   Shared Components:
@@ -121,7 +121,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_03=>'DOWNLOAD'
 ,p_substitution_value_03=>'<span class="fa fa-file-excel-o"></span><span class="download">Download</span>'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160705165510'
+,p_last_upd_yyyymmddhh24miss=>'20160706132744'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -438,7 +438,6 @@ wwv_flow_api.create_list_item(
 ,p_list_item_display_sequence=>5
 ,p_list_item_link_text=>'&APP_USER.'
 ,p_list_item_icon=>'fa-user'
-,p_list_item_icon_attributes=>'style="text-decoration:lower;"'
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list_item(
@@ -3318,9 +3317,9 @@ wwv_flow_api.create_template(
 '  #APPLICATION_CSS#',
 '  #PAGE_CSS#  ',
 '  <!--#FAVICONS#-->',
-' <link rel="icon" sizes="16x16" href="http://novajii.com/img/RubyBank/favicon-16x16.png">',
-'<link rel="icon" sizes="32x32" href="http://novajii.com/img/RubyBank/favicon-32x32.png">',
-'<link rel="apple-touch-icon" sizes="180x180" href="http://novajii.com/img/RubyBank/favicon-180x180.png">',
+' <link rel="icon" sizes="16x16" href="http://novajii.com/img/ruby/assets/favicon.fw.png">',
+'<link rel="icon" sizes="32x32" href="http://novajii.com/img/ruby/assets/favicon.fw.png">',
+'<link rel="apple-touch-icon" sizes="http://novajii.com/img/ruby/assets/favicon.fw.png">',
 '  #HEAD#',
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>',
 '</head>',
@@ -3568,9 +3567,9 @@ wwv_flow_api.create_template(
 '  #APPLICATION_CSS#',
 '  #PAGE_CSS#',
 '  <!--#FAVICONS#-->',
-'    <link rel="icon" sizes="16x16" href="http://novajii.com/img/RubyBank/favicon-16x16.png">',
-'    <link rel="icon" sizes="32x32" href="http://novajii.com/img/RubyBank/favicon-32x32.png">',
-'    <link rel="apple-touch-icon" sizes="180x180" href="http://novajii.com/img/RubyBank/favicon-180x180.png">',
+'    <link rel="icon" sizes="16x12" href="http://novajii.com/img/ruby/assets/favicon.fw.png">',
+'    <link rel="icon" sizes="32x26" href="http://novajii.com/img/ruby/assets/favicon.fw.png">',
+'    <link rel="apple-touch-icon" sizes="180x180" href="http://novajii.com/img/ruby/assets/favicon.fw.png">',
 '',
 '  #HEAD#',
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>',
@@ -3588,6 +3587,9 @@ wwv_flow_api.create_template(
 '      </div>',
 '    </div>',
 '  </div>',
+'    <footer>',
+'        #REGION_POSITION_01#',
+'    </footer>',
 '</div>'))
 ,p_footer_template=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '#FORM_CLOSE#',
@@ -15156,6 +15158,7 @@ wwv_flow_api.create_user_interface(
 ,p_theme_id=>42
 ,p_home_url=>'f?p=&APP_ID.:1:&SESSION.'
 ,p_login_url=>'f?p=&APP_ID.:LOGIN_DESKTOP:&SESSION.'
+,p_global_page_id=>0
 ,p_navigation_list_id=>wwv_flow_api.id(30635670954989916)
 ,p_navigation_list_position=>'SIDE'
 ,p_navigation_list_template_id=>wwv_flow_api.id(30670298881989949)
@@ -15171,6 +15174,64 @@ end;
 prompt --application/user_interfaces/combined_files
 begin
 null;
+end;
+/
+prompt --application/pages/page_00000
+begin
+wwv_flow_api.create_page(
+ p_id=>0
+,p_user_interface_id=>wwv_flow_api.id(30678093337989972)
+,p_name=>'Global Page - Desktop'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'Global Page - Desktop'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_protection_level=>'D'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160706132101'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33298926676358009)
+,p_plug_name=>'Footer'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(30643706521989934)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY_1'
+,p_plug_source=>'<div style="font-size:10px;color:grey;padding: 5px 0 0 2px">Novaji Introserve@&P0_YYYY.</div>'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33299040806358010)
+,p_name=>'P0_YYYY'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(33298926676358009)
+,p_source=>'to_char(sysdate,''yyyy'')'
+,p_source_type=>'FUNCTION'
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33299163266358011)
+,p_name=>'P0_USER'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(33298926676358009)
+,p_use_cache_before_default=>'NO'
+,p_item_default=>'lower(:app_user)'
+,p_item_default_type=>'PLSQL_EXPRESSION'
+,p_source=>'lower(:app_user)'
+,p_source_type=>'FUNCTION'
+,p_display_as=>'NATIVE_HIDDEN'
+,p_display_when_type=>'USER_IS_NOT_PUBLIC_USER'
+,p_attribute_01=>'Y'
+);
 end;
 /
 prompt --application/pages/page_00001
@@ -15191,7 +15252,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160704183259'
+,p_last_upd_yyyymmddhh24miss=>'20160706123437'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30679887200989998)
@@ -15207,118 +15268,6 @@ wwv_flow_api.create_page_plug(
 ,p_menu_template_id=>wwv_flow_api.id(30673328750989954)
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(30693221887387502)
-,p_plug_name=>'Dashboard'
-,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--scrollBody:t-Form--labelsAbove'
-,p_escape_on_http_output=>'Y'
-,p_plug_template=>wwv_flow_api.id(31261378455831956)
-,p_plug_display_sequence=>50
-,p_include_in_reg_disp_sel_yn=>'Y'
-,p_plug_display_point=>'BODY'
-,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select',
-'    '' '' as label,',
-'      ''Group Management'' as value,',
-'    ''f?p=''||:APP_ID||'':8:''||:APP_SESSION||'':::'' as url',
-'from dual',
-'union all',
-'select',
-'    '' '' as label,',
-'     ''Accounts & Control'' as value,',
-'    ''f?p=''||:APP_ID||'':30:''||:APP_SESSION||'':::'' as url',
-'from dual',
-'union all',
-'select',
-'    '' '' as label,',
-'      ''Credit Management'' as value,',
-'    ''f?p=''||:APP_ID||'':12:''||:APP_SESSION||'':::'' as url',
-'from dual',
-'union all ',
-'select',
-'    '' '' as label,',
-'      ''Individual Accounts'' as value,',
-'    ''f?p=''||:APP_ID||'':11:''||:APP_SESSION||'':::'' as url',
-'from dual',
-'union all',
-'select',
-'    '' '' as label,',
-'      ''Reports'' as value,',
-'    ''f?p=''||:APP_ID||'':27:''||:APP_SESSION||'':::'' as url',
-'from dual',
-'union all ',
-'select',
-'    '' '' as label,',
-'      ''Operations'' as value,',
-'    ''f?p=''||:APP_ID||'':26:''||:APP_SESSION||'':::'' as url',
-'from dual'))
-,p_plug_source_type=>'PLUGIN_COM.ORACLE.APEX.BADGE_LIST'
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_plug_required_role=>wwv_flow_api.id(30935547790298660)
-,p_plug_display_condition_type=>'NEVER'
-,p_attribute_01=>'LABEL'
-,p_attribute_02=>'VALUE'
-,p_attribute_04=>'&URL.'
-,p_attribute_05=>'3'
-,p_attribute_07=>'BOX'
-,p_attribute_08=>'N'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(31443083257301343)
-,p_plug_name=>'Dashboard'
-,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--scrollBody:t-Form--labelsAbove'
-,p_escape_on_http_output=>'Y'
-,p_plug_template=>wwv_flow_api.id(31261378455831956)
-,p_plug_display_sequence=>200
-,p_include_in_reg_disp_sel_yn=>'Y'
-,p_plug_display_point=>'BODY'
-,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select',
-'    '' '' as label,',
-'     ''Group Management'' as value,',
-'    ''f?p=''||:APP_ID||'':8:''||:APP_SESSION||'':::'' as url',
-'from dual',
-'--union all',
-'--select',
-'    --'' '' as label,',
-'     --''Accounts & Control'' as value,',
-'    --''f?p=''||:APP_ID||'':1:''||:APP_SESSION||'':::'' as url',
-'--from dual',
-'union all',
-'select',
-'    '' '' as label,',
-'     ''Credit Management'' as value,',
-'   ''f?p=''||:APP_ID||'':12:''||:APP_SESSION||'':::'' as url',
-'from dual',
-'union all ',
-'select',
-'    '' '' as label,',
-'      ''Individual Accounts'' as value,',
-'    ''f?p=''||:APP_ID||'':11:''||:APP_SESSION||'':::'' as url',
-'from dual',
-'union all',
-'select',
-'    '' '' as label,',
-'      ''Members'' as value,',
-'    ''f?p=''||:APP_ID||'':15:''||:APP_SESSION||'':::'' as url',
-'from dual',
-'--union all ',
-'--select',
-'    --'' '' as label,',
-'      --''Operations'' as value,',
-'    --''f?p=''||:APP_ID||'':1:''||:APP_SESSION||'':::'' as url',
-'--from dual'))
-,p_plug_source_type=>'PLUGIN_COM.ORACLE.APEX.BADGE_LIST'
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_plug_required_role=>wwv_flow_api.id(30935054236282365)
-,p_plug_display_condition_type=>'NEVER'
-,p_attribute_01=>'LABEL'
-,p_attribute_02=>'VALUE'
-,p_attribute_04=>'&URL.'
-,p_attribute_05=>'2'
-,p_attribute_07=>'BOX'
-,p_attribute_08=>'N'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31974331393638020)
@@ -15337,6 +15286,7 @@ wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31974464198638021)
 ,p_plug_name=>'Group Management'
 ,p_parent_plug_id=>wwv_flow_api.id(31974331393638020)
+,p_region_css_classes=>'bgwhite'
 ,p_icon_css_classes=>'fa-group'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_region_attributes=>'class="dashboard"'
@@ -15352,6 +15302,7 @@ wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31974573425638022)
 ,p_plug_name=>'Credit Management'
 ,p_parent_plug_id=>wwv_flow_api.id(31974331393638020)
+,p_region_css_classes=>'bgwhite'
 ,p_icon_css_classes=>'fa-credit-card'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_region_attributes=>'class="dashboard"'
@@ -15368,6 +15319,7 @@ wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31974923134638026)
 ,p_plug_name=>'Individual Account'
 ,p_parent_plug_id=>wwv_flow_api.id(31974331393638020)
+,p_region_css_classes=>'bgwhite'
 ,p_icon_css_classes=>'fa-user'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_region_attributes=>'class="dashboard"'
@@ -15383,6 +15335,7 @@ wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31975026885638027)
 ,p_plug_name=>'Membership Management'
 ,p_parent_plug_id=>wwv_flow_api.id(31974331393638020)
+,p_region_css_classes=>'bgwhite'
 ,p_icon_css_classes=>'fa-cubes'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_region_attributes=>'class="dashboard"'
@@ -15412,6 +15365,7 @@ wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31976358631638040)
 ,p_plug_name=>'Accounting & Control'
 ,p_parent_plug_id=>wwv_flow_api.id(31976215577638039)
+,p_region_css_classes=>'bgwhite'
 ,p_icon_css_classes=>'fa-book'
 ,p_region_template_options=>'t-Form--noPadding'
 ,p_plug_template=>wwv_flow_api.id(30650274756989937)
@@ -15426,6 +15380,7 @@ wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31976952502638046)
 ,p_plug_name=>'Reporting'
 ,p_parent_plug_id=>wwv_flow_api.id(31976215577638039)
+,p_region_css_classes=>'bgwhite'
 ,p_icon_css_classes=>'fa-bar-chart-o'
 ,p_region_template_options=>'t-Form--noPadding'
 ,p_plug_template=>wwv_flow_api.id(30650274756989937)
@@ -15441,6 +15396,7 @@ wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32497397326014539)
 ,p_plug_name=>'Portfolio Management'
 ,p_parent_plug_id=>wwv_flow_api.id(31976215577638039)
+,p_region_css_classes=>'bgwhite'
 ,p_icon_css_classes=>'fa-briefcase'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_api.id(30650274756989937)
@@ -15455,6 +15411,7 @@ wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32774646470934304)
 ,p_plug_name=>'Cash Management'
 ,p_parent_plug_id=>wwv_flow_api.id(31976215577638039)
+,p_region_css_classes=>'bgwhite'
 ,p_icon_css_classes=>'fa-money'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_api.id(30650274756989937)
@@ -23128,7 +23085,7 @@ wwv_flow_api.create_page(
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
 ,p_html_page_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<div style="background:white;padding:10px 0 0 5px">',
+'<div class="header1">',
 '    <img src="http://novajii.com/img/ruby/assets/ruby-top.fw.png"/>',
 '</div>'))
 ,p_step_template=>wwv_flow_api.id(31766967823222187)
@@ -23139,7 +23096,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160622111943'
+,p_last_upd_yyyymmddhh24miss=>'20160706111449'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31443322259301346)
@@ -23148,10 +23105,10 @@ wwv_flow_api.create_page_plug(
 ,p_plug_template=>wwv_flow_api.id(31261378455831956)
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'Y'
-,p_plug_grid_column_span=>7
-,p_plug_display_column=>4
+,p_plug_grid_column_span=>8
+,p_plug_display_column=>3
 ,p_plug_display_point=>'BODY'
-,p_plug_source=>'<a href="http://novajii.com:4000/apex/f?p=112:101:3050242149600:::::" style="padding:10px 0 0 10px">Go to Login Page</a>'
+,p_plug_source=>'<a href="f?p=&APP_ID.:101" style="padding:10px 0 0 10px">Go to Login Page</a>'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>'<h3 class="signin-title">Reset Your Password</h3>'
 ,p_attribute_01=>'N'
@@ -23178,7 +23135,7 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(30672380578989951)
-,p_item_template_options=>'#DEFAULT#'
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
 ,p_protection_level=>'S'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'N'
@@ -29669,7 +29626,7 @@ wwv_flow_api.create_page(
 ,p_first_item=>'AUTO_FIRST_ITEM'
 ,p_autocomplete_on_off=>'OFF'
 ,p_html_page_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<div style="background:white;padding:10px 0 0 5px">',
+'<div class="header1">',
 '    <img src="http://novajii.com/img/ruby/assets/ruby-top.fw.png"/>',
 '</div>'))
 ,p_step_template=>wwv_flow_api.id(31766967823222187)
@@ -29679,7 +29636,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'C'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160622111943'
+,p_last_upd_yyyymmddhh24miss=>'20160706120424'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30678572448989990)
@@ -29689,7 +29646,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_display_point=>'BODY'
-,p_plug_source=>'<span style="padding:10px 0 0 10px"><a href="http://novajii.com:4000/apex/f?p=112:23">Reset Password</a></span>'
+,p_plug_source=>'<span style="padding:10px 0 0 10px"><a href="f?p=&APP_ID.:23">Reset Password</a></span>'
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>'<h3 class="signin-title">Simplify Collections..</h3>'

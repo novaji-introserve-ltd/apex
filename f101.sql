@@ -27,7 +27,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 -- Application Export:
 --   Application:     101
 --   Name:            easytaxpayer.com
---   Date and Time:   00:00 Thursday July 7, 2016
+--   Date and Time:   00:00 Friday July 8, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -37,12 +37,12 @@ prompt APPLICATION 101 - easytaxpayer.com
 
 -- Application Statistics:
 --   Pages:                     21
---     Items:                   45
+--     Items:                   46
 --     Validations:              2
 --     Processes:               26
---     Regions:                 47
+--     Regions:                 48
 --     Buttons:                 18
---     Dynamic Actions:          1
+--     Dynamic Actions:          2
 --   Shared Components:
 --     Logic:
 --       Items:                  3
@@ -120,7 +120,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_02=>'WHITE_LOGO'
 ,p_substitution_value_02=>' <img src="http://easytaxpayer.com/img/white_tax_logo.png" style="height:42px;padding-left:15px;vertical-align:middle"/>'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160706221944'
+,p_last_upd_yyyymmddhh24miss=>'20160707140026'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -9853,7 +9853,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160706221944'
+,p_last_upd_yyyymmddhh24miss=>'20160707140026'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30283762452544650)
@@ -9889,9 +9889,8 @@ wwv_flow_api.create_page_plug(
 ,p_parent_plug_id=>wwv_flow_api.id(33299592875358015)
 ,p_region_template_options=>'#DEFAULT#:js-showMaximizeButton:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(30255782108544603)
-,p_plug_display_sequence=>11
+,p_plug_display_sequence=>30
 ,p_include_in_reg_disp_sel_yn=>'N'
-,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_required_role=>wwv_flow_api.id(32976046393894516)
@@ -10039,16 +10038,112 @@ wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(33299318788358013)
 ,p_plug_name=>'Make Payment'
 ,p_parent_plug_id=>wwv_flow_api.id(33299592875358015)
-,p_region_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(30247650370544600)
-,p_plug_display_sequence=>1
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(30255782108544603)
+,p_plug_display_sequence=>20
 ,p_include_in_reg_disp_sel_yn=>'N'
-,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_required_role=>wwv_flow_api.id(32964821077264311)
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>',
+'    <span class="fa fa-credit-card pad-right"></span>Pay Tax',
+'</h3>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(33299652743358016)
+,p_name=>'Last Payments'
+,p_parent_plug_id=>wwv_flow_api.id(33299592875358015)
+,p_template=>wwv_flow_api.id(30255782108544603)
+,p_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
+,p_component_template_options=>'#DEFAULT#:t-Cards--compact:t-Cards--3cols'
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select app.user_mobile(:app_user) card_subtext,',
+'       app.total_paid_by_month(app.user_mobile(:app_user),',
+'       to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) card_text,',
+'       to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'') card_title , 1 seq',
+'',
+'from  dual',
+'',
+'union all',
+'  ',
+'  select app.user_mobile(:app_user) card_subtext,',
+'       app.total_paid_by_month(app.user_mobile(:app_user),to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) card_text,',
+'     to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'') card_title ,2 seq',
+'     from dual',
+'',
+'union all ',
+'',
+'select ',
+'  app.user_mobile(:app_user) card_subtext,',
+'   app.total_paid_by_month(app.user_mobile(:app_user),to_char(trunc(sysdate,''MON''),''MON YYYY'')) card_text,',
+'   to_char(trunc(sysdate,''MON''),''MON YYYY'') card_title, 3 seq',
+'   from dual',
+'   ',
+'   order by seq',
+'        '))
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>',
+'    <span class="fa fa-clock-o"></span>&nbsp;Last Payments',
+'</h3>'))
+,p_ajax_enabled=>'Y'
+,p_query_row_template=>wwv_flow_api.id(30261936426544606)
+,p_query_num_rows=>15
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_show_nulls_as=>'-'
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33300825013358028)
+,p_query_column_id=>1
+,p_column_alias=>'CARD_SUBTEXT'
+,p_column_display_sequence=>4
+,p_column_heading=>'Card subtext'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33300642186358026)
+,p_query_column_id=>2
+,p_column_alias=>'CARD_TEXT'
+,p_column_display_sequence=>2
+,p_column_heading=>'Card text'
+,p_use_as_row_header=>'N'
+,p_column_format=>'999G999G999G999G990D00'
+,p_column_html_expression=>'<h6>#CARD_TEXT#</h6>'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33300771820358027)
+,p_query_column_id=>3
+,p_column_alias=>'CARD_TITLE'
+,p_column_display_sequence=>3
+,p_column_heading=>'Card title'
+,p_use_as_row_header=>'N'
+,p_column_html_expression=>'<h5>#CARD_TITLE#</h5>'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33300575023358025)
+,p_query_column_id=>4
+,p_column_alias=>'SEQ'
+,p_column_display_sequence=>1
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(32864094518529936)
@@ -10080,15 +10175,16 @@ wwv_flow_api.create_page_button(
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(33299404237358014)
-,p_button_sequence=>10
+,p_button_sequence=>20
 ,p_button_plug_id=>wwv_flow_api.id(33299318788358013)
 ,p_button_name=>'PAY'
-,p_button_action=>'SUBMIT'
+,p_button_action=>'DEFINED_BY_DA'
 ,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--iconLeft:t-Button--stretch'
 ,p_button_template_id=>wwv_flow_api.id(30276890737544615)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Pay Tax Now'
 ,p_button_position=>'BODY'
+,p_button_css_classes=>'pad-btn'
 ,p_icon_css_classes=>'fa-credit-card'
 ,p_grid_new_row=>'Y'
 );
@@ -10202,6 +10298,40 @@ wwv_flow_api.create_page_item(
 ,p_attribute_04=>'button'
 ,p_attribute_05=>'Y'
 ,p_attribute_07=>'MONTH'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33300973263358029)
+,p_name=>'P1_AMOUNT'
+,p_is_required=>true
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(33299318788358013)
+,p_prompt=>'Amount'
+,p_placeholder=>'Enter amount'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_cSize=>30
+,p_grid_label_column_span=>0
+,p_field_template=>wwv_flow_api.id(30276498179544614)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--xlarge'
+,p_attribute_01=>'0'
+,p_attribute_03=>'left'
+);
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(33301085383358030)
+,p_name=>'Alert'
+,p_event_sequence=>10
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_api.id(33299404237358014)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(33301172706358031)
+,p_event_id=>wwv_flow_api.id(33301085383358030)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>'alert(''This will implement eBills Pay'');'
 );
 end;
 /

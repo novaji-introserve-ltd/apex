@@ -27,7 +27,7 @@ prompt APPLICATION 101 - easytaxpayer.com
 -- Application Export:
 --   Application:     101
 --   Name:            easytaxpayer.com
---   Date and Time:   00:00 Monday July 11, 2016
+--   Date and Time:   00:00 Tuesday July 12, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -120,7 +120,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_02=>'WHITE_LOGO'
 ,p_substitution_value_02=>' <img src="http://easytaxpayer.com/img/white_tax_logo.png" style="height:42px;padding-left:15px;vertical-align:middle"/>'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160708162133'
+,p_last_upd_yyyymmddhh24miss=>'20160711110833'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -3771,6 +3771,10 @@ wwv_flow_api.create_template(
 '.t-Card-wrap t-Card-titleWrap t-Card-title',
 '{',
 '    color: #6db343;',
+'}',
+'.t-Report-links a:hover',
+'{',
+'    text-decoration: underline;',
 '}',
 '/*t-Report-colHead',
 '{',
@@ -10946,7 +10950,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160708160131'
+,p_last_upd_yyyymmddhh24miss=>'20160711092925'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31761242309431032)
@@ -11119,7 +11123,8 @@ wwv_flow_api.create_report_region(
 ,p_query_show_nulls_as=>'-'
 ,p_query_num_rows_type=>'ROW_RANGES_IN_SELECT_LIST'
 ,p_pagination_display_position=>'BOTTOM_RIGHT'
-,p_csv_output=>'N'
+,p_csv_output=>'Y'
+,p_csv_output_link_text=>'<span style="color:#6db343">Download</span>'
 ,p_prn_output=>'N'
 ,p_sort_null=>'L'
 ,p_plug_query_strip_html=>'N'

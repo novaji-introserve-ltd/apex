@@ -27,7 +27,7 @@ prompt APPLICATION 111 - ore.ng
 -- Application Export:
 --   Application:     111
 --   Name:            ore.ng
---   Date and Time:   00:00 Monday July 11, 2016
+--   Date and Time:   00:00 Tuesday July 12, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -37,12 +37,12 @@ prompt APPLICATION 111 - ore.ng
 
 -- Application Statistics:
 --   Pages:                    128
---     Items:                  418
+--     Items:                  421
 --     Computations:             5
 --     Validations:             85
---     Processes:              186
---     Regions:                225
---     Buttons:                291
+--     Processes:              189
+--     Regions:                228
+--     Buttons:                294
 --     Dynamic Actions:         68
 --   Shared Components:
 --     Logic:
@@ -163,7 +163,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_12=>'LOGO1'
 ,p_substitution_value_12=>'ore-logo-blue.png'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160709181646'
+,p_last_upd_yyyymmddhh24miss=>'20160711211756'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'https://ore.ng/')
 ,p_ui_type_name => null
 );
@@ -2744,8 +2744,8 @@ wwv_flow_api.create_list_of_values(
  p_id=>wwv_flow_api.id(33460027900556851)
 ,p_lov_name=>'DOCUMENTS'
 ,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select upper(doc)  as display_value, upper(doc) as return_value ',
-'  from docs_view',
+'select upper(NAME)  as display_value, upper(NAME) as return_value ',
+'  from OR_OBJECTS',
 ' order by 1'))
 );
 wwv_flow_api.create_list_of_values(
@@ -3228,7 +3228,7 @@ wwv_flow_api.create_list_of_values(
  p_id=>wwv_flow_api.id(59511024582270075)
 ,p_lov_name=>'USER'
 ,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select USERNAME || '' ['' || nvl(fname,''No Name'') || '']'' as display_value, ID as return_value ',
+'select  nvl(fname,'' - '') || '' ''|| nvl(lname,'' - '')  as display_value, ID as return_value ',
 '  from OR_USER',
 ' order by 1'))
 );
@@ -34076,7 +34076,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20151127221925'
+,p_last_upd_yyyymmddhh24miss=>'20160711211445'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(59872810363246881)
@@ -34183,7 +34183,7 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_POPUP_LOV'
 ,p_named_lov=>'USER'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select USERNAME || '' ['' || nvl(fname,''No Name'') || '']'' as display_value, ID as return_value ',
+'select  nvl(fname,'' - '') || '' ''|| nvl(lname,'' - '')  as display_value, ID as return_value ',
 '  from OR_USER',
 ' order by 1'))
 ,p_cSize=>32
@@ -34736,7 +34736,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20151127221925'
+,p_last_upd_yyyymmddhh24miss=>'20160711211445'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(59889554712446194)
@@ -34853,7 +34853,7 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_POPUP_LOV'
 ,p_named_lov=>'USER'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select USERNAME || '' ['' || nvl(fname,''No Name'') || '']'' as display_value, ID as return_value ',
+'select  nvl(fname,'' - '') || '' ''|| nvl(lname,'' - '')  as display_value, ID as return_value ',
 '  from OR_USER',
 ' order by 1'))
 ,p_cSize=>32
@@ -38197,7 +38197,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20151127221925'
+,p_last_upd_yyyymmddhh24miss=>'20160711211445'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(60090381555824275)
@@ -38314,7 +38314,7 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_POPUP_LOV'
 ,p_named_lov=>'USER'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select USERNAME || '' ['' || nvl(fname,''No Name'') || '']'' as display_value, ID as return_value ',
+'select  nvl(fname,'' - '') || '' ''|| nvl(lname,'' - '')  as display_value, ID as return_value ',
 '  from OR_USER',
 ' order by 1'))
 ,p_lov_display_null=>'YES'
@@ -39239,7 +39239,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20151127221925'
+,p_last_upd_yyyymmddhh24miss=>'20160711211445'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(60311520750239716)
@@ -39463,7 +39463,7 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_POPUP_LOV'
 ,p_named_lov=>'USER'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select USERNAME || '' ['' || nvl(fname,''No Name'') || '']'' as display_value, ID as return_value ',
+'select  nvl(fname,'' - '') || '' ''|| nvl(lname,'' - '')  as display_value, ID as return_value ',
 '  from OR_USER',
 ' order by 1'))
 ,p_lov_display_null=>'YES'
@@ -40001,7 +40001,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160212214014'
+,p_last_upd_yyyymmddhh24miss=>'20160711211445'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(60356294912216709)
@@ -40183,7 +40183,7 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_POPUP_LOV'
 ,p_named_lov=>'USER'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select USERNAME || '' ['' || nvl(fname,''No Name'') || '']'' as display_value, ID as return_value ',
+'select  nvl(fname,'' - '') || '' ''|| nvl(lname,'' - '')  as display_value, ID as return_value ',
 '  from OR_USER',
 ' order by 1'))
 ,p_lov_display_null=>'YES'
@@ -41972,7 +41972,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20151127221925'
+,p_last_upd_yyyymmddhh24miss=>'20160711211445'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(60484824338133255)
@@ -42111,7 +42111,7 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'USER'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select USERNAME || '' ['' || nvl(fname,''No Name'') || '']'' as display_value, ID as return_value ',
+'select  nvl(fname,'' - '') || '' ''|| nvl(lname,'' - '')  as display_value, ID as return_value ',
 '  from OR_USER',
 ' order by 1'))
 ,p_lov_display_null=>'YES'
@@ -42958,7 +42958,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20151127221925'
+,p_last_upd_yyyymmddhh24miss=>'20160711211445'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(60405856046395877)
@@ -43593,7 +43593,7 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_POPUP_LOV'
 ,p_named_lov=>'USER'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select USERNAME || '' ['' || nvl(fname,''No Name'') || '']'' as display_value, ID as return_value ',
+'select  nvl(fname,'' - '') || '' ''|| nvl(lname,'' - '')  as display_value, ID as return_value ',
 '  from OR_USER',
 ' order by 1'))
 ,p_cSize=>30
@@ -55402,18 +55402,22 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160602222900'
+,p_last_upd_yyyymmddhh24miss=>'20160711211756'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31247900240728206)
 ,p_plug_name=>'Regenerate Reserve History'
 ,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(1315401119881073280)
-,p_plug_display_sequence=>10
+,p_plug_display_sequence=>32
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_plug_header=>'<h3>Regenerate Reserve History</h3>'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>Rebuild Reserves ( Step 3 )</h3>',
+'<p>',
+'    Reserves will be rebuilt up to the previous day. Run this after computing your interest on loans & investments',
+'</p>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -55422,7 +55426,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_name=>'Regenerate Equity Dividends'
 ,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(1315401119881073280)
-,p_plug_display_sequence=>20
+,p_plug_display_sequence=>50
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -55435,7 +55439,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_name=>'Regenerate Savings Dividends'
 ,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(1315401119881073280)
-,p_plug_display_sequence=>30
+,p_plug_display_sequence=>60
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -55448,7 +55452,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_name=>'Regenerate Loan Repayment Dividends'
 ,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(1315401119881073280)
-,p_plug_display_sequence=>40
+,p_plug_display_sequence=>70
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -55461,11 +55465,63 @@ wwv_flow_api.create_page_plug(
 ,p_plug_name=>'Regenerate Guaranty Dividends'
 ,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(1315401119881073280)
-,p_plug_display_sequence=>50
+,p_plug_display_sequence=>80
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>'<h3>Regenerate Guaranty Dividends</h3>'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33552835751344701)
+,p_plug_name=>'Rebuild Interest on Loans'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(1315401119881073280)
+,p_plug_display_sequence=>31
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>Rebuild Interest on Loans ( Step 2 )</h3>',
+'<p>',
+'    Interest on loans will be computed up to the previous day',
+'</p>'))
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33553264963344705)
+,p_plug_name=>'Rebuild Interest on Investments'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(1315401119881073280)
+,p_plug_display_sequence=>30
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>Rebuild Interest on Investments ( Step 1 )</h3>',
+'<p>',
+'    Interest on investements will be computed up to the previous day',
+'</p>'))
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33553724858344710)
+,p_plug_name=>'Rebuild late savings penalty'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(1315401119881073280)
+,p_plug_display_sequence=>40
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_display_condition_type=>'NEVER'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>Rebuild Late Savings Penalty ( Step 4 )</h3>',
+'<p>',
+'    Late savings panelty will be computed up to the previous day',
+'</p>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -55479,7 +55535,7 @@ wwv_flow_api.create_page_button(
 ,p_button_template_options=>'#DEFAULT#:t-Button--small:t-Button--iconLeft:t-Button--padLeft'
 ,p_button_template_id=>wwv_flow_api.id(1315414316853073333)
 ,p_button_is_hot=>'Y'
-,p_button_image_alt=>'Regenerate Reserve History'
+,p_button_image_alt=>'Rebuild Reserves'
 ,p_button_position=>'BELOW_BOX'
 ,p_icon_css_classes=>'fa-database'
 );
@@ -55534,6 +55590,48 @@ wwv_flow_api.create_page_button(
 ,p_button_template_id=>wwv_flow_api.id(1315414316853073333)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Regenerate Guaranty Dividends'
+,p_button_position=>'BELOW_BOX'
+,p_icon_css_classes=>'fa-database'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(33553019789344703)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(33552835751344701)
+,p_button_name=>'RELOAD_LOAN_INTERESTS'
+,p_button_static_id=>'RELOAD_LOAN_INTERESTS'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--small:t-Button--iconLeft:t-Button--padLeft'
+,p_button_template_id=>wwv_flow_api.id(1315414316853073333)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Rebuild  loan interests'
+,p_button_position=>'BELOW_BOX'
+,p_icon_css_classes=>'fa-database'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(33553423438344707)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(33553264963344705)
+,p_button_name=>'RELOAD_INVESTMENT_INTERESTS'
+,p_button_static_id=>'RELOAD_LOAN_INTERESTS'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--small:t-Button--iconLeft:t-Button--padLeft'
+,p_button_template_id=>wwv_flow_api.id(1315414316853073333)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Rebuild  investment interests'
+,p_button_position=>'BELOW_BOX'
+,p_icon_css_classes=>'fa-database'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(33553930916344712)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(33553724858344710)
+,p_button_name=>'RELOAD_LATE_SAVINGS'
+,p_button_static_id=>'RELOAD_LOAN_INTERESTS'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--small:t-Button--iconLeft:t-Button--padLeft'
+,p_button_template_id=>wwv_flow_api.id(1315414316853073333)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Rebuild  late savings penalty'
 ,p_button_position=>'BELOW_BOX'
 ,p_icon_css_classes=>'fa-database'
 );
@@ -55694,12 +55792,102 @@ wwv_flow_api.create_page_item(
 ,p_attribute_05=>'N'
 ,p_attribute_07=>'NONE'
 );
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33552965354344702)
+,p_name=>'P106_START_LOAN_INT'
+,p_is_required=>true
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(33552835751344701)
+,p_use_cache_before_default=>'NO'
+,p_item_default=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'declare ',
+'',
+'ret date;',
+'',
+'begin',
+'',
+'select min(start_date) into ret from or_loan where status_id=3;',
+'return nvl(to_char(ret,''DD-MON-YYYY''),''01-JAN-2010'');',
+'',
+'end;'))
+,p_item_default_type=>'PLSQL_FUNCTION_BODY'
+,p_prompt=>'Start Date'
+,p_format_mask=>'DD-MON-YYYY'
+,p_source=>'P106_START_LOAN_INT'
+,p_source_type=>'ITEM'
+,p_display_as=>'NATIVE_DATE_PICKER'
+,p_cSize=>30
+,p_field_template=>wwv_flow_api.id(1653905900709671302)
+,p_attribute_04=>'button'
+,p_attribute_05=>'N'
+,p_attribute_07=>'NONE'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33553310847344706)
+,p_name=>'P106_START_INV'
+,p_is_required=>true
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(33553264963344705)
+,p_use_cache_before_default=>'NO'
+,p_item_default=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'declare ',
+'',
+'ret date;',
+'',
+'begin',
+'',
+'select min(value_date) into ret from or_investment;',
+'return nvl(to_char(ret,''DD-MON-YYYY''),''01-JAN-2010'');',
+'',
+'end;'))
+,p_item_default_type=>'PLSQL_FUNCTION_BODY'
+,p_prompt=>'Start Date'
+,p_format_mask=>'DD-MON-YYYY'
+,p_source=>'P106_START_INV'
+,p_source_type=>'ITEM'
+,p_display_as=>'NATIVE_DATE_PICKER'
+,p_cSize=>30
+,p_field_template=>wwv_flow_api.id(1653905900709671302)
+,p_attribute_04=>'button'
+,p_attribute_05=>'N'
+,p_attribute_07=>'NONE'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33553862725344711)
+,p_name=>'P106_START_LATE'
+,p_is_required=>true
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(33553724858344710)
+,p_use_cache_before_default=>'NO'
+,p_item_default=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'declare ',
+'',
+'ret date;',
+'',
+'begin',
+'',
+'select min(value_dy) into ret from or_saving;',
+'return nvl(to_char(ret,''DD-MON-YYYY''),''01-JAN-2010'');',
+'',
+'end;'))
+,p_item_default_type=>'PLSQL_FUNCTION_BODY'
+,p_prompt=>'Start Date'
+,p_format_mask=>'DD-MON-YYYY'
+,p_source=>'P106_START_LATE'
+,p_source_type=>'ITEM'
+,p_display_as=>'NATIVE_DATE_PICKER'
+,p_cSize=>30
+,p_field_template=>wwv_flow_api.id(1653905900709671302)
+,p_attribute_04=>'button'
+,p_attribute_05=>'N'
+,p_attribute_07=>'NONE'
+);
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(31249426432728221)
 ,p_process_sequence=>10
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'Rebuild Reserve History'
+,p_process_name=>'Rebuild Reserves'
 ,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'DECLARE',
 '    l_sql VARCHAR2(4000);',
@@ -55713,7 +55901,7 @@ wwv_flow_api.create_page_process(
 '',
 '    start_date number;',
 '    end_date number;',
-'    today varchar2(20) := to_char(sysdate,''''DD-MON-YYYY'''');',
+'    today varchar2(20) := to_char(trunc(sysdate)-1,''''DD-MON-YYYY'''');',
 '    business_date varchar2(30);',
 '',
 '    begin',
@@ -55749,8 +55937,183 @@ wwv_flow_api.create_page_process(
 ,p_security_scheme=>wwv_flow_api.id(41954896586278906)
 );
 wwv_flow_api.create_page_process(
- p_id=>wwv_flow_api.id(31249629312728223)
+ p_id=>wwv_flow_api.id(33553141496344704)
 ,p_process_sequence=>20
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Rebuild Loan Interests'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'DECLARE',
+'    l_sql VARCHAR2(4000);',
+'    l_job NUMBER;',
+'BEGIN',
+'',
+'    -- try to format receiver first',
+'  ',
+'    l_sql := ''',
+'    declare',
+'',
+'    start_date number;',
+'    end_date number;',
+'    today varchar2(20) := to_char(trunc(sysdate)-1,''''DD-MON-YYYY'''');',
+'    business_date varchar2(30);',
+'',
+'    begin',
+'    ',
+'    -- CLEAR DATA',
+'',
+'    delete from or_loan_interest;',
+'    DELETE FROM  OR_transactions where DOCUMENT_SRC=''''OR_LOAN_INTEREST'''';',
+'    ',
+'    -- reset the loan table',
+'    update or_loan set computed_principal = principal, last_principal_update = start_date ;',
+'    commit;',
+'',
+'    -- reload the table of interests',
+'',
+'      start_date := to_number(to_char(to_date(:p106_start_loan_int, ''''DD-MON-YYYY''''), ''''j''''));',
+'      end_date := to_number(to_char(to_date(today, ''''DD-MON-YYYY''''), ''''j''''));',
+'      for cur_r in start_date..end_date loop ',
+'        business_date := to_date(cur_r, ''''j'''');',
+'        account_mgt.compute_interest_on_loans(business_date);',
+'      end loop;',
+'',
+'    commit;',
+'',
+'end;',
+'  ',
+'    '';',
+'    --store l_job for later reference',
+'    l_job := APEX_PLSQL_JOB.SUBMIT_PROCESS(',
+'        p_sql => l_sql,',
+'        p_status => ''Background process submitted'');',
+'    -- log job',
+'',
+'APEX_UTIL.SET_SESSION_STATE(''G_LOGIN_MESSAGE'', ''Loan interests rebuild submitted successfully..<br/>Please wait a few minutes to complete'');',
+'',
+'end;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(33553019789344703)
+,p_process_success_message=>'<p>Operation has been submitted and will soon be completed.</p>'
+,p_security_scheme=>wwv_flow_api.id(41954896586278906)
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(33553588257344708)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Rebuild investment interests'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'DECLARE',
+'    l_sql VARCHAR2(4000);',
+'    l_job NUMBER;',
+'BEGIN',
+'',
+'    -- try to format receiver first',
+'  ',
+'    l_sql := ''',
+'    declare',
+'',
+'    start_date number;',
+'    end_date number;',
+'    today varchar2(20) := to_char(trunc(sysdate)-1,''''DD-MON-YYYY'''');',
+'    business_date varchar2(30);',
+'',
+'    begin',
+'    ',
+'    -- CLEAR DATA',
+'',
+'    delete from or_investment_interest;',
+'    DELETE FROM  OR_transactions where DOCUMENT_SRC=''''OR_INVESTMENT_INTEREST'''';',
+'',
+'    -- reload the table',
+'',
+'      start_date := to_number(to_char(to_date(:p106_start_inv, ''''DD-MON-YYYY''''), ''''j''''));',
+'      end_date := to_number(to_char(to_date(today, ''''DD-MON-YYYY''''), ''''j''''));',
+'      for cur_r in start_date..end_date loop ',
+'        business_date := to_date(cur_r, ''''j'''');',
+'        account_mgt.calc_interest_on_investments(business_date);',
+'      end loop;',
+'',
+'    commit;',
+'',
+'end;',
+'  ',
+'    '';',
+'    --store l_job for later reference',
+'    l_job := APEX_PLSQL_JOB.SUBMIT_PROCESS(',
+'        p_sql => l_sql,',
+'        p_status => ''Background process submitted'');',
+'    -- log job',
+'',
+'APEX_UTIL.SET_SESSION_STATE(''G_LOGIN_MESSAGE'', ''Interest on investment rebuild submitted successfully..<br/>Please wait a few minutes to complete'');',
+'',
+'end;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(33553423438344707)
+,p_process_success_message=>'<p>Operation has been submitted and will soon be completed.</p>'
+,p_security_scheme=>wwv_flow_api.id(41954896586278906)
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(33553632554344709)
+,p_process_sequence=>40
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Rebuild late savings penalty'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'DECLARE',
+'    l_sql VARCHAR2(4000);',
+'    l_job NUMBER;',
+'BEGIN',
+'',
+'    -- try to format receiver first',
+'  ',
+'    l_sql := ''',
+'    declare',
+'',
+'    start_date number;',
+'    end_date number;',
+'    today varchar2(20) := to_char(trunc(sysdate)-1,''''DD-MON-YYYY'''');',
+'    business_date varchar2(30);',
+'',
+'    begin',
+'    ',
+'    -- CLEAR DATA',
+'',
+'    delete from or_PENALTY;',
+'    DELETE FROM  OR_transactions where DOCUMENT_SRC=''''OR_PENALTY'''';',
+'',
+'    -- reload the table',
+'',
+'      start_date := to_number(to_char(to_date(:p106_start_inv, ''''DD-MON-YYYY''''), ''''j''''));',
+'      end_date := to_number(to_char(to_date(today, ''''DD-MON-YYYY''''), ''''j''''));',
+'      for cur_r in start_date..end_date loop ',
+'        business_date := to_date(cur_r, ''''j'''');',
+'        account_mgt.advise_late_saving_penalty(business_date);',
+'      end loop;',
+'',
+'    commit;',
+'',
+'end;',
+'  ',
+'    '';',
+'    --store l_job for later reference',
+'    l_job := APEX_PLSQL_JOB.SUBMIT_PROCESS(',
+'        p_sql => l_sql,',
+'        p_status => ''Background process submitted'');',
+'    -- log job',
+'',
+'APEX_UTIL.SET_SESSION_STATE(''G_LOGIN_MESSAGE'', ''Late savings penalty rebuild submitted successfully..<br/>Please wait a few minutes to complete'');',
+'',
+'end;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(33553930916344712)
+,p_process_success_message=>'<p>Operation has been submitted and will soon be completed.</p>'
+,p_security_scheme=>wwv_flow_api.id(41954896586278906)
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(31249629312728223)
+,p_process_sequence=>50
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'Regenerate Equity Dividends'
@@ -55767,13 +56130,15 @@ wwv_flow_api.create_page_process(
 '',
 '    start_date number;',
 '    end_date number;',
-'    today varchar2(20) := to_char(sysdate,''''DD-MON-YYYY'''');',
+'    today varchar2(20) := to_char(TRUNC(sysdate)-1,''''DD-MON-YYYY'''');',
 '    business_date varchar2(30);',
 '',
 '    begin',
 '',
-'    delete from or_equity_dividend;',
-'',
+'    -- delete from or_equity_dividend where circle_id=user_mgt.default_circle(or_auth.user_id(:app_user));',
+'    account_mgt.clear_journal_items(''''or_equity_dividend'''',',
+'        user_mgt.default_circle(or_auth.user_id(:app_user)));',
+'    commit;',
 '    -- reload the table',
 '',
 '      start_date := to_number(to_char(to_date(:p106_start_eq, ''''DD-MON-YYYY''''), ''''j''''));',
@@ -55804,7 +56169,7 @@ wwv_flow_api.create_page_process(
 );
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(31250409142728231)
-,p_process_sequence=>30
+,p_process_sequence=>60
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'Regenerate Savings Dividends'
@@ -55821,12 +56186,14 @@ wwv_flow_api.create_page_process(
 '',
 '    start_date number;',
 '    end_date number;',
-'    today varchar2(20) := to_char(sysdate,''''DD-MON-YYYY'''');',
+'    today varchar2(20) := to_char(TRUNC(sysdate)-1,''''DD-MON-YYYY'''');',
 '    business_date varchar2(30);',
 '',
 '    begin',
 '',
-'    delete from or_saving_dividend;',
+'    -- delete from or_saving_dividend;',
+'    account_mgt.clear_journal_items(''''or_saving_dividend'''',',
+'        user_mgt.default_circle(or_auth.user_id(:app_user)));',
 '',
 '    -- reload the table',
 '',
@@ -55859,7 +56226,7 @@ wwv_flow_api.create_page_process(
 );
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(31250832326728235)
-,p_process_sequence=>40
+,p_process_sequence=>70
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'Regenerate Repayment Dividends'
@@ -55874,12 +56241,15 @@ wwv_flow_api.create_page_process(
 '',
 '    start_date number;',
 '    end_date number;',
-'    today varchar2(20) := to_char(sysdate,''''DD-MON-YYYY'''');',
+'    today varchar2(20) := to_char(TRUNC(sysdate)-1,''''DD-MON-YYYY'''');',
 '    business_date varchar2(30);',
 '',
 '    begin',
 '',
-'    delete from or_loan_repayment_dividend;',
+'    -- delete from or_loan_repayment_dividend;',
+'    ',
+'    account_mgt.clear_journal_items(''''or_loan_repayment_dividend'''',',
+'        user_mgt.default_circle(or_auth.user_id(:app_user)));',
 '',
 '    -- reload the table',
 '',
@@ -55912,7 +56282,7 @@ wwv_flow_api.create_page_process(
 );
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(31251224130728239)
-,p_process_sequence=>50
+,p_process_sequence=>80
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'Regenerate Guaranty Dividends'
@@ -55927,12 +56297,13 @@ wwv_flow_api.create_page_process(
 '',
 '    start_date number;',
 '    end_date number;',
-'    today varchar2(20) := to_char(sysdate,''''DD-MON-YYYY'''');',
+'    today varchar2(20) := to_char(TRUNC(sysdate)-1,''''DD-MON-YYYY'''');',
 '    business_date varchar2(30);',
 '',
 '    begin',
 '',
-'    delete from or_guaranty_dividend;',
+'    account_mgt.clear_journal_items(''''or_guaranty_dividend'''',',
+'        user_mgt.default_circle(or_auth.user_id(:app_user)));',
 '',
 '    -- reload the table',
 '',
@@ -62553,7 +62924,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160709180928'
+,p_last_upd_yyyymmddhh24miss=>'20160711155447'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(33444672369546754)
@@ -62670,8 +63041,8 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'DOCUMENTS'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select upper(doc)  as display_value, upper(doc) as return_value ',
-'  from docs_view',
+'select upper(NAME)  as display_value, upper(NAME) as return_value ',
+'  from OR_OBJECTS',
 ' order by 1'))
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_api.id(1653905718533671300)
@@ -63042,7 +63413,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160709123123'
+,p_last_upd_yyyymmddhh24miss=>'20160711162016'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(33483520245784874)
@@ -63053,14 +63424,10 @@ wwv_flow_api.create_page_plug(
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select AMOUNT,',
-'       DY,',
-'       user_id,',
-'       MTH ||'' ''||YR month,',
-'       ACCOUNT_ID ',
-'  from V_JOURNAL_ITEMS ',
-'  where yr = :p128_yr AND UPPER(DOC)= :P128_DOC  and ',
-'  circle_id=user_mgt.default_circle(or_auth.user_id(:app_user)) ORDER BY DOC_ID DESC '))
+'select t.id,t.tran_date,t.tran_mth,t.user_id,t.tran_id,t.tran_type,t.document_src,t.document_id,t.debit,t.credit,t.account_id,t.circle_id',
+'from v_transactions t',
+'where to_char(t.tran_date,''yyyy'') = :p128_yr AND T.tran_type = :P128_TYPE  and ',
+'circle_id=user_mgt.default_circle(or_auth.user_id(:app_user)) ORDER BY t.tran_date desc,t.document_id desc,t.id DESC '))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -63081,20 +63448,40 @@ wwv_flow_api.create_worksheet(
 ,p_internal_uid=>33483680738784874
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(33484038908784876)
-,p_db_column_name=>'AMOUNT'
-,p_display_order=>1
-,p_column_identifier=>'A'
-,p_column_label=>'Amount'
-,p_column_type=>'NUMBER'
+ p_id=>wwv_flow_api.id(33302452811358044)
+,p_db_column_name=>'TRAN_ID'
+,p_display_order=>10
+,p_column_identifier=>'K'
+,p_column_label=>'Transaction ID'
+,p_column_type=>'STRING'
 ,p_heading_alignment=>'LEFT'
-,p_format_mask=>'999G999G999G999G990D00'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(33484487982784876)
-,p_db_column_name=>'DY'
-,p_display_order=>2
-,p_column_identifier=>'B'
+ p_id=>wwv_flow_api.id(33485631739784877)
+,p_db_column_name=>'ACCOUNT_ID'
+,p_display_order=>20
+,p_column_identifier=>'E'
+,p_column_label=>'Account'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'LOV_ESCAPE_SC'
+,p_heading_alignment=>'LEFT'
+,p_rpt_named_lov=>wwv_flow_api.id(59507784889098999)
+,p_rpt_show_filter_lov=>'1'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33302112966358041)
+,p_db_column_name=>'ID'
+,p_display_order=>40
+,p_column_identifier=>'H'
+,p_column_label=>'Id'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33302201687358042)
+,p_db_column_name=>'TRAN_DATE'
+,p_display_order=>50
+,p_column_identifier=>'I'
 ,p_column_label=>'Date'
 ,p_column_type=>'DATE'
 ,p_heading_alignment=>'LEFT'
@@ -63102,28 +63489,77 @@ wwv_flow_api.create_worksheet_column(
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(33485631739784877)
-,p_db_column_name=>'ACCOUNT_ID'
-,p_display_order=>5
-,p_column_identifier=>'E'
-,p_column_label=>'Account'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'LEFT'
-,p_column_alignment=>'RIGHT'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(33301559890358035)
-,p_db_column_name=>'MONTH'
-,p_display_order=>15
-,p_column_identifier=>'F'
+ p_id=>wwv_flow_api.id(33302303645358043)
+,p_db_column_name=>'TRAN_MTH'
+,p_display_order=>60
+,p_column_identifier=>'J'
 ,p_column_label=>'Month'
 ,p_column_type=>'STRING'
 ,p_heading_alignment=>'LEFT'
 );
 wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33302595401358045)
+,p_db_column_name=>'TRAN_TYPE'
+,p_display_order=>70
+,p_column_identifier=>'L'
+,p_column_label=>'Trans. Type'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'LOV_ESCAPE_SC'
+,p_heading_alignment=>'LEFT'
+,p_rpt_named_lov=>wwv_flow_api.id(59510793152264449)
+,p_rpt_show_filter_lov=>'1'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33302686601358046)
+,p_db_column_name=>'DOCUMENT_SRC'
+,p_display_order=>80
+,p_column_identifier=>'M'
+,p_column_label=>'Document src'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33302710849358047)
+,p_db_column_name=>'DOCUMENT_ID'
+,p_display_order=>90
+,p_column_identifier=>'N'
+,p_column_label=>'Document id'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33302809602358048)
+,p_db_column_name=>'DEBIT'
+,p_display_order=>100
+,p_column_identifier=>'O'
+,p_column_label=>'Debit'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'LEFT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33302914403358049)
+,p_db_column_name=>'CREDIT'
+,p_display_order=>110
+,p_column_identifier=>'P'
+,p_column_label=>'Credit'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'LEFT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33303016845358050)
+,p_db_column_name=>'CIRCLE_ID'
+,p_display_order=>120
+,p_column_identifier=>'Q'
+,p_column_label=>'Circle '
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(33301642618358036)
 ,p_db_column_name=>'USER_ID'
-,p_display_order=>25
+,p_display_order=>130
 ,p_column_identifier=>'G'
 ,p_column_label=>'Member'
 ,p_column_type=>'NUMBER'
@@ -63140,7 +63576,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'AMOUNT:DY:ACCOUNT_ID:MONTH:USER_ID'
+,p_report_columns=>'ACCOUNT_MONTH:USER_ID:ID:TRAN_DATE:TRAN_MTH:TRAN_ID:TRAN_TYPE:DOCUMENT_SRC:DOCUMENT_ID:DEBIT:CREDIT:CIRCLE_ID'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_button(
@@ -63183,20 +63619,20 @@ wwv_flow_api.create_page_item(
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(33301398541358033)
-,p_name=>'P128_DOC'
+,p_name=>'P128_TYPE'
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_api.id(33483520245784874)
 ,p_use_cache_before_default=>'NO'
-,p_item_default=>'return ''OR_EQUITY'';'
+,p_item_default=>'return 1;'
 ,p_item_default_type=>'PLSQL_FUNCTION_BODY'
-,p_prompt=>'Document'
-,p_source=>'P128_DOC'
+,p_prompt=>'Transaction Type'
+,p_source=>'P128_TYPE'
 ,p_source_type=>'ITEM'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'DOCUMENTS'
+,p_named_lov=>'TRANSACTION-TYPE'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select upper(doc)  as display_value, upper(doc) as return_value ',
-'  from docs_view',
+'select NAME as display_value, ID as return_value ',
+'  from OR_TRANSACTION_TYPE',
 ' order by 1'))
 ,p_cHeight=>1
 ,p_begin_on_new_line=>'N'

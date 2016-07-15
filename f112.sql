@@ -27,7 +27,7 @@ prompt APPLICATION 112 - ruby.banking.app
 -- Application Export:
 --   Application:     112
 --   Name:            ruby.banking.app
---   Date and Time:   00:00 Friday July 15, 2016
+--   Date and Time:   00:00 Saturday July 16, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -121,7 +121,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_03=>'DOWNLOAD'
 ,p_substitution_value_03=>'<span class="fa fa-file-excel-o"></span><span class="download">Download</span>'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160706132744'
+,p_last_upd_yyyymmddhh24miss=>'20160715195728'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -26605,7 +26605,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160705165000'
+,p_last_upd_yyyymmddhh24miss=>'20160715195728'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32604308715690210)
@@ -26708,7 +26708,7 @@ wwv_flow_api.create_report_columns(
 ,p_query_column_id=>2
 ,p_column_alias=>'CREDIT'
 ,p_column_display_sequence=>2
-,p_column_heading=>'Credit'
+,p_column_heading=>'DEBIT'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G990D00'
 ,p_column_html_expression=>'<span class="#STYLE#">#CREDIT#</span>'
@@ -26723,7 +26723,7 @@ wwv_flow_api.create_report_columns(
 ,p_query_column_id=>3
 ,p_column_alias=>'DEBIT'
 ,p_column_display_sequence=>3
-,p_column_heading=>'Debit'
+,p_column_heading=>'CREDIT'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G990D00'
 ,p_column_html_expression=>'<span class="#STYLE#">#DEBIT#</span>'

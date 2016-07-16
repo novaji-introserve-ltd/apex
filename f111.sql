@@ -27,7 +27,7 @@ prompt APPLICATION 111 - ore.ng
 -- Application Export:
 --   Application:     111
 --   Name:            ore.ng
---   Date and Time:   00:00 Saturday July 16, 2016
+--   Date and Time:   00:00 Sunday July 17, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -37,11 +37,11 @@ prompt APPLICATION 111 - ore.ng
 
 -- Application Statistics:
 --   Pages:                    128
---     Items:                  421
+--     Items:                  422
 --     Computations:             5
 --     Validations:             85
 --     Processes:              189
---     Regions:                228
+--     Regions:                229
 --     Buttons:                294
 --     Dynamic Actions:         68
 --   Shared Components:
@@ -53,7 +53,7 @@ prompt APPLICATION 111 - ore.ng
 --       Data Loading:           3
 --     Navigation:
 --       Parent Tabs:            1
---       Lists:                 19
+--       Lists:                 20
 --       Breadcrumbs:            1
 --         Entries:             93
 --       NavBar Entries:         4
@@ -66,13 +66,13 @@ prompt APPLICATION 111 - ore.ng
 --         Page:                 9
 --         Region:              16
 --         Label:                5
---         List:                11
+--         List:                12
 --         Popup LOV:            1
 --         Calendar:             1
 --         Breadcrumb:           1
 --         Button:               5
 --         Report:              10
---       LOVs:                  66
+--       LOVs:                  67
 --       Shortcuts:              2
 --       Plug-ins:              14
 --     Globalization:
@@ -163,7 +163,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_12=>'LOGO1'
 ,p_substitution_value_12=>'ore-logo-blue.png'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160711211756'
+,p_last_upd_yyyymmddhh24miss=>'20160716192557'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'https://ore.ng/')
 ,p_ui_type_name => null
 );
@@ -450,6 +450,32 @@ wwv_flow_api.create_list_item(
 ,p_list_item_link_text=>'Data Load Results'
 ,p_list_item_link_target=>'f?p=&APP_ID.:122:&SESSION.::&DEBUG.'
 ,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list(
+ p_id=>wwv_flow_api.id(33692789464506907)
+,p_name=>'Bottom Links'
+,p_list_status=>'PUBLIC'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(33692919491506908)
+,p_list_item_display_sequence=>10
+,p_list_item_link_text=>'About'
+,p_list_item_link_target=>'#'
+,p_list_item_current_for_pages=>'#'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(33693315649506909)
+,p_list_item_display_sequence=>20
+,p_list_item_link_text=>'Terms'
+,p_list_item_link_target=>'#'
+,p_list_item_current_for_pages=>'#'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(33693754092506909)
+,p_list_item_display_sequence=>30
+,p_list_item_link_text=>'Policy'
+,p_list_item_link_target=>'#'
+,p_list_item_current_for_pages=>'#'
 );
 wwv_flow_api.create_list(
  p_id=>wwv_flow_api.id(41972005527488767)
@@ -941,6 +967,9 @@ wwv_flow_api.create_list_item(
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'42,43'
 );
+end;
+/
+begin
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(42324899314403805)
 ,p_list_item_display_sequence=>300
@@ -952,9 +981,6 @@ wwv_flow_api.create_list_item(
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'6,44'
 );
-end;
-/
-begin
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(42325757073403806)
 ,p_list_item_display_sequence=>320
@@ -1721,6 +1747,9 @@ wwv_flow_api.create_list_item(
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'52'
 );
+end;
+/
+begin
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(60492899640133373)
 ,p_list_item_display_sequence=>360
@@ -1733,9 +1762,6 @@ wwv_flow_api.create_list_item(
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'53,54'
 );
-end;
-/
-begin
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(60530875611877630)
 ,p_list_item_display_sequence=>370
@@ -2849,6 +2875,14 @@ wwv_flow_api.create_list_of_values(
 ,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select NAME as display_value, ID as return_value ',
 '  from OR_INVESTMENT_TYPE',
+' order by 1'))
+);
+wwv_flow_api.create_list_of_values(
+ p_id=>wwv_flow_api.id(33623916216382720)
+,p_lov_name=>'INVESTMENT_TRANSACTIONS'
+,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select NAME as display_value, ID as return_value ',
+'  from OR_transaction_TYPE where document_src=''OR_INVESTMENT_INTEREST'' ',
 ' order by 1'))
 );
 wwv_flow_api.create_list_of_values(
@@ -4890,10 +4924,19 @@ wwv_flow_api.create_template(
 '    <div class="t-Body-col t-Body-col--main">',
 '      <div class="t-Login-container">',
 '      #BODY#',
-'      </div>',
+'      </div>  ',
+'      ',
 '    </div>',
+'  ',
 '  </div>',
-'</div>'))
+'  <div class="footer">',
+'          #REGION_POSITION_03#',
+'  </div>',
+'  ',
+'    ',
+'    ',
+'</div>',
+''))
 ,p_footer_template=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '#FORM_CLOSE#',
 '#DEVELOPER_TOOLBAR#',
@@ -4989,11 +5032,19 @@ wwv_flow_api.create_template(
 ,p_dialog_js_close_code=>'apex.navigation.dialog.close(#IS_MODAL#,#TARGET#);'
 ,p_dialog_js_cancel_code=>'apex.navigation.dialog.cancel(#IS_MODAL#);'
 ,p_dialog_browser_frame=>'MODAL'
-,p_translate_this_template=>'N'
 );
 end;
 /
 begin
+wwv_flow_api.create_page_tmpl_display_point(
+ p_id=>wwv_flow_api.id(33687934049351221)
+,p_page_template_id=>wwv_flow_api.id(1315374318934073215)
+,p_name=>'Footer Region'
+,p_placeholder=>'REGION_POSITION_03'
+,p_has_grid_support=>true
+,p_glv_new_row=>true
+,p_max_fixed_grid_columns=>12
+);
 wwv_flow_api.create_page_tmpl_display_point(
  p_id=>wwv_flow_api.id(2659553745091178773)
 ,p_page_template_id=>wwv_flow_api.id(1315374318934073215)
@@ -6729,6 +6780,28 @@ end;
 /
 prompt --application/shared_components/user_interface/templates/list
 begin
+wwv_flow_api.create_list_template(
+ p_id=>wwv_flow_api.id(33696452849560498)
+,p_list_template_current=>'<li><a href="#LINK#">#TEXT#</a></li>'
+,p_list_template_noncurrent=>'<li><a href="#LINK#">#TEXT#</a></li>'
+,p_list_template_name=>'Bottom Links'
+,p_theme_id=>42
+,p_theme_class_id=>12
+,p_list_template_before_rows=>'<ul class="#COMPONENT_CSS_CLASSES#" id="#LIST_ID#">'
+,p_list_template_after_rows=>'</ul>'
+,p_before_sub_list=>'<ul>'
+,p_after_sub_list=>'</ul>'
+,p_sub_list_item_current=>'<li class="t-LinksList-item is-current #A03#"><a href="#LINK#" class="t-LinksList-link" #A02#><span class="t-LinksList-icon"><span class="t-Icon #ICON_CSS_CLASSES#"></span></span><span class="t-LinksList-label">#TEXT#</span><span class="t-LinksList-b'
+||'adge">#A01#</span></a></li>'
+,p_sub_list_item_noncurrent=>'<li class="t-LinksList-item#A03#"><a href="#LINK#" class="t-LinksList-link" #A02#><span class="t-LinksList-icon"><span class="t-Icon #ICON_CSS_CLASSES#"></span></span><span class="t-LinksList-label">#TEXT#</span><span class="t-LinksList-badge">#A01#<'
+||'/span></a></li>'
+,p_item_templ_curr_w_child=>'<li><a href="#LINK#">#TEXT#</a></li>'
+,p_item_templ_noncurr_w_child=>'<li><a href="#LINK#">#TEXT#</a></li>'
+,p_a01_label=>'#ATTRIBUTE1#'
+,p_a02_label=>'#ATTRIBUTE1#'
+,p_a03_label=>'#ATTRIBUTE1#'
+,p_a04_label=>'#ATTRIBUTE1#'
+);
 wwv_flow_api.create_list_template(
  p_id=>wwv_flow_api.id(1315408188870073298)
 ,p_list_template_current=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
@@ -16742,6 +16815,79 @@ end;
 prompt --application/shared_components/user_interface/template_options
 begin
 wwv_flow_api.create_template_option(
+ p_id=>wwv_flow_api.id(33696804228560501)
+,p_theme_id=>42
+,p_name=>'ACTIONS'
+,p_display_name=>'Actions'
+,p_display_sequence=>10
+,p_list_template_id=>wwv_flow_api.id(33696452849560498)
+,p_css_classes=>'t-LinksList--actions'
+,p_group_id=>wwv_flow_api.id(2632507656577521780)
+,p_template_types=>'LIST'
+,p_help_text=>'Render as actions to be placed on the right side column.'
+);
+wwv_flow_api.create_template_option(
+ p_id=>wwv_flow_api.id(33697233390560501)
+,p_theme_id=>42
+,p_name=>'DISABLETEXTWRAPPING'
+,p_display_name=>'Disable Text Wrapping'
+,p_display_sequence=>30
+,p_list_template_id=>wwv_flow_api.id(33696452849560498)
+,p_css_classes=>'t-LinksList--nowrap'
+,p_template_types=>'LIST'
+,p_help_text=>'Do not allow link text to wrap to new lines. Truncate with ellipsis.'
+,p_is_advanced=>'N'
+);
+wwv_flow_api.create_template_option(
+ p_id=>wwv_flow_api.id(33697654537560501)
+,p_theme_id=>42
+,p_name=>'SHOWBADGES'
+,p_display_name=>'Show Badges'
+,p_display_sequence=>10
+,p_list_template_id=>wwv_flow_api.id(33696452849560498)
+,p_css_classes=>'t-LinksList--showBadge'
+,p_template_types=>'LIST'
+,p_help_text=>'Show badge to right of link (requires Attribute 1 to be populated)'
+,p_is_advanced=>'N'
+);
+wwv_flow_api.create_template_option(
+ p_id=>wwv_flow_api.id(33698006567560501)
+,p_theme_id=>42
+,p_name=>'SHOWGOTOARROW'
+,p_display_name=>'Show Right Arrow'
+,p_display_sequence=>20
+,p_list_template_id=>wwv_flow_api.id(33696452849560498)
+,p_css_classes=>'t-LinksList--showArrow'
+,p_template_types=>'LIST'
+,p_help_text=>'Show arrow to the right of link'
+,p_is_advanced=>'N'
+);
+wwv_flow_api.create_template_option(
+ p_id=>wwv_flow_api.id(33698432071560502)
+,p_theme_id=>42
+,p_name=>'SHOWICONS'
+,p_display_name=>'For All Items'
+,p_display_sequence=>20
+,p_list_template_id=>wwv_flow_api.id(33696452849560498)
+,p_css_classes=>'t-LinksList--showIcons'
+,p_group_id=>wwv_flow_api.id(2632505211118521778)
+,p_template_types=>'LIST'
+,p_is_advanced=>'N'
+);
+wwv_flow_api.create_template_option(
+ p_id=>wwv_flow_api.id(33698836181560502)
+,p_theme_id=>42
+,p_name=>'SHOWTOPICONS'
+,p_display_name=>'For Top Level Items Only'
+,p_display_sequence=>10
+,p_list_template_id=>wwv_flow_api.id(33696452849560498)
+,p_css_classes=>'t-LinksList--showTopIcons'
+,p_group_id=>wwv_flow_api.id(2632505211118521778)
+,p_template_types=>'LIST'
+,p_help_text=>'This will show icons for top level items of the list only. It will not show icons for sub lists.'
+,p_is_advanced=>'N'
+);
+wwv_flow_api.create_template_option(
  p_id=>wwv_flow_api.id(49503633681732834)
 ,p_theme_id=>42
 ,p_name=>'REMOVEALLBORDERS'
@@ -17658,6 +17804,9 @@ wwv_flow_api.create_template_option(
 ,p_template_types=>'REGION'
 ,p_is_advanced=>'N'
 );
+end;
+/
+begin
 wwv_flow_api.create_template_option(
  p_id=>wwv_flow_api.id(2063847232173444274)
 ,p_theme_id=>42
@@ -17736,9 +17885,6 @@ wwv_flow_api.create_template_option(
 ,p_group_id=>wwv_flow_api.id(2632511635448521782)
 ,p_template_types=>'REGION'
 );
-end;
-/
-begin
 wwv_flow_api.create_template_option(
  p_id=>wwv_flow_api.id(2063859504301444313)
 ,p_theme_id=>42
@@ -18648,6 +18794,9 @@ wwv_flow_api.create_template_option(
 ,p_template_types=>'LIST'
 ,p_help_text=>'Stretch tabs to fill to the width of the tabs container.'
 );
+end;
+/
+begin
 wwv_flow_api.create_template_option(
  p_id=>wwv_flow_api.id(2063948125637444508)
 ,p_theme_id=>42
@@ -18727,9 +18876,6 @@ wwv_flow_api.create_template_option(
 ,p_css_classes=>'js-tabLike'
 ,p_template_types=>'LIST'
 );
-end;
-/
-begin
 wwv_flow_api.create_template_option(
  p_id=>wwv_flow_api.id(2063955291747444524)
 ,p_theme_id=>42
@@ -19659,6 +19805,9 @@ wwv_flow_api.create_template_option(
 ,p_group_id=>wwv_flow_api.id(2632513679747521783)
 ,p_template_types=>'REGION'
 );
+end;
+/
+begin
 wwv_flow_api.create_template_option(
  p_id=>wwv_flow_api.id(2632540234514521801)
 ,p_theme_id=>42
@@ -28346,7 +28495,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'C'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160709181521'
+,p_last_upd_yyyymmddhh24miss=>'20160716174422'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29333035331831234)
@@ -28359,6 +28508,27 @@ wwv_flow_api.create_page_plug(
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_display_condition_type=>'CURRENT_PAGE_NOT_IN_CONDITION'
 ,p_plug_display_when_condition=>'10,4,5,10,22,26,29,32,34,41,43,44,54,57,64,83,101,82,79,104,105,98,84,102,108,76,71,59,68,78,60,61,62,63,50,126'
+,p_plug_header=>'<br/>'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(29567572687289561)
+,p_plug_name=>'User Avatar'
+,p_parent_plug_id=>wwv_flow_api.id(29333035331831234)
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--hiddenOverflow'
+,p_plug_template=>wwv_flow_api.id(1315401119881073280)
+,p_plug_display_sequence=>1
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'',
+'<div class="user-profile"><h6>&G_FIRSTNAME.</h6> &G_DISPLAY_PICTURE. &nbsp; </div>'))
+,p_translate_title=>'N'
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_display_condition_type=>'CURRENT_PAGE_NOT_IN_CONDITION'
+,p_plug_display_when_condition=>'10,4,5,10,22,24,26,29,32,34,41,43,44,54,57,64,83,76,59,92,78,77,68,126,50'
 ,p_plug_header=>'<br/>'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
@@ -28463,26 +28633,6 @@ wwv_flow_api.create_page_plug(
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_footer=>'<br/>'
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(29567572687289561)
-,p_plug_name=>'Avatar'
-,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--hiddenOverflow'
-,p_plug_template=>wwv_flow_api.id(1315401119881073280)
-,p_plug_display_sequence=>1
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_plug_display_point=>'REGION_POSITION_03'
-,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'',
-'<div class="user-profile"><h6>&G_FIRSTNAME.</h6> &G_DISPLAY_PICTURE. &nbsp; </div>'))
-,p_translate_title=>'N'
-,p_plug_query_row_template=>1
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_plug_display_condition_type=>'CURRENT_PAGE_NOT_IN_CONDITION'
-,p_plug_display_when_condition=>'10,4,5,10,22,24,26,29,32,34,41,43,44,54,57,64,83,76,59,92,78,77,68,126,50'
-,p_plug_header=>'<br/>'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -40514,7 +40664,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160414020745'
+,p_last_upd_yyyymmddhh24miss=>'20160716123038'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(60434194992339465)
@@ -40565,219 +40715,255 @@ wwv_flow_api.create_worksheet_column(
 ,p_display_text_as=>'HIDDEN'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(60435388190339506)
+ p_id=>wwv_flow_api.id(33554188651344714)
+,p_db_column_name=>'INV_REFERENCE'
+,p_display_order=>11
+,p_column_identifier=>'B'
+,p_column_label=>'Reference '
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33554226327344715)
 ,p_db_column_name=>'DEAL_DATE'
-,p_display_order=>3
+,p_display_order=>21
 ,p_column_identifier=>'C'
-,p_column_label=>'Deal Date'
+,p_column_label=>'Deal date'
 ,p_column_type=>'DATE'
+,p_display_text_as=>'HIDDEN'
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(60435827523339507)
+ p_id=>wwv_flow_api.id(33554345542344716)
 ,p_db_column_name=>'VALUE_DATE'
-,p_display_order=>4
+,p_display_order=>31
 ,p_column_identifier=>'D'
-,p_column_label=>'Value Date'
+,p_column_label=>'Value date'
 ,p_column_type=>'DATE'
+,p_heading_alignment=>'LEFT'
+,p_format_mask=>'DD-MON-YYYY'
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(60436216357339508)
+ p_id=>wwv_flow_api.id(33554426796344717)
 ,p_db_column_name=>'TENOR'
-,p_display_order=>5
+,p_display_order=>41
 ,p_column_identifier=>'E'
 ,p_column_label=>'Tenor'
 ,p_column_type=>'NUMBER'
-,p_tz_dependent=>'N'
+,p_heading_alignment=>'LEFT'
+,p_format_mask=>'999G999G999G999G990D00'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(60436948720339509)
-,p_db_column_name=>'MATURITY_DATE'
-,p_display_order=>7
-,p_column_identifier=>'G'
-,p_column_label=>'Maturity Date'
-,p_column_type=>'DATE'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(60438948788339511)
-,p_db_column_name=>'TYPE_ID'
-,p_display_order=>12
-,p_column_identifier=>'L'
-,p_column_label=>'Type'
+ p_id=>wwv_flow_api.id(33554547803344718)
+,p_db_column_name=>'TENORC'
+,p_display_order=>51
+,p_column_identifier=>'F'
+,p_column_label=>'Tenor Cnt'
 ,p_column_type=>'NUMBER'
-,p_display_text_as=>'LOV_ESCAPE_SC'
-,p_rpt_named_lov=>wwv_flow_api.id(59509994372243213)
-,p_rpt_show_filter_lov=>'1'
+,p_display_text_as=>'HIDDEN'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(60443814097339518)
-,p_db_column_name=>'DVM'
-,p_display_order=>24
-,p_column_identifier=>'X'
-,p_column_label=>'Dvm'
+ p_id=>wwv_flow_api.id(33554620098344719)
+,p_db_column_name=>'MATURITY_DATE'
+,p_display_order=>61
+,p_column_identifier=>'G'
+,p_column_label=>'Maturity date'
+,p_column_type=>'DATE'
+,p_heading_alignment=>'LEFT'
+,p_format_mask=>'DD-MON-YYYY'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33554797601344720)
+,p_db_column_name=>'FACE_VALUE'
+,p_display_order=>71
+,p_column_identifier=>'H'
+,p_column_label=>'Face value'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33554810774344721)
+,p_db_column_name=>'YIELD'
+,p_display_order=>81
+,p_column_identifier=>'I'
+,p_column_label=>'Yield'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33554976609344722)
+,p_db_column_name=>'PRINCIPAL'
+,p_display_order=>91
+,p_column_identifier=>'J'
+,p_column_label=>'Principal'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33555086272344723)
+,p_db_column_name=>'RATE'
+,p_display_order=>101
+,p_column_identifier=>'K'
+,p_column_label=>'Rate'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33555177228344724)
+,p_db_column_name=>'REDISCRATE'
+,p_display_order=>111
+,p_column_identifier=>'L'
+,p_column_label=>'Rediscrate'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33555223105344725)
+,p_db_column_name=>'DISCOUNT'
+,p_display_order=>121
+,p_column_identifier=>'M'
+,p_column_label=>'Discount'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33555330552344726)
+,p_db_column_name=>'REDISCVALUE'
+,p_display_order=>131
+,p_column_identifier=>'N'
+,p_column_label=>'Rediscvalue'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33555446990344727)
+,p_db_column_name=>'REDISCDATE'
+,p_display_order=>141
+,p_column_identifier=>'O'
+,p_column_label=>'Rediscdate'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33555534951344728)
+,p_db_column_name=>'INTRECEIVABLE'
+,p_display_order=>151
+,p_column_identifier=>'P'
+,p_column_label=>'Intreceivable'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33555623165344729)
+,p_db_column_name=>'BASIS'
+,p_display_order=>161
+,p_column_identifier=>'Q'
+,p_column_label=>'Basis'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33555714542344730)
+,p_db_column_name=>'INVESTMENT_AMOUNT'
+,p_display_order=>171
+,p_column_identifier=>'R'
+,p_column_label=>'Investment amount'
 ,p_column_type=>'STRING'
 ,p_format_mask=>'999G999G999G999G990D00'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(60444626853339519)
-,p_db_column_name=>'USER_ID'
-,p_display_order=>26
-,p_column_identifier=>'Z'
-,p_column_label=>'Manager'
-,p_column_type=>'NUMBER'
-,p_display_text_as=>'LOV_ESCAPE_SC'
-,p_rpt_named_lov=>wwv_flow_api.id(49430959730559228)
-,p_rpt_show_filter_lov=>'1'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30418561588909826)
-,p_db_column_name=>'INV_REFERENCE'
-,p_display_order=>36
-,p_column_identifier=>'AA'
-,p_column_label=>'Inv reference'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30418666407909827)
-,p_db_column_name=>'TENORC'
-,p_display_order=>46
-,p_column_identifier=>'AB'
-,p_column_label=>'Tenorc'
-,p_column_type=>'NUMBER'
-,p_column_alignment=>'RIGHT'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30418797917909828)
-,p_db_column_name=>'FACE_VALUE'
-,p_display_order=>56
-,p_column_identifier=>'AC'
-,p_column_label=>'Face value'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30418846220909829)
-,p_db_column_name=>'YIELD'
-,p_display_order=>66
-,p_column_identifier=>'AD'
-,p_column_label=>'Yield'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30418919174909830)
-,p_db_column_name=>'PRINCIPAL'
-,p_display_order=>76
-,p_column_identifier=>'AE'
-,p_column_label=>'Principal'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30419050256909831)
-,p_db_column_name=>'RATE'
-,p_display_order=>86
-,p_column_identifier=>'AF'
-,p_column_label=>'Rate'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30419105458909832)
-,p_db_column_name=>'REDISCRATE'
-,p_display_order=>96
-,p_column_identifier=>'AG'
-,p_column_label=>'Rediscrate'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30419241817909833)
-,p_db_column_name=>'DISCOUNT'
-,p_display_order=>106
-,p_column_identifier=>'AH'
-,p_column_label=>'Discount'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30419396749909834)
-,p_db_column_name=>'REDISCVALUE'
-,p_display_order=>116
-,p_column_identifier=>'AI'
-,p_column_label=>'Rediscvalue'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30419438303909835)
-,p_db_column_name=>'REDISCDATE'
-,p_display_order=>126
-,p_column_identifier=>'AJ'
-,p_column_label=>'Rediscdate'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30419572360909836)
-,p_db_column_name=>'INTRECEIVABLE'
-,p_display_order=>136
-,p_column_identifier=>'AK'
-,p_column_label=>'Intreceivable'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30419688720909837)
-,p_db_column_name=>'BASIS'
-,p_display_order=>146
-,p_column_identifier=>'AL'
-,p_column_label=>'Basis'
-,p_column_type=>'NUMBER'
-,p_column_alignment=>'RIGHT'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30419757099909838)
-,p_db_column_name=>'INVESTMENT_AMOUNT'
-,p_display_order=>156
-,p_column_identifier=>'AM'
-,p_column_label=>'Investment amount'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30419844214909839)
+ p_id=>wwv_flow_api.id(33555849628344731)
 ,p_db_column_name=>'DV'
-,p_display_order=>166
-,p_column_identifier=>'AN'
+,p_display_order=>181
+,p_column_identifier=>'S'
 ,p_column_label=>'Dv'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30419970855909840)
-,p_db_column_name=>'MATURITY_AMOUNT'
-,p_display_order=>176
-,p_column_identifier=>'AO'
-,p_column_label=>'Maturity amount'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30420003816909841)
-,p_db_column_name=>'YIELDC'
-,p_display_order=>186
-,p_column_identifier=>'AP'
-,p_column_label=>'Yieldc'
-,p_column_type=>'STRING'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30420114456909842)
-,p_db_column_name=>'INV_TYPE'
-,p_display_order=>196
-,p_column_identifier=>'AQ'
-,p_column_label=>'Inv type'
 ,p_column_type=>'STRING'
 ,p_display_text_as=>'HIDDEN'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(30420213149909843)
+ p_id=>wwv_flow_api.id(33555902631344732)
+,p_db_column_name=>'MATURITY_AMOUNT'
+,p_display_order=>191
+,p_column_identifier=>'T'
+,p_column_label=>'Maturity amount'
+,p_column_type=>'STRING'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33556039709344733)
+,p_db_column_name=>'DVM'
+,p_display_order=>201
+,p_column_identifier=>'U'
+,p_column_label=>'Dvm'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33556118938344734)
+,p_db_column_name=>'YIELDC'
+,p_display_order=>211
+,p_column_identifier=>'V'
+,p_column_label=>'Yield Count'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33556231941344735)
+,p_db_column_name=>'INV_TYPE'
+,p_display_order=>221
+,p_column_identifier=>'W'
+,p_column_label=>'Investment type'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33556389583344736)
+,p_db_column_name=>'TYPE_ID'
+,p_display_order=>231
+,p_column_identifier=>'X'
+,p_column_label=>'Type id'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33556492619344737)
+,p_db_column_name=>'USER_ID'
+,p_display_order=>241
+,p_column_identifier=>'Y'
+,p_column_label=>'User id'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33556563932344738)
 ,p_db_column_name=>'CIRCLE_ID'
-,p_display_order=>206
-,p_column_identifier=>'AR'
+,p_display_order=>251
+,p_column_identifier=>'Z'
 ,p_column_label=>'Circle id'
 ,p_column_type=>'NUMBER'
 ,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33556607596344739)
+,p_db_column_name=>'GL_TYPE_ID'
+,p_display_order=>261
+,p_column_identifier=>'AA'
+,p_column_label=>'Gl type id'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'HIDDEN'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33556779916344740)
+,p_db_column_name=>'TRANSACTION_TYPE'
+,p_display_order=>271
+,p_column_identifier=>'AB'
+,p_column_label=>'Interest Journal'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'LOV_ESCAPE_SC'
+,p_heading_alignment=>'LEFT'
+,p_rpt_named_lov=>wwv_flow_api.id(33623916216382720)
+,p_rpt_show_filter_lov=>'1'
 );
 wwv_flow_api.create_worksheet_rpt(
  p_id=>wwv_flow_api.id(60455118816410593)
@@ -40787,7 +40973,8 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'ID:DEAL_DATE:VALUE_DATE:TENOR:MATURITY_DATE:TYPE_ID:REDISC_REDISC_VALUE:MATURITY_AMTM_C:USER_ID:INV_REFERENCE:TENORC:REDISCRATE:REDISCVALUE:REDISCDATE:INTRECEIVABLE:INVESTMENT_AMOUNT:DV:MATURITY_AMOUNT:YIELDC:INV_TYPE:CIRCLE_ID'
+,p_report_columns=>'ID:REDISC_REDISC_VALUE:MATURITY_AMTM_C:INV_REFERENCE:DEAL_DATE:VALUE_DATE:TENOR:TENORC:MATURITY_DATE:FACE_VALUE:YIELD:PRINCIPAL:RATE:REDISCRATE:DISCOUNT:REDISCVALUE:REDISCDATE:INTRECEIVABLE:BASIS:INVESTMENT_AMOUNT:DV:MATURITY_AMOUNT:DVM:YIELDC:INV_TY'
+||'PE:TYPE_ID:USER_ID:CIRCLE_ID:GL_TYPE_ID:TRANSACTION_TYPE'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_button(
@@ -40866,7 +41053,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160709181646'
+,p_last_upd_yyyymmddhh24miss=>'20160716120517'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(60417105315339386)
@@ -40958,7 +41145,7 @@ wwv_flow_api.create_page_button(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(30420340030909844)
 ,p_name=>'P50_REDISCVALUE'
-,p_item_sequence=>145
+,p_item_sequence=>155
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Redisc. Value'
@@ -40986,6 +41173,29 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_protection_level=>'S'
 ,p_attribute_01=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33554044035344713)
+,p_name=>'P50_TRANSACTION_TYPE'
+,p_is_required=>true
+,p_item_sequence=>55
+,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Transaction Type'
+,p_source=>'TRANSACTION_TYPE'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_named_lov=>'INVESTMENT_TRANSACTIONS'
+,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select NAME as display_value, ID as return_value ',
+'  from OR_transaction_TYPE where document_src=''OR_INVESTMENT_INTEREST'' ',
+' order by 1'))
+,p_cHeight=>1
+,p_field_template=>wwv_flow_api.id(1653905900709671302)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'NO'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60420553914339397)
@@ -41046,7 +41256,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60422221022339401)
 ,p_name=>'P50_TENOR'
-,p_item_sequence=>55
+,p_item_sequence=>65
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Tenor'
@@ -41063,7 +41273,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60423013710339401)
 ,p_name=>'P50_MATURITY_DATE'
-,p_item_sequence=>65
+,p_item_sequence=>75
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Maturity Date'
@@ -41083,7 +41293,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60423359072339404)
 ,p_name=>'P50_FACE_VALUE'
-,p_item_sequence=>75
+,p_item_sequence=>85
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Face Value'
@@ -41100,7 +41310,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60423760754339404)
 ,p_name=>'P50_YIELD'
-,p_item_sequence=>85
+,p_item_sequence=>95
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Yield'
@@ -41118,7 +41328,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60424142774339405)
 ,p_name=>'P50_PRINCIPAL'
-,p_item_sequence=>95
+,p_item_sequence=>105
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Principal'
@@ -41135,7 +41345,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60424459524339405)
 ,p_name=>'P50_RATE'
-,p_item_sequence=>105
+,p_item_sequence=>115
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Rate'
@@ -41153,7 +41363,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60424875680339405)
 ,p_name=>'P50_TYPE_ID'
-,p_item_sequence=>115
+,p_item_sequence=>125
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Type'
@@ -41176,7 +41386,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60426034402339407)
 ,p_name=>'P50_DISCOUNT'
-,p_item_sequence=>125
+,p_item_sequence=>135
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Discount'
@@ -41194,7 +41404,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60426835488339407)
 ,p_name=>'P50_REDISC_DATE'
-,p_item_sequence=>135
+,p_item_sequence=>145
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Redisc Date'
@@ -41213,7 +41423,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60427246144339408)
 ,p_name=>'P50_INTEREST_RECEIVABLE'
-,p_item_sequence=>165
+,p_item_sequence=>175
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Interest Receivable'
@@ -41231,7 +41441,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60427671305339408)
 ,p_name=>'P50_BASIS'
-,p_item_sequence=>155
+,p_item_sequence=>165
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Basis'
@@ -41251,7 +41461,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60428888349339410)
 ,p_name=>'P50_DV'
-,p_item_sequence=>175
+,p_item_sequence=>185
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Dv'
@@ -41268,7 +41478,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60429274587339411)
 ,p_name=>'P50_MATURITY_AMT'
-,p_item_sequence=>185
+,p_item_sequence=>195
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Maturity Amt'
@@ -41286,7 +41496,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60429718045339411)
 ,p_name=>'P50_DVM'
-,p_item_sequence=>195
+,p_item_sequence=>205
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Dvm'
@@ -41306,7 +41516,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60430081071339411)
 ,p_name=>'P50_YIELD_C'
-,p_item_sequence=>205
+,p_item_sequence=>215
 ,p_item_plug_id=>wwv_flow_api.id(60417105315339386)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Yield C'
@@ -53702,8 +53912,11 @@ wwv_flow_api.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_api.id(1734678302290019784)
 ,p_html_page_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<div class="header">',
 '<img src="&APP_IMAGES.images/&LOGO1." height="35" />',
-'<span style="float:right;padding:10px 10px 0 0;font-size:14px;font-weight:bold"><a href="f?p=&APP_ID.:79">Join Ore</a></span>'))
+'<span style="float:right;padding:10px 10px 0 0;font-size:14px;font-weight:bold"><a href="f?p=&APP_ID.:79">Join Ore</a></span>',
+'</div>',
+''))
 ,p_css_file_urls=>'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'
 ,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'div.t-Login-region,#login1,.transparent{',
@@ -53720,21 +53933,42 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'C'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160612151810'
+,p_last_upd_yyyymmddhh24miss=>'20160716192557'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(29898335879802605)
 ,p_plug_name=>'Footer'
-,p_region_css_classes=>'transparent'
-,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
-,p_plug_template=>wwv_flow_api.id(1315401119881073280)
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(1315394406987073258)
 ,p_plug_display_sequence=>20
 ,p_include_in_reg_disp_sel_yn=>'Y'
-,p_plug_grid_column_span=>12
-,p_plug_display_point=>'BODY_3'
-,p_plug_source=>'Copyright &copy; 2016. www.ore.ng'
+,p_plug_display_point=>'REGION_POSITION_03'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_plug_display_condition_type=>'NEVER'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33556855164344741)
+,p_plug_name=>'Bottom'
+,p_parent_plug_id=>wwv_flow_api.id(29898335879802605)
+,p_region_sub_css_classes=>'bottom-links'
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_list_id=>wwv_flow_api.id(33692789464506907)
+,p_plug_source_type=>'NATIVE_LIST'
+,p_list_template_id=>wwv_flow_api.id(33696452849560498)
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33556951371344742)
+,p_plug_name=>'Space'
+,p_plug_template=>wwv_flow_api.id(1315394406987073258)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_footer=>'<br/><br/><br/>'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -53745,7 +53979,7 @@ wwv_flow_api.create_page_plug(
 ,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody:t-Form--large:t-Form--stretchInputs'
 ,p_component_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_api.id(1315401119881073280)
-,p_plug_display_sequence=>10
+,p_plug_display_sequence=>20
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_display_point=>'BODY'
 ,p_plug_item_display_point=>'BELOW'
@@ -53755,42 +53989,6 @@ wwv_flow_api.create_page_plug(
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>'<!--<center><img src="&APP_IMAGES.images/&LOGO1." height="35" /><br/></center>-->'
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(41966125357479118)
-,p_plug_name=>'Bottom Links'
-,p_parent_plug_id=>wwv_flow_api.id(7526479902933774964)
-,p_region_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(1315394406987073258)
-,p_plug_display_sequence=>20
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_plug_display_point=>'BODY'
-,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<!--<center>',
-'<div id="bottom-list">',
-'<span><a href="f?p=&APP_ID.:82">Reset Password</a></span>&nbsp;|&nbsp;',
-'<span><a href="f?p=&APP_ID.:79">Accept Invitation</a></span>',
-'',
-'</center> -->'))
-,p_plug_query_row_template=>1
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_plug_footer=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<center>',
-'    <br/>',
-'   <p style="font-size:10px;font-family:Arial">',
-'        Terms | Policy',
-'    </p>',
-'        ',
-'     <p>',
-'         <span class="fa fa-facebook-square"></span>&nbsp;<span class="fa fa-twitter-square"></span>&nbsp;<span class="fa fa-linkedin-square"></span>',
-'    </p>',
-'    <p style="font-size:10px;font-family:Arial">',
-'        Copyright &copy; 2016. www.ore.ng',
-'    </p>',
-'    ',
-'</center>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -53806,6 +54004,7 @@ wwv_flow_api.create_page_button(
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Login'
 ,p_button_position=>'BELOW_BOX'
+,p_button_css_classes=>'btn-pad'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(29898449485802606)
@@ -55402,7 +55601,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160711211756'
+,p_last_upd_yyyymmddhh24miss=>'20160716160436'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31247900240728206)
@@ -55416,7 +55615,8 @@ wwv_flow_api.create_page_plug(
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<h3>Rebuild Reserves ( Step 3 )</h3>',
 '<p>',
-'    Reserves will be rebuilt up to the previous day. Run this after computing your interest on loans & investments',
+'    Reserves will be updated up to previous day. Run this after computing your interest on loans & investments<br/>',
+'    <span class="red-alert">Since values of reserve history are computed based on historic data, Ore does not delete previous enries but only updates missing entries up to previous day</span>',
 '</p>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
@@ -55485,7 +55685,8 @@ wwv_flow_api.create_page_plug(
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<h3>Rebuild Interest on Loans ( Step 2 )</h3>',
 '<p>',
-'    Interest on loans will be computed up to the previous day',
+'    Interest on loans will be computed up to the previous day.',
+'    <br/><span class="red-alert">***Warning: You need to manually close loans to stop generating interest on loans</span>',
 '</p>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
@@ -55594,34 +55795,6 @@ wwv_flow_api.create_page_button(
 ,p_icon_css_classes=>'fa-database'
 );
 wwv_flow_api.create_page_button(
- p_id=>wwv_flow_api.id(33553019789344703)
-,p_button_sequence=>10
-,p_button_plug_id=>wwv_flow_api.id(33552835751344701)
-,p_button_name=>'RELOAD_LOAN_INTERESTS'
-,p_button_static_id=>'RELOAD_LOAN_INTERESTS'
-,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#:t-Button--small:t-Button--iconLeft:t-Button--padLeft'
-,p_button_template_id=>wwv_flow_api.id(1315414316853073333)
-,p_button_is_hot=>'Y'
-,p_button_image_alt=>'Rebuild  loan interests'
-,p_button_position=>'BELOW_BOX'
-,p_icon_css_classes=>'fa-database'
-);
-wwv_flow_api.create_page_button(
- p_id=>wwv_flow_api.id(33553423438344707)
-,p_button_sequence=>10
-,p_button_plug_id=>wwv_flow_api.id(33553264963344705)
-,p_button_name=>'RELOAD_INVESTMENT_INTERESTS'
-,p_button_static_id=>'RELOAD_LOAN_INTERESTS'
-,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#:t-Button--small:t-Button--iconLeft:t-Button--padLeft'
-,p_button_template_id=>wwv_flow_api.id(1315414316853073333)
-,p_button_is_hot=>'Y'
-,p_button_image_alt=>'Rebuild  investment interests'
-,p_button_position=>'BELOW_BOX'
-,p_icon_css_classes=>'fa-database'
-);
-wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(33553930916344712)
 ,p_button_sequence=>10
 ,p_button_plug_id=>wwv_flow_api.id(33553724858344710)
@@ -55634,6 +55807,36 @@ wwv_flow_api.create_page_button(
 ,p_button_image_alt=>'Rebuild  late savings penalty'
 ,p_button_position=>'BELOW_BOX'
 ,p_icon_css_classes=>'fa-database'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(33553019789344703)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(33552835751344701)
+,p_button_name=>'RELOAD_LOAN_INTERESTS'
+,p_button_static_id=>'RELOAD_LOAN_INTERESTS'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--small:t-Button--iconLeft:t-Button--padLeft'
+,p_button_template_id=>wwv_flow_api.id(1315414316853073333)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Rebuild  loan interests'
+,p_button_position=>'BODY'
+,p_icon_css_classes=>'fa-database'
+,p_grid_new_row=>'Y'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(33553423438344707)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(33553264963344705)
+,p_button_name=>'RELOAD_INVESTMENT_INTERESTS'
+,p_button_static_id=>'rebuild_investment_interest'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--small:t-Button--iconLeft:t-Button--padLeft'
+,p_button_template_id=>wwv_flow_api.id(1315414316853073333)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Rebuild  investment interests'
+,p_button_position=>'BODY'
+,p_icon_css_classes=>'fa-database'
+,p_grid_new_row=>'Y'
 );
 wwv_flow_api.create_page_branch(
  p_id=>wwv_flow_api.id(31249517787728222)
@@ -55667,6 +55870,7 @@ wwv_flow_api.create_page_item(
 ,p_source_type=>'ITEM'
 ,p_display_as=>'NATIVE_DATE_PICKER'
 ,p_cSize=>30
+,p_display_when_type=>'NEVER'
 ,p_field_template=>wwv_flow_api.id(1653905900709671302)
 ,p_attribute_04=>'button'
 ,p_attribute_05=>'N'
@@ -55883,11 +56087,11 @@ wwv_flow_api.create_page_item(
 ,p_attribute_07=>'NONE'
 );
 wwv_flow_api.create_page_process(
- p_id=>wwv_flow_api.id(31249426432728221)
+ p_id=>wwv_flow_api.id(33553588257344708)
 ,p_process_sequence=>10
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'Rebuild Reserves'
+,p_process_name=>'Rebuild investment interests'
 ,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'DECLARE',
 '    l_sql VARCHAR2(4000);',
@@ -55903,18 +56107,23 @@ wwv_flow_api.create_page_process(
 '    end_date number;',
 '    today varchar2(20) := to_char(trunc(sysdate)-1,''''DD-MON-YYYY'''');',
 '    business_date varchar2(30);',
+'    p_circle_id number := user_mgt.default_circle(or_auth.user_id(:app_user));',
 '',
 '    begin',
+'    ',
+'    -- CLEAR DATA',
 '',
-'    delete from or_reserve_history;',
-'',
+'    delete from or_investment_interest where circle_id = p_circle_id;',
+'    DELETE FROM  OR_transactions where DOCUMENT_SRC=''''OR_INVESTMENT_INTEREST'''' and circle_id = p_circle_id;',
+'    commit;',
 '    -- reload the table',
 '',
-'      start_date := to_number(to_char(to_date(:p106_start, ''''DD-MON-YYYY''''), ''''j''''));',
+'      start_date := to_number(to_char(to_date(:p106_start_inv, ''''DD-MON-YYYY''''), ''''j''''));',
 '      end_date := to_number(to_char(to_date(today, ''''DD-MON-YYYY''''), ''''j''''));',
-'      for cur_r in start_date..end_date loop',
+'      for cur_r in start_date..end_date loop ',
 '        business_date := to_date(cur_r, ''''j'''');',
-'        account_mgt.update_reserve_history(business_date);',
+'        account_mgt.advise_investment_interest(business_date);',
+'        account_mgt.advise_treasury_bill_interest(business_date);',
 '      end loop;',
 '',
 '    commit;',
@@ -55928,11 +56137,11 @@ wwv_flow_api.create_page_process(
 '        p_status => ''Background process submitted'');',
 '    -- log job',
 '',
-'APEX_UTIL.SET_SESSION_STATE(''G_LOGIN_MESSAGE'', ''Reserve History Rebuild submitted successfully'');',
+'APEX_UTIL.SET_SESSION_STATE(''G_LOGIN_MESSAGE'', ''Interest on investment rebuild submitted successfully..<br/>Please wait a few minutes to complete'');',
 '',
 'end;'))
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
-,p_process_when_button_id=>wwv_flow_api.id(31248238486728209)
+,p_process_when_button_id=>wwv_flow_api.id(33553423438344707)
 ,p_process_success_message=>'<p>Operation has been submitted and will soon be completed.</p>'
 ,p_security_scheme=>wwv_flow_api.id(41954896586278906)
 );
@@ -55957,16 +56166,20 @@ wwv_flow_api.create_page_process(
 '    end_date number;',
 '    today varchar2(20) := to_char(trunc(sysdate)-1,''''DD-MON-YYYY'''');',
 '    business_date varchar2(30);',
+'    p_circle_id number := user_mgt.default_circle(or_auth.user_id(:app_user));',
 '',
 '    begin',
 '    ',
 '    -- CLEAR DATA',
 '',
-'    delete from or_loan_interest;',
-'    DELETE FROM  OR_transactions where DOCUMENT_SRC=''''OR_LOAN_INTEREST'''';',
+'    delete from or_loan_interest where circle_id=p_circle_id;',
+'    DELETE FROM  OR_transactions where DOCUMENT_SRC=''''OR_LOAN_INTEREST'''' and circle_id = p_circle_id;',
 '    ',
-'    -- reset the loan table',
-'    update or_loan set computed_principal = principal, last_principal_update = start_date ;',
+'   -- reset the loan table, triggers can cause problem for updates',
+'    execute immediate ''''alter trigger aft_ins_trg_1 disable'''';',
+'    update or_loan set computed_principal = principal, closure_date = null,',
+'    last_principal_update = start_date where status_id in (3) and circle_id = p_circle_id ;',
+'    execute immediate ''''alter trigger aft_ins_trg_1 enable'''';',
 '    commit;',
 '',
 '    -- reload the table of interests',
@@ -55975,7 +56188,7 @@ wwv_flow_api.create_page_process(
 '      end_date := to_number(to_char(to_date(today, ''''DD-MON-YYYY''''), ''''j''''));',
 '      for cur_r in start_date..end_date loop ',
 '        business_date := to_date(cur_r, ''''j'''');',
-'        account_mgt.compute_interest_on_loans(business_date);',
+'        account_mgt.advise_loan_interest(business_date);',
 '      end loop;',
 '',
 '    commit;',
@@ -55998,11 +56211,11 @@ wwv_flow_api.create_page_process(
 ,p_security_scheme=>wwv_flow_api.id(41954896586278906)
 );
 wwv_flow_api.create_page_process(
- p_id=>wwv_flow_api.id(33553588257344708)
+ p_id=>wwv_flow_api.id(31249426432728221)
 ,p_process_sequence=>30
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'Rebuild investment interests'
+,p_process_name=>'Rebuild Reserves'
 ,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'DECLARE',
 '    l_sql VARCHAR2(4000);',
@@ -56020,19 +56233,17 @@ wwv_flow_api.create_page_process(
 '    business_date varchar2(30);',
 '',
 '    begin',
-'    ',
-'    -- CLEAR DATA',
 '',
-'    delete from or_investment_interest;',
-'    DELETE FROM  OR_transactions where DOCUMENT_SRC=''''OR_INVESTMENT_INTEREST'''';',
+'    -- delete from or_reserve_history',
 '',
 '    -- reload the table',
 '',
-'      start_date := to_number(to_char(to_date(:p106_start_inv, ''''DD-MON-YYYY''''), ''''j''''));',
+'      -- start_date := to_number(to_char(to_date(:p106_start, ''''DD-MON-YYYY''''), ''''j''''));',
+'      select to_number(to_char(trunc(max(entry_date))-1, ''''j'''')) into start_date from or_reserve_history;',
 '      end_date := to_number(to_char(to_date(today, ''''DD-MON-YYYY''''), ''''j''''));',
-'      for cur_r in start_date..end_date loop ',
+'      for cur_r in start_date..end_date loop',
 '        business_date := to_date(cur_r, ''''j'''');',
-'        account_mgt.calc_interest_on_investments(business_date);',
+'        account_mgt.advise_reserve(business_date);',
 '      end loop;',
 '',
 '    commit;',
@@ -56046,11 +56257,11 @@ wwv_flow_api.create_page_process(
 '        p_status => ''Background process submitted'');',
 '    -- log job',
 '',
-'APEX_UTIL.SET_SESSION_STATE(''G_LOGIN_MESSAGE'', ''Interest on investment rebuild submitted successfully..<br/>Please wait a few minutes to complete'');',
+'APEX_UTIL.SET_SESSION_STATE(''G_LOGIN_MESSAGE'', ''Reserve History Rebuild submitted successfully'');',
 '',
 'end;'))
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
-,p_process_when_button_id=>wwv_flow_api.id(33553423438344707)
+,p_process_when_button_id=>wwv_flow_api.id(31248238486728209)
 ,p_process_success_message=>'<p>Operation has been submitted and will soon be completed.</p>'
 ,p_security_scheme=>wwv_flow_api.id(41954896586278906)
 );
@@ -62747,7 +62958,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160709180848'
+,p_last_upd_yyyymmddhh24miss=>'20160716122641'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(33454013882546782)
@@ -62799,7 +63010,7 @@ wwv_flow_api.create_worksheet_column(
 ,p_db_column_name=>'NAME'
 ,p_display_order=>11
 ,p_column_identifier=>'G'
-,p_column_label=>'Transaction Type'
+,p_column_label=>'Transaction Type/Journal'
 ,p_column_type=>'STRING'
 ,p_heading_alignment=>'LEFT'
 );

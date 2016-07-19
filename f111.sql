@@ -27,7 +27,7 @@ prompt APPLICATION 111 - ore.ng
 -- Application Export:
 --   Application:     111
 --   Name:            ore.ng
---   Date and Time:   00:00 Tuesday July 19, 2016
+--   Date and Time:   00:00 Wednesday July 20, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -37,12 +37,12 @@ prompt APPLICATION 111 - ore.ng
 
 -- Application Statistics:
 --   Pages:                    128
---     Items:                  422
+--     Items:                  424
 --     Computations:             5
 --     Validations:             85
---     Processes:              189
---     Regions:                229
---     Buttons:                294
+--     Processes:              191
+--     Regions:                230
+--     Buttons:                295
 --     Dynamic Actions:         68
 --   Shared Components:
 --     Logic:
@@ -72,7 +72,7 @@ prompt APPLICATION 111 - ore.ng
 --         Breadcrumb:           1
 --         Button:               5
 --         Report:              10
---       LOVs:                  67
+--       LOVs:                  68
 --       Shortcuts:              2
 --       Plug-ins:              14
 --     Globalization:
@@ -163,7 +163,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_12=>'LOGO1'
 ,p_substitution_value_12=>'ore-logo-blue.png'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160716192557'
+,p_last_upd_yyyymmddhh24miss=>'20160719145836'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'https://ore.ng/')
 ,p_ui_type_name => null
 );
@@ -2462,6 +2462,17 @@ wwv_flow_api.create_list_of_values(
 ,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select ACCOUNT_NUMBER as display_value, ID as return_value ',
 '  from OR_ACCOUNT',
+' order by 1'))
+);
+wwv_flow_api.create_list_of_values(
+ p_id=>wwv_flow_api.id(33746840274422228)
+,p_lov_name=>'ACTIVE LOANS'
+,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select l.subject || '' - ''|| to_char(l.principal,''999,999,999.99'') as d,',
+'       l.id as r',
+'  from or_loan l',
+'  where l.circle_id = user_mgt.default_circle(or_auth.user_id(:app_user))',
+'  and l.status_id = (SELECT s.id FROM or_loan_states s WHERE s.name=''Disbursed'')',
 ' order by 1'))
 );
 wwv_flow_api.create_list_of_values(
@@ -37346,7 +37357,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160413134456'
+,p_last_upd_yyyymmddhh24miss=>'20160719145836'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(60033535065841374)
@@ -37493,7 +37504,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(30417292935909813)
 ,p_name=>'P38_CIRCLE_ID'
-,p_item_sequence=>210
+,p_item_sequence=>220
 ,p_item_plug_id=>wwv_flow_api.id(60033535065841374)
 ,p_use_cache_before_default=>'NO'
 ,p_item_default=>'user_mgt.default_circle(or_auth.user_id(:app_user))'
@@ -37506,7 +37517,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(30417366863909814)
 ,p_name=>'P38_COMPUTED_PRINCIPAL'
-,p_item_sequence=>220
+,p_item_sequence=>230
 ,p_item_plug_id=>wwv_flow_api.id(60033535065841374)
 ,p_use_cache_before_default=>'NO'
 ,p_item_default=>':P38_PRINCIPAL'
@@ -37661,7 +37672,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60040276063841390)
 ,p_name=>'P38_NOTES'
-,p_item_sequence=>200
+,p_item_sequence=>210
 ,p_item_plug_id=>wwv_flow_api.id(60033535065841374)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Notes'
@@ -37762,7 +37773,10 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>150
 ,p_item_plug_id=>wwv_flow_api.id(60033535065841374)
 ,p_use_cache_before_default=>'NO'
+,p_item_default=>':p38_closure_date'
+,p_item_default_type=>'PLSQL_EXPRESSION'
 ,p_prompt=>'Closure Date'
+,p_format_mask=>'DD-MON-YYYY'
 ,p_source=>'CLOSURE_DATE'
 ,p_source_type=>'DB_COLUMN'
 ,p_display_as=>'NATIVE_DATE_PICKER'
@@ -37779,7 +37793,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60042636885841391)
 ,p_name=>'P38_REPAYMENTS'
-,p_item_sequence=>160
+,p_item_sequence=>170
 ,p_item_plug_id=>wwv_flow_api.id(60033535065841374)
 ,p_use_cache_before_default=>'NO'
 ,p_source=>'REPAYMENTS'
@@ -37791,7 +37805,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60043121079841391)
 ,p_name=>'P38_INTEREST'
-,p_item_sequence=>170
+,p_item_sequence=>180
 ,p_item_plug_id=>wwv_flow_api.id(60033535065841374)
 ,p_use_cache_before_default=>'NO'
 ,p_source=>'INTEREST'
@@ -37803,7 +37817,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60043467348841392)
 ,p_name=>'P38_EARNED_INTEREST'
-,p_item_sequence=>180
+,p_item_sequence=>190
 ,p_item_plug_id=>wwv_flow_api.id(60033535065841374)
 ,p_use_cache_before_default=>'NO'
 ,p_source=>'EARNED_INTEREST'
@@ -37815,7 +37829,7 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(60043930662841392)
 ,p_name=>'P38_LOAN_TYPE'
-,p_item_sequence=>190
+,p_item_sequence=>200
 ,p_item_plug_id=>wwv_flow_api.id(60033535065841374)
 ,p_use_cache_before_default=>'NO'
 ,p_item_default=>'1'
@@ -37883,8 +37897,27 @@ wwv_flow_api.create_page_process(
 ,p_process_success_message=>'Action Processed.'
 );
 wwv_flow_api.create_page_process(
- p_id=>wwv_flow_api.id(30418470891909825)
+ p_id=>wwv_flow_api.id(33557599884344748)
 ,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Set Closure Date'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'begin ',
+'',
+'',
+'',
+'loan_mgt.set_closure(:p38_id,to_date(upper(:p38_closure_date),''DD-MON-YYYY''));',
+'',
+'',
+'end;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(60034075897841376)
+,p_process_success_message=>'Action Processed.'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(30418470891909825)
+,p_process_sequence=>40
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'Set Success Message'
@@ -37893,7 +37926,7 @@ wwv_flow_api.create_page_process(
 );
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(60045528309841393)
-,p_process_sequence=>40
+,p_process_sequence=>50
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_SESSION_STATE'
 ,p_process_name=>'reset page'
@@ -55601,7 +55634,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160716160436'
+,p_last_upd_yyyymmddhh24miss=>'20160719045934'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31247900240728206)
@@ -55641,6 +55674,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_template=>wwv_flow_api.id(1315401119881073280)
 ,p_plug_display_sequence=>60
 ,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>'<h3>Regenerate Savings Dividends</h3>'
@@ -55667,6 +55701,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_template=>wwv_flow_api.id(1315401119881073280)
 ,p_plug_display_sequence=>80
 ,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>'<h3>Regenerate Guaranty Dividends</h3>'
@@ -55680,13 +55715,14 @@ wwv_flow_api.create_page_plug(
 ,p_plug_template=>wwv_flow_api.id(1315401119881073280)
 ,p_plug_display_sequence=>31
 ,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<h3>Rebuild Interest on Loans ( Step 2 )</h3>',
+'<h3>Rebuild Interest on Loans (Step 2)</h3>',
 '<p>',
 '    Interest on loans will be computed up to the previous day.',
-'    <br/><span class="red-alert">***Warning: You need to manually close loans to stop generating interest on loans</span>',
+'    <br/><span class="red-alert">***You need to manually close loans to stop generating interest on loans</span>',
 '</p>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
@@ -55701,10 +55737,12 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<h3>Rebuild Interest on Investments ( Step 1 )</h3>',
+'<h3>Rebuild Interest on Investments (Step 1)</h3>',
 '<p>',
-'    Interest on investements will be computed up to the previous day',
-'</p>'))
+'    Interest on investements will be computed up to the previous day<br/>',
+'    <span class="red-alert">***Operations should be run with caution</span>',
+'</p>',
+''))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -55715,6 +55753,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_template=>wwv_flow_api.id(1315401119881073280)
 ,p_plug_display_sequence=>40
 ,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_display_condition_type=>'NEVER'
@@ -55723,6 +55762,22 @@ wwv_flow_api.create_page_plug(
 '<p>',
 '    Late savings panelty will be computed up to the previous day',
 '</p>'))
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33557019227344743)
+,p_plug_name=>'Loan Closure'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(1315401119881073280)
+,p_plug_display_sequence=>90
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>',
+'    Set Loan Closure',
+'</h3>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -55837,6 +55892,18 @@ wwv_flow_api.create_page_button(
 ,p_button_position=>'BODY'
 ,p_icon_css_classes=>'fa-database'
 ,p_grid_new_row=>'Y'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(33557345169344746)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_api.id(33557019227344743)
+,p_button_name=>'CLOSE_LOAN'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--small:t-Button--iconLeft'
+,p_button_template_id=>wwv_flow_api.id(1315414316853073333)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Apply Closure'
+,p_button_position=>'REGION_TEMPLATE_CHANGE'
 );
 wwv_flow_api.create_page_branch(
  p_id=>wwv_flow_api.id(31249517787728222)
@@ -56082,6 +56149,49 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_DATE_PICKER'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(1653905900709671302)
+,p_attribute_04=>'button'
+,p_attribute_05=>'N'
+,p_attribute_07=>'NONE'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33557106455344744)
+,p_name=>'P106_LOAN_ID'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(33557019227344743)
+,p_prompt=>'Target Loan'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_named_lov=>'ACTIVE LOANS'
+,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select l.subject || '' - ''|| to_char(l.principal,''999,999,999.99'') as d,',
+'       l.id as r',
+'  from or_loan l',
+'  where l.circle_id = user_mgt.default_circle(or_auth.user_id(:app_user))',
+'  and l.status_id = (SELECT s.id FROM or_loan_states s WHERE s.name=''Disbursed'')',
+' order by 1'))
+,p_cHeight=>1
+,p_field_template=>wwv_flow_api.id(1653905900709671302)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'NO'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33557203079344745)
+,p_name=>'P106_CLOSURE_DATE'
+,p_is_required=>true
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(33557019227344743)
+,p_item_default=>'TO_CHAR(SYSDATE,''DD-MON-YYYY'')'
+,p_item_default_type=>'PLSQL_EXPRESSION'
+,p_prompt=>'Closure date'
+,p_format_mask=>'DD-MON-YYYY'
+,p_source=>'P106_CLOSURE_DATE'
+,p_source_type=>'ITEM'
+,p_display_as=>'NATIVE_DATE_PICKER'
+,p_cSize=>30
+,p_begin_on_new_line=>'N'
+,p_field_template=>wwv_flow_api.id(1653905900709671302)
+,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_04=>'button'
 ,p_attribute_05=>'N'
 ,p_attribute_07=>'NONE'
@@ -56491,6 +56601,9 @@ wwv_flow_api.create_page_process(
 ,p_process_success_message=>'<p>Operation has been submitted and will soon be completed.</p>'
 ,p_security_scheme=>wwv_flow_api.id(41954896586278906)
 );
+end;
+/
+begin
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(31251224130728239)
 ,p_process_sequence=>80
@@ -56544,6 +56657,23 @@ wwv_flow_api.create_page_process(
 ,p_process_when_button_id=>wwv_flow_api.id(31251119662728238)
 ,p_process_success_message=>'<p>Operation has been submitted and will soon be completed.</p>'
 ,p_security_scheme=>wwv_flow_api.id(41954896586278906)
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(33557436483344747)
+,p_process_sequence=>90
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Close Loan'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'begin ',
+'',
+'loan_mgt.set_closure(:p106_loan_id,to_date(:p106_closure_date,''DD-MON-YYYY''));',
+'',
+'',
+'end;',
+'APEX_UTIL.SET_SESSION_STATE(''G_LOGIN_MESSAGE'', ''Loan closure date set successfully. ''||:p106_closure_date);'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(33557345169344746)
 );
 end;
 /

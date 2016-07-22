@@ -27,7 +27,7 @@ prompt APPLICATION 107 - sms.novajii.com
 -- Application Export:
 --   Application:     107
 --   Name:            sms.novajii.com
---   Date and Time:   00:00 Friday July 22, 2016
+--   Date and Time:   00:00 Saturday July 23, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -40,7 +40,7 @@ prompt APPLICATION 107 - sms.novajii.com
 --     Items:                  126
 --     Validations:             30
 --     Processes:               65
---     Regions:                 94
+--     Regions:                 95
 --     Buttons:                 69
 --     Dynamic Actions:          9
 --   Shared Components:
@@ -121,7 +121,7 @@ wwv_flow_api.create_flow(
 ,p_auto_time_zone=>'N'
 ,p_default_error_display_loc=>'INLINE_WITH_FIELD'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160721084553'
+,p_last_upd_yyyymmddhh24miss=>'20160722114551'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'http://novajii.com/sms/res/')
 ,p_ui_type_name => null
 );
@@ -25853,7 +25853,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160721084553'
+,p_last_upd_yyyymmddhh24miss=>'20160722114551'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(28707666324855285)
@@ -25874,7 +25874,7 @@ wwv_flow_api.create_page_plug(
 ,p_parent_plug_id=>wwv_flow_api.id(28707666324855285)
 ,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(31357946033794231)
-,p_plug_display_sequence=>20
+,p_plug_display_sequence=>30
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
@@ -25883,9 +25883,9 @@ wwv_flow_api.create_page_plug(
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<center>',
 '     <h3>',
-'    <img src="http://novajii.com/email/simple/novajii-sms.png" style="padding-top:10px;height:32px;"/>',
+'    <!--<img src="http://novajii.com/email/simple/novajii-sms.png" style="padding-top:10px;height:32px;"/>-->',
 '    </h3>',
-'    <img src="http://novajii.com/email/simple/text-message-2.jpg" style="width:100%;"/>',
+'    <img src="https://novajii.com/img/text.jpg" style="width:100%;"/>',
 '   </center>',
 '<br/>'))
 ,p_attribute_01=>'N'
@@ -25912,7 +25912,7 @@ wwv_flow_api.create_page_plug(
 ,p_parent_plug_id=>wwv_flow_api.id(28707666324855285)
 ,p_region_template_options=>'t-Form--noPadding:t-Form--xlarge'
 ,p_plug_template=>wwv_flow_api.id(32764433255904827)
-,p_plug_display_sequence=>30
+,p_plug_display_sequence=>40
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
@@ -25984,13 +25984,29 @@ wwv_flow_api.create_report_columns(
 ,p_include_in_export=>'Y'
 );
 wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(28710042674855288)
-,p_plug_name=>'<h3>How To Pay</h3>'
+ p_id=>wwv_flow_api.id(33413851822327412)
+,p_plug_name=>'New'
 ,p_parent_plug_id=>wwv_flow_api.id(28707666324855285)
-,p_region_template_options=>'#DEFAULT#:t-Alert--colorBG:t-Alert--horizontal:t-Alert--noIcon:t-Alert--info'
-,p_plug_template=>wwv_flow_api.id(31348288177794209)
+,p_region_template_options=>'#DEFAULT#:t-Region--noPadding:t-Region--removeHeader:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(31357946033794231)
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>'<img src="https://novajii.com/img/payment.jpg" width="100%"/>'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(28710042674855288)
+,p_plug_name=>'<h3>How To Pay</h3>'
+,p_parent_plug_id=>wwv_flow_api.id(33413851822327412)
+,p_region_template_options=>'#DEFAULT#:t-Alert--colorBG:t-Alert--horizontal:t-Alert--noIcon:t-Alert--info'
+,p_plug_template=>wwv_flow_api.id(31348288177794209)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_new_grid_row=>false
+,p_plug_new_grid_column=>false
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>'<h5>After payment send evidence of payment & your email account to info@novajii.com</h5>'
 ,p_plug_query_row_template=>1

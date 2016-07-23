@@ -27,7 +27,7 @@ prompt APPLICATION 107 - sms.novajii.com
 -- Application Export:
 --   Application:     107
 --   Name:            sms.novajii.com
---   Date and Time:   00:00 Saturday July 23, 2016
+--   Date and Time:   00:00 Sunday July 24, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -40,7 +40,7 @@ prompt APPLICATION 107 - sms.novajii.com
 --     Items:                  126
 --     Validations:             30
 --     Processes:               65
---     Regions:                 95
+--     Regions:                 91
 --     Buttons:                 69
 --     Dynamic Actions:          9
 --   Shared Components:
@@ -120,8 +120,8 @@ wwv_flow_api.create_flow(
 ,p_csv_encoding=>'Y'
 ,p_auto_time_zone=>'N'
 ,p_default_error_display_loc=>'INLINE_WITH_FIELD'
-,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160722114551'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160723215040'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'http://novajii.com/sms/res/')
 ,p_ui_type_name => null
 );
@@ -17953,7 +17953,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'D'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160319113531'
+,p_last_upd_yyyymmddhh24miss=>'20160723215040'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(12455146284319912)
@@ -17983,105 +17983,22 @@ wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31469492880566767)
 ,p_plug_name=>'Footer'
 ,p_region_name=>'footer'
-,p_region_css_classes=>'footer'
-,p_region_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(31349783874794221)
+,p_region_template_options=>'#DEFAULT#:t-Region--noPadding:t-Region--removeHeader:t-Region--noUI:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(31357946033794231)
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'Y'
-,p_plug_display_point=>'REGION_POSITION_05'
+,p_plug_display_point=>'BODY_3'
 ,p_plug_item_display_point=>'BELOW'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<div>Copyright@2016. <a href="novajii.com">Novaji Introserve Limited</a>&nbsp;',
+'<span class="fa fa-facebook"></span>&nbsp;<span class="fa fa-twitter"></span>&nbsp;<span class="fa fa-skype"></span>&nbsp;<span class="fa fa-linkedin-square"></span>',
+'</div>',
+''))
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_plug_display_condition_type=>'NEVER'
 ,p_plug_footer=>'<link rel="icon" type="image/png" href="&APP_IMAGES.favicon.png" />'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(32087719299756295)
-,p_plug_name=>'Get In Touch'
-,p_parent_plug_id=>wwv_flow_api.id(31469492880566767)
-,p_region_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(31564296857554439)
-,p_plug_display_sequence=>10
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_plug_new_grid_row=>false
-,p_plug_grid_column_span=>3
-,p_plug_grid_column_css_classes=>'footer-col'
-,p_plug_display_column=>1
-,p_plug_display_point=>'BODY'
-,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<h4>Our Office</h4>',
-'<p>EU17/11 - 12<br/>',
-'Arena Complex<br/>',
-'Bolade, Oshodi<br/>',
-'Lagos, Nigeria</p>',
-'<h4>Email</h4>',
-'<p>info@sleektelecoms.com</p>',
-'<h4>Call</h4>',
-'<p>234 - 8087789408, 9095358512</p>'))
-,p_plug_query_row_template=>1
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(32087946057756297)
-,p_plug_name=>'Let''s Help'
-,p_parent_plug_id=>wwv_flow_api.id(31469492880566767)
-,p_region_css_classes=>'footer-col'
-,p_region_template_options=>'#DEFAULT#'
-,p_component_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(31564296857554439)
-,p_plug_display_sequence=>20
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_plug_new_grid_row=>false
-,p_plug_grid_column_span=>3
-,p_plug_grid_column_css_classes=>'footer-col'
-,p_plug_display_column=>4
-,p_plug_display_point=>'BODY'
-,p_list_id=>wwv_flow_api.id(31577906076533810)
-,p_plug_source_type=>'NATIVE_LIST'
-,p_list_template_id=>wwv_flow_api.id(32285469761376010)
-,p_plug_query_row_template=>1
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(32088021131756298)
-,p_plug_name=>'About Us'
-,p_parent_plug_id=>wwv_flow_api.id(31469492880566767)
-,p_region_css_classes=>'footer-col'
-,p_region_template_options=>'#DEFAULT#'
-,p_component_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(31564296857554439)
-,p_plug_display_sequence=>30
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_plug_new_grid_row=>false
-,p_plug_grid_column_span=>3
-,p_plug_grid_column_css_classes=>'footer-col'
-,p_plug_display_column=>7
-,p_plug_display_point=>'BODY'
-,p_list_id=>wwv_flow_api.id(32278596517672242)
-,p_plug_source_type=>'NATIVE_LIST'
-,p_list_template_id=>wwv_flow_api.id(32285469761376010)
-,p_plug_query_row_template=>1
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(32088089868756299)
-,p_plug_name=>'Copyright'
-,p_region_name=>'copyright'
-,p_parent_plug_id=>wwv_flow_api.id(31469492880566767)
-,p_region_template_options=>'#DEFAULT#'
-,p_component_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(31349783874794221)
-,p_plug_display_sequence=>40
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_plug_display_point=>'BODY'
-,p_plug_source=>'htp.p(''<p>&copy;''||to_char(sysdate,''yyyy'')||'' Sleek Mobile. All rights reserved.</p> '');'
-,p_plug_source_type=>'NATIVE_PLSQL'
-,p_plug_query_row_template=>1
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(33152310248399007)
@@ -25846,18 +25763,41 @@ wwv_flow_api.create_page(
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'AUTO_FIRST_ITEM'
 ,p_autocomplete_on_off=>'OFF'
-,p_css_file_urls=>'&APP_IMAGES.login.css'
+,p_css_file_urls=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'&APP_IMAGES.login.css',
+'https://fonts.googleapis.com/css?family=Open+Sans'))
+,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'.btn-pad{',
+'    margin: 5px 8px 5px 8px;',
+'    width:96%;',
+'}',
+'h4{',
+'    font-family:''Open Sans'',Helvetica;',
+'    color:blue;',
+'    padding: 10px 0 10px 0;',
+'    font-size: 121%;',
+'}',
+'',
+'h5{',
+'    font-family:''Open Sans'',Helvetica;',
+'    font-size: 91%;',
+'    padding: 10px 0 10px 0;',
+'}',
+'',
+'html,body{',
+'    height:100%;',
+'}'))
 ,p_step_template=>wwv_flow_api.id(28726355054985056)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'Y'
 ,p_cache_mode=>'NOCACHE'
-,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160722114551'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160723214343'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(28707666324855285)
-,p_plug_name=>'Side Details'
+,p_plug_name=>'Container'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_api.id(31349783874794221)
 ,p_plug_display_sequence=>10
@@ -25870,9 +25810,9 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(28705650852855277)
-,p_plug_name=>'&nbsp;'
+,p_plug_name=>'Login'
 ,p_parent_plug_id=>wwv_flow_api.id(28707666324855285)
-,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:t-Region--noPadding:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(31357946033794231)
 ,p_plug_display_sequence=>30
 ,p_include_in_reg_disp_sel_yn=>'N'
@@ -25881,13 +25821,11 @@ wwv_flow_api.create_page_plug(
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<center>',
-'     <h3>',
-'    <!--<img src="http://novajii.com/email/simple/novajii-sms.png" style="padding-top:10px;height:32px;"/>-->',
-'    </h3>',
+'',
+'     ',
 '    <img src="https://novajii.com/img/text.jpg" style="width:100%;"/>',
-'   </center>',
-'<br/>'))
+'    ',
+''))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -25907,11 +25845,28 @@ wwv_flow_api.create_page_plug(
 ,p_attribute_02=>'HTML'
 );
 wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(33557702320344750)
+,p_plug_name=>'Login'
+,p_parent_plug_id=>wwv_flow_api.id(28705650852855277)
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noBorder:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(31357946033794231)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h4>',
+'        Sign In',
+'</h4>'))
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(28708059775855285)
 ,p_plug_name=>'Pricing'
 ,p_parent_plug_id=>wwv_flow_api.id(28707666324855285)
-,p_region_template_options=>'t-Form--noPadding:t-Form--xlarge'
-,p_plug_template=>wwv_flow_api.id(32764433255904827)
+,p_region_template_options=>'#DEFAULT#:t-Region--noPadding:t-Region--removeHeader:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(31357946033794231)
 ,p_plug_display_sequence=>40
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_new_grid_row=>false
@@ -25919,21 +25874,7 @@ wwv_flow_api.create_page_plug(
 ,p_translate_title=>'N'
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(28601520288349314)
-,p_plug_name=>'Register'
-,p_parent_plug_id=>wwv_flow_api.id(28708059775855285)
-,p_region_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(31349783874794221)
-,p_plug_display_sequence=>43
-,p_include_in_reg_disp_sel_yn=>'N'
-,p_plug_new_grid_row=>false
-,p_plug_new_grid_column=>false
-,p_plug_display_point=>'BODY'
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>'<img src="https://novajii.com/img/Pricing.jpg" width="100%"/>'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -25944,12 +25885,14 @@ wwv_flow_api.create_report_region(
 ,p_template=>wwv_flow_api.id(31357946033794231)
 ,p_display_sequence=>40
 ,p_include_in_reg_disp_sel_yn=>'N'
-,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
-,p_component_template_options=>'t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--horizontalBorders'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noBorder:t-Region--scrollBody'
+,p_component_template_options=>'t-Report--stretch:t-Report--staticRowColors:t-Report--rowHighlightOff:t-Report--noBorders'
 ,p_display_point=>'BODY'
 ,p_source=>'select description,price from app_pricing order by seq '
 ,p_source_type=>'NATIVE_SQL_REPORT'
-,p_header=>'<h3>Pricing Plan</h3>'
+,p_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'',
+'<h4>Pricing Plan</h4>'))
 ,p_ajax_enabled=>'Y'
 ,p_query_row_template=>wwv_flow_api.id(31366698018794237)
 ,p_query_num_rows=>15
@@ -25985,7 +25928,7 @@ wwv_flow_api.create_report_columns(
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(33413851822327412)
-,p_plug_name=>'New'
+,p_plug_name=>'Payment'
 ,p_parent_plug_id=>wwv_flow_api.id(28707666324855285)
 ,p_region_template_options=>'#DEFAULT#:t-Region--noPadding:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(31357946033794231)
@@ -25999,20 +25942,24 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(28710042674855288)
-,p_plug_name=>'<h3>How To Pay</h3>'
+,p_plug_name=>'Payment;'
 ,p_parent_plug_id=>wwv_flow_api.id(33413851822327412)
-,p_region_template_options=>'#DEFAULT#:t-Alert--colorBG:t-Alert--horizontal:t-Alert--noIcon:t-Alert--info'
-,p_plug_template=>wwv_flow_api.id(31348288177794209)
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noBorder:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(31357946033794231)
 ,p_plug_display_sequence=>20
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_new_grid_row=>false
 ,p_plug_new_grid_column=>false
 ,p_plug_display_point=>'BODY'
-,p_plug_source=>'<h5>After payment send evidence of payment & your email account to info@novajii.com</h5>'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h5>After payment send evidence of payment & your email account to info@novajii.com</h5>',
+'<br/><br/>'))
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<span><img src="http://novajii.com/sms/res/fidelity.png" height=32/></span>',
+'<h4>How To Make Payment</h4>',
+'<br/>',
+'<span><img src="http://novajii.com/sms/res/fidelity.png" height=44/></span>',
 '<h5>ACCOUNT NAME: NOVAJII INTROSERVE NIG. LTD</h5>',
 '<h5>ACCOUNT NUMBER: 4011073010</h5>'))
 ,p_attribute_01=>'N'
@@ -26021,20 +25968,21 @@ wwv_flow_api.create_page_plug(
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(28706094699855279)
 ,p_button_sequence=>40
-,p_button_plug_id=>wwv_flow_api.id(28705650852855277)
+,p_button_plug_id=>wwv_flow_api.id(33557702320344750)
 ,p_button_name=>'LOGIN'
 ,p_button_action=>'SUBMIT'
 ,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--stretch'
 ,p_button_template_id=>wwv_flow_api.id(31378687125794262)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Log In'
-,p_button_position=>'BELOW_BOX'
-,p_button_alignment=>'LEFT'
+,p_button_position=>'BODY'
+,p_button_css_classes=>'btn-pad'
+,p_grid_new_row=>'Y'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(28601783953349316)
-,p_button_sequence=>10
-,p_button_plug_id=>wwv_flow_api.id(28601520288349314)
+,p_button_sequence=>50
+,p_button_plug_id=>wwv_flow_api.id(33557702320344750)
 ,p_button_name=>'REGISTER'
 ,p_button_action=>'REDIRECT_PAGE'
 ,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--iconRight:t-Button--stretch'
@@ -26043,13 +25991,15 @@ wwv_flow_api.create_page_button(
 ,p_button_image_alt=>'Create Account'
 ,p_button_position=>'BODY'
 ,p_button_redirect_url=>'f?p=&APP_ID.:2:&SESSION.::&DEBUG.:RP::'
+,p_button_condition_type=>'NEVER'
+,p_button_css_classes=>'btn-pad'
 ,p_grid_new_row=>'Y'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(28706451942855281)
 ,p_name=>'P30_USERNAME'
 ,p_item_sequence=>20
-,p_item_plug_id=>wwv_flow_api.id(28705650852855277)
+,p_item_plug_id=>wwv_flow_api.id(33557702320344750)
 ,p_prompt=>'Email'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
@@ -26065,7 +26015,7 @@ wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(28706854157855283)
 ,p_name=>'P30_PASSWORD'
 ,p_item_sequence=>30
-,p_item_plug_id=>wwv_flow_api.id(28705650852855277)
+,p_item_plug_id=>wwv_flow_api.id(33557702320344750)
 ,p_prompt=>'Password'
 ,p_display_as=>'NATIVE_PASSWORD'
 ,p_cSize=>30

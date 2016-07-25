@@ -27,7 +27,7 @@ prompt APPLICATION 107 - sms.novajii.com
 -- Application Export:
 --   Application:     107
 --   Name:            sms.novajii.com
---   Date and Time:   00:00 Monday July 25, 2016
+--   Date and Time:   00:00 Tuesday July 26, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -120,8 +120,8 @@ wwv_flow_api.create_flow(
 ,p_csv_encoding=>'Y'
 ,p_auto_time_zone=>'N'
 ,p_default_error_display_loc=>'INLINE_WITH_FIELD'
-,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160723215040'
+,p_last_updated_by=>'SUPPORT'
+,p_last_upd_yyyymmddhh24miss=>'20160725104825'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'http://novajii.com/sms/res/')
 ,p_ui_type_name => null
 );
@@ -279,6 +279,14 @@ wwv_flow_api.create_list_item(
 ,p_parent_list_item_id=>wwv_flow_api.id(12894768440187746)
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'27'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(33832581119704554)
+,p_list_item_display_sequence=>180
+,p_list_item_link_text=>'Developer API'
+,p_list_item_link_target=>'https://novajii.com/pdf/HTTPSMS_API_v2.4.pdf'
+,p_security_scheme=>'MUST_NOT_BE_PUBLIC_USER'
+,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list(
  p_id=>wwv_flow_api.id(31383790118794451)

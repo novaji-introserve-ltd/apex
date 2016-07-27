@@ -27,7 +27,7 @@ prompt APPLICATION 111 - ore.ng
 -- Application Export:
 --   Application:     111
 --   Name:            ore.ng
---   Date and Time:   00:00 Wednesday July 27, 2016
+--   Date and Time:   00:00 Thursday July 28, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -163,7 +163,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_12=>'LOGO1'
 ,p_substitution_value_12=>'ore-logo-blue.png'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160726045406'
+,p_last_upd_yyyymmddhh24miss=>'20160727163021'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'https://ore.ng/')
 ,p_ui_type_name => null
 );
@@ -41086,7 +41086,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160726045406'
+,p_last_upd_yyyymmddhh24miss=>'20160727163021'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(60417105315339386)
@@ -41567,10 +41567,12 @@ wwv_flow_api.create_page_process(
 'begin ',
 '',
 '-- set maturity date',
+'/*',
 ':p50_maturity_date := trunc(:p50_value_date) + :p50_tenure;',
 ':p50_face_value := :p50_principal;',
+':p50_redisc_rate := :p50_rate;',
+'*/',
 'null;',
-'',
 'end;'))
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );

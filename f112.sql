@@ -27,7 +27,7 @@ prompt APPLICATION 112 - ruby.banking.app
 -- Application Export:
 --   Application:     112
 --   Name:            ruby.banking.app
---   Date and Time:   00:00 Saturday July 30, 2016
+--   Date and Time:   00:00 Sunday July 31, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -36,19 +36,19 @@ prompt APPLICATION 112 - ruby.banking.app
 --
 
 -- Application Statistics:
---   Pages:                     52
---     Items:                  196
---     Validations:             21
---     Processes:               73
---     Regions:                140
---     Buttons:                121
+--   Pages:                     53
+--     Items:                  200
+--     Validations:             23
+--     Processes:               75
+--     Regions:                143
+--     Buttons:                126
 --     Dynamic Actions:         16
 --   Shared Components:
 --     Logic:
 --     Navigation:
 --       Lists:                  2
 --       Breadcrumbs:            1
---         Entries:             43
+--         Entries:             44
 --     Security:
 --       Authentication:         2
 --       Authorization:          3
@@ -64,7 +64,7 @@ prompt APPLICATION 112 - ruby.banking.app
 --         Breadcrumb:           1
 --         Button:               5
 --         Report:               9
---       LOVs:                  27
+--       LOVs:                  28
 --       Shortcuts:              2
 --       Plug-ins:              10
 --     Globalization:
@@ -121,7 +121,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_03=>'DOWNLOAD'
 ,p_substitution_value_03=>'<span class="fa fa-file-excel-o"></span><span class="download">Download</span>'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160729171617'
+,p_last_upd_yyyymmddhh24miss=>'20160730171803'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -423,6 +423,15 @@ wwv_flow_api.create_list_item(
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'51'
 );
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(34024600493110140)
+,p_list_item_display_sequence=>310
+,p_list_item_link_text=>'Income Statement Lines'
+,p_list_item_link_target=>'f?p=&APP_ID.:52:&SESSION.::&DEBUG.'
+,p_parent_list_item_id=>wwv_flow_api.id(30873814812470194)
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'52'
+);
 wwv_flow_api.create_list(
  p_id=>wwv_flow_api.id(30677966748989972)
 ,p_name=>'Desktop Navigation Bar'
@@ -676,6 +685,15 @@ wwv_flow_api.create_list_of_values(
 'select firstname||'' ''|| lastname as d,',
 '       id as r',
 '  from members where group_id=:p3_group',
+' order by 1'))
+);
+wwv_flow_api.create_list_of_values(
+ p_id=>wwv_flow_api.id(34038633157254021)
+,p_lov_name=>'INCOME_STATEMENT_LINES'
+,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select name as d,',
+'       id as r',
+'  from income_statement_lines',
 ' order by 1'))
 );
 wwv_flow_api.create_list_of_values(
@@ -1347,6 +1365,13 @@ wwv_flow_api.create_menu_option(
 ,p_short_name=>'Balance Sheet Items'
 ,p_link=>'f?p=&APP_ID.:51:&SESSION.'
 ,p_page_id=>51
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(34034046341110167)
+,p_parent_id=>wwv_flow_api.id(31552444156223651)
+,p_short_name=>'Income Statement Lines'
+,p_link=>'f?p=&APP_ID.:52:&SESSION.'
+,p_page_id=>52
 );
 end;
 /
@@ -23840,8 +23865,8 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'C'
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
-,p_last_updated_by=>'SUPPORT'
-,p_last_upd_yyyymmddhh24miss=>'20160729152753'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160730121745'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(30584708923216428)
@@ -23871,7 +23896,7 @@ wwv_flow_api.create_page_plug(
 '"CODE",',
 '"TYPE_ID",',
 '"DATE_CREATED",',
-'"USER_ID",balance_sheet_item ',
+'"USER_ID",balance_sheet_item,income_statement_line',
 'from "#OWNER#"."ACCOUNT" ',
 '  ',
 ''))
@@ -23970,6 +23995,18 @@ wwv_flow_api.create_worksheet_column(
 ,p_rpt_named_lov=>wwv_flow_api.id(33962984936535709)
 ,p_rpt_show_filter_lov=>'1'
 );
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(33849816139183414)
+,p_db_column_name=>'INCOME_STATEMENT_LINE'
+,p_display_order=>26
+,p_column_identifier=>'H'
+,p_column_label=>'Income statement line'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'LOV_ESCAPE_SC'
+,p_heading_alignment=>'LEFT'
+,p_rpt_named_lov=>wwv_flow_api.id(34038633157254021)
+,p_rpt_show_filter_lov=>'1'
+);
 wwv_flow_api.create_worksheet_rpt(
  p_id=>wwv_flow_api.id(31790052418169158)
 ,p_application_user=>'APXWS_DEFAULT'
@@ -23978,7 +24015,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'ID:NAME:CODE:TYPE_ID:DATE_CREATED:USER_ID:BALANCE_SHEET_ITEM'
+,p_report_columns=>'ID:NAME:CODE:TYPE_ID:DATE_CREATED:USER_ID:BALANCE_SHEET_ITEM:INCOME_STATEMENT_LINE'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_button(
@@ -24055,7 +24092,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160729142305'
+,p_last_upd_yyyymmddhh24miss=>'20160730114809'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(31775868659160343)
@@ -24279,6 +24316,31 @@ wwv_flow_api.create_page_item(
 ' order by 1'))
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
+,p_field_template=>wwv_flow_api.id(30672486835989951)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs'
+,p_lov_display_extra=>'NO'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(33849715034183413)
+,p_name=>'P31_INCOME_STATEMENT_LINES'
+,p_item_sequence=>70
+,p_item_plug_id=>wwv_flow_api.id(31775868659160343)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Add to Income Statement Line'
+,p_source=>'INCOME_STATEMENT_LINE'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_named_lov=>'INCOME_STATEMENT_LINES'
+,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select name as d,',
+'       id as r',
+'  from income_statement_lines',
+' order by 1'))
+,p_lov_display_null=>'YES'
+,p_cHeight=>1
+,p_begin_on_new_line=>'N'
 ,p_field_template=>wwv_flow_api.id(30672486835989951)
 ,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs'
 ,p_lov_display_extra=>'NO'
@@ -27596,7 +27658,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160705131141'
+,p_last_upd_yyyymmddhh24miss=>'20160730171803'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(32778771172934345)
@@ -27609,14 +27671,14 @@ wwv_flow_api.create_page_plug(
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<h3>',
-'    <span class="fa fa-book"></span>&nbsp;Profit & Loss Statement',
+'    <span class="fa fa-book"></span>&nbsp;Statement of Income (for the period  ended &P44_MONTH., &P44_YEAR.)',
 '</h3>'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
 wwv_flow_api.create_report_region(
  p_id=>wwv_flow_api.id(33132433138248305)
-,p_name=>'P&L Report'
+,p_name=>'Income Statement'
 ,p_parent_plug_id=>wwv_flow_api.id(32778771172934345)
 ,p_template=>wwv_flow_api.id(31261378455831956)
 ,p_display_sequence=>10
@@ -27625,109 +27687,90 @@ wwv_flow_api.create_report_region(
 ,p_component_template_options=>'#DEFAULT#:t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--noBorders'
 ,p_display_point=>'BODY'
 ,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select * from (select a.name,acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
-'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
-'        acct.t_account_by_month(a.id,to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,0 seq,''report-row'' style',
-'  from  account a where a.code like ''1%'' ',
+'select * from ( ',
+'    select  ''Interest Income'' title,income_stmt.line_by_month(''Interest Income'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-2),''MON YYYY'')) x,',
+'    income_stmt.line_by_month(''Interest Income'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-1),''MON YYYY'')) y,',
+'    income_stmt.line_by_month(''Interest Income'',to_char(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),''MON YYYY'')) z,0 seq,''report-row'' style',
+'from  dual ',
+'',
+'union all',
+'',
+'    select  ''Interest Expense'' title,income_stmt.line_by_month(''Interest Expense'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-2),''MON YYYY'')) x,',
+'        income_stmt.line_by_month(''Interest Expense'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-1),''MON YYYY'')) y,',
+'        income_stmt.line_by_month(''Interest Expense'',to_char(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),''MON YYYY'')) z,10 seq,''report-row'' style',
+'    from  dual ',
+'    ',
+'union all ',
+'     select  ''Interest Spread'' title,income_stmt.interest_spread(to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-2),''MON YYYY'')) x,',
+'        income_stmt.interest_spread(to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-1),''MON YYYY'')) y,',
+'        income_stmt.interest_spread(to_char(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),''MON YYYY'')) z,11 seq,''report-total'' style',
+'    from  dual ',
+'    ',
+'union all',
+'    ',
+'    select  ''Loan Impairment Expense'' title,income_stmt.line_by_month(''Loan Impairment Expense'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-2),''MON YYYY'')) x,',
+'        income_stmt.line_by_month(''Loan Impairment Expense'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-1),''MON YYYY'')) y,',
+'        income_stmt.line_by_month(''Loan Impairment Expense'',to_char(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),''MON YYYY'')) z,20 seq,''report-row'' style',
+'    from  dual ',
+'    ',
+'union all ',
+'     select  ''Net Interest Income'' title,income_stmt.net_interest_income(to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-2),''MON YYYY'')) x,',
+'        income_stmt.net_interest_income(to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-1),''MON YYYY'')) y,',
+'        income_stmt.net_interest_income(to_char(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),''MON YYYY'')) z,21 seq,''report-total'' style',
+'    from  dual ',
+'    ',
+'union all',
+'    select  ''Other Income'' title,income_stmt.line_by_month(''Other Income'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-2),''MON YYYY'')) x,',
+'        income_stmt.line_by_month(''Other Income'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-1),''MON YYYY'')) y,',
+'        income_stmt.line_by_month(''Other Income'',to_char(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),''MON YYYY'')) z,30 seq,''report-row'' style',
+'    from  dual ',
+'',
+'    union all',
+'    select  ''Total Operating Income'' title,income_stmt.total_operating_income(to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-2),''MON YYYY'')) x,',
+'        income_stmt.total_operating_income(to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-1),''MON YYYY'')) y,',
+'        income_stmt.total_operating_income(to_char(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),''MON YYYY'')) z,31 seq,''report-total'' style',
+'    from  dual ',
+'    ',
+'    union all',
+'    select  ''Staff Cost'' title,income_stmt.line_by_month(''Staff Cost'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-2),''MON YYYY'')) x,',
+'        income_stmt.line_by_month(''Staff Cost'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-1),''MON YYYY'')) y,',
+'        income_stmt.line_by_month(''Staff Cost'',to_char(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),''MON YYYY'')) z,40 seq,''report-row'' style',
+'    from  dual ',
+'    union all',
+'      select  ''Depreciation'' title,income_stmt.line_by_month(''Depreciation'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-2),''MON YYYY'')) x,',
+'        income_stmt.line_by_month(''Depreciation'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-1),''MON YYYY'')) y,',
+'        income_stmt.line_by_month(''Depreciation'',to_char(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),''MON YYYY'')) z,50 seq,''report-row'' style',
+'    from  dual ',
+'    union all ',
+'     select  ''General Administrative Expenses'' title,income_stmt.line_by_month(''General Administrative Expenses'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-2),''MON YYYY'')) x,',
+'        income_stmt.line_by_month(''General Administrative Expenses'',to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-1),''MON YYYY'')) y,',
+'        income_stmt.line_by_month(''General Administrative Expenses'',to_char(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),''MON YYYY'')) z,50 seq,''report-row'' style',
+'    from  dual ',
+'    ',
+'    union all',
+'      select  ''Total Operating Costs'' title,income_stmt.total_operating_cost(to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-2),''MON YYYY'')) x,',
+'        income_stmt.total_operating_cost(to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-1),''MON YYYY'')) y,',
+'        income_stmt.total_operating_cost(to_char(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),''MON YYYY'')) z,51 seq,''report-total'' style',
+'    from  dual ',
+'    ',
+'      union all',
+'      select  ''Net Operating Profit'' title,income_stmt.net_operating_profit(to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-2),''MON YYYY'')) x,',
+'        income_stmt.net_operating_profit(to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-1),''MON YYYY'')) y,',
+'        income_stmt.net_operating_profit(to_char(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),''MON YYYY'')) z,51 seq,''report-total'' style',
+'    from  dual ',
+'',
+') ',
+'order by seq ',
 '  ',
-'  union all',
-'  select  ''Total assets'' title,acct.t_account_by_month_by_code(''1%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
-'        acct.t_account_by_month_by_code(''1%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
-'        acct.t_account_by_month_by_code(''1%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,1 seq,''report-total'' style',
-'  from  dual',
-'  order by seq)',
 '  ',
-'  union all ',
-'  select * from (select a.name,acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
-'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
-'        acct.t_account_by_month(a.id,to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,0 seq,''report-row'' style',
-'  from  account a where a.code like ''2%'' ',
-'  ',
-'  union all',
-'  select  ''Total Liabilities'' title,acct.t_account_by_month_by_code(''2%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY''))*(-1) x,',
-'        acct.t_account_by_month_by_code(''2%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) * (-1) y,',
-'        acct.t_account_by_month_by_code(''2%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) *(-1) z,1 seq,''report-total'' style',
-'  from  dual',
-'  order by seq)',
-'  ',
-'  union all ',
-'  select  ''Total Net Assets'' title,acct.t_account_by_month_by_code(''1%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) - ',
-'  acct.t_account_by_month_by_code(''2%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
-'        acct.t_account_by_month_by_code(''1%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) - ',
-'        acct.t_account_by_month_by_code(''2%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
-'        acct.t_account_by_month_by_code(''1%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) -',
-'        acct.t_account_by_month_by_code(''2%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,1 seq,''report-total'' style',
-'  from  dual',
-'  ',
-'  union all ',
-'  ',
-'  select * from (select a.name,acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
-'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
-'        acct.t_account_by_month(a.id,to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,0 seq,''report-row'' style',
-'  from  account a where a.code like ''3%'' ',
-'  ',
-'  union all',
-'  select  ''Total Equity'' title,acct.t_account_by_month_by_code(''3%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
-'        acct.t_account_by_month_by_code(''3%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
-'        acct.t_account_by_month_by_code(''3%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,1 seq,''report-total'' style',
-'  from  dual',
-'  order by seq)',
-'  ',
-'  union all',
-'  ',
-'  select * from (select a.name,acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
-'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
-'        acct.t_account_by_month(a.id,to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,0 seq,''report-row'' style',
-'  from  account a where a.code like ''4%'' ',
-'  ',
-'  union all',
-'  select  ''Total Expenses'' title,acct.t_account_by_month_by_code(''4%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY''))*(-1) x,',
-'        acct.t_account_by_month_by_code(''4%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) * (-1) y,',
-'        acct.t_account_by_month_by_code(''4%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) *(-1) z,1 seq,''report-total'' style',
-'  from  dual',
-'  order by seq)',
-'  ',
-'  union all ',
-'  select * from (select a.name,acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
-'        acct.t_account_by_month(a.id,to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
-'        acct.t_account_by_month(a.id,to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,0 seq,''report-row'' style',
-'  from  account a where a.code like ''5%'' ',
-'  ',
-'  union all',
-'  select  ''Total income'' title,acct.t_account_by_month_by_code(''5%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
-'        acct.t_account_by_month_by_code(''5%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
-'        acct.t_account_by_month_by_code(''5%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) z,1 seq,''report-total'' style',
-'  from  dual',
-'  order by seq)',
-'  ',
-'  union all',
-'  ',
-'  select  ''Profit/Loss for period'' title,',
-'  ( acct.t_account_by_month_by_code(''1%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) - ',
-'  acct.t_account_by_month_by_code(''2%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) ) + ',
-'  acct.t_account_by_month_by_code(''3%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) - ',
-'  acct.t_account_by_month_by_code(''4%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) + ',
-'  acct.t_account_by_month_by_code(''5%'',to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')) x,',
-'        ( acct.t_account_by_month_by_code(''1%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) - ',
-'        acct.t_account_by_month_by_code(''2%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) ) +',
-'        acct.t_account_by_month_by_code(''3%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) -',
-'        acct.t_account_by_month_by_code(''4%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) +',
-'        acct.t_account_by_month_by_code(''5%'',to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'')) y,',
-'        ( acct.t_account_by_month_by_code(''1%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) -',
-'        acct.t_account_by_month_by_code(''2%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) ) +',
-'        acct.t_account_by_month_by_code(''3%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) -',
-'        acct.t_account_by_month_by_code(''4%'',to_char(trunc(sysdate,''MON''),''MON YYYY'')) +',
-'        acct.t_account_by_month_by_code(''5%'',to_char(trunc(sysdate,''MON''),''MON YYYY''))z,1 seq,''report-total'' style',
-'  from  dual',
-'  ',
-''))
+' '))
 ,p_source_type=>'NATIVE_SQL_REPORT'
 ,p_ajax_enabled=>'N'
 ,p_query_row_template=>wwv_flow_api.id(30660670762989944)
 ,p_query_headings=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'return null||'':''||to_char(add_months(trunc(sysdate,''MON''),-2),''MON YYYY'')||'':''||',
-'       to_char(add_months(trunc(sysdate,''MON''),-1),''MON YYYY'') ||'':''||',
-'       to_char(trunc(sysdate,''MON''),''MON YYYY'');',
+'return null||'':''||to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-2),''MON YYYY'')||'':''||',
+'       to_char(add_months(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),-1),''MON YYYY'') ||'':''||',
+'       to_char(trunc(to_date(''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY''),''MON''),''MON YYYY'');',
 ''))
 ,p_query_headings_type=>'FUNCTION_BODY_RETURNING_COLON_DELIMITED_LIST'
 ,p_query_num_rows=>500
@@ -27744,13 +27787,13 @@ wwv_flow_api.create_report_region(
 ,p_plug_query_strip_html=>'N'
 );
 wwv_flow_api.create_report_columns(
- p_id=>wwv_flow_api.id(33149256806489838)
+ p_id=>wwv_flow_api.id(33849946853183415)
 ,p_query_column_id=>1
-,p_column_alias=>'NAME'
+,p_column_alias=>'TITLE'
 ,p_column_display_sequence=>1
-,p_column_heading=>'Name'
+,p_column_heading=>'Title'
 ,p_use_as_row_header=>'N'
-,p_column_html_expression=>'<span class="#STYLE#">#NAME#</span>'
+,p_column_html_expression=>'<span class="#STYLE#">#TITLE#</span>'
 ,p_heading_alignment=>'LEFT'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
@@ -27828,6 +27871,37 @@ wwv_flow_api.create_page_plug(
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 );
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(34050099920188943)
+,p_plug_name=>'Periods '
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--scrollBody:t-Form--labelsAbove'
+,p_plug_template=>wwv_flow_api.id(31261378455831956)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>',
+'    <span  class="fa fa-calendar"></span>&nbsp;Set period ended',
+'</h3>'))
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(34050323653188960)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_api.id(34050099920188943)
+,p_button_name=>'SUBMIT'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--large'
+,p_button_template_id=>wwv_flow_api.id(30672878552989954)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Submit'
+,p_button_position=>'BODY'
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'Y'
+);
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(33149164841489837)
 ,p_name=>'P44_LAST_DATE'
@@ -27837,6 +27911,58 @@ wwv_flow_api.create_page_item(
 ,p_item_default_type=>'PLSQL_EXPRESSION'
 ,p_source=>'P44_LAST_DATE'
 ,p_source_type=>'ITEM'
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(34050727682188965)
+,p_name=>'P44_MONTH'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(34050099920188943)
+,p_item_default=>'to_char(sysdate,''MON'')'
+,p_item_default_type=>'PLSQL_EXPRESSION'
+,p_prompt=>'Month'
+,p_source=>'P44_MONTH'
+,p_source_type=>'ITEM'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_named_lov=>'MONTHS'
+,p_lov=>'.'||wwv_flow_api.id(33996028929247411)||'.'
+,p_cHeight=>1
+,p_field_template=>wwv_flow_api.id(30672551725989952)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_lov_display_extra=>'NO'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(34051163349188970)
+,p_name=>'P44_YEAR'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(34050099920188943)
+,p_item_default=>'to_char(sysdate,''YYYY'')'
+,p_item_default_type=>'PLSQL_EXPRESSION'
+,p_prompt=>'Year'
+,p_source=>'P44_YEAR'
+,p_source_type=>'ITEM'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_lov=>'select yr d,yr r from available_years order by 1 '
+,p_cHeight=>1
+,p_begin_on_new_line=>'N'
+,p_field_template=>wwv_flow_api.id(30672551725989952)
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_lov_display_extra=>'NO'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(34051524558188970)
+,p_name=>'P44_PERIOD'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_api.id(34050099920188943)
+,p_item_default=>'to_date (''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY'')'
+,p_item_default_type=>'PLSQL_EXPRESSION'
+,p_source=>'to_date (''01-''||:p44_month||''-''||:p44_year,''DD-MON-YYYY'')'
+,p_source_type=>'FUNCTION'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'Y'
 );
@@ -30046,6 +30172,275 @@ wwv_flow_api.create_page_process(
 ,p_process_type=>'NATIVE_TABFORM_DELETE'
 ,p_process_name=>'ApplyMRD'
 ,p_attribute_02=>'BALANCE_SHEET_ITEMS'
+,p_attribute_03=>'ID'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when=>'MULTI_ROW_DELETE'
+,p_process_when_type=>'REQUEST_EQUALS_CONDITION'
+,p_process_success_message=>'#MRD_COUNT# row(s) deleted.'
+);
+end;
+/
+prompt --application/pages/page_00052
+begin
+wwv_flow_api.create_page(
+ p_id=>52
+,p_user_interface_id=>wwv_flow_api.id(30678093337989972)
+,p_name=>'Income Statement Lines'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'Income Statement Lines'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_javascript_code=>'var htmldb_delete_message=''"DELETE_CONFIRM_MSG"'';'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_help_text=>'No help is available for this page.'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20160730113038'
+);
+wwv_flow_api.create_report_region(
+ p_id=>wwv_flow_api.id(34025013057110142)
+,p_name=>'Income Statement Lines'
+,p_template=>wwv_flow_api.id(31261378455831956)
+,p_display_sequence=>15
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'#DEFAULT#:t-Report--altRowsDefault:t-Report--rowHighlight'
+,p_display_point=>'BODY'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select ',
+'"ID",',
+'"ID" ID_DISPLAY,',
+'"NAME",',
+'"ACCOUNT_TYPE",',
+'seq',
+'from "#OWNER#"."INCOME_STATEMENT_LINES"',
+''))
+,p_source_type=>'NATIVE_TABFORM'
+,p_header=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<h3>',
+'    Income Statement Lines',
+'</h3>'))
+,p_ajax_enabled=>'N'
+,p_query_row_template=>wwv_flow_api.id(30660670762989944)
+,p_query_num_rows=>10
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_show_nulls_as=>'(null)'
+,p_query_no_data_found=>'No data found.'
+,p_query_num_rows_type=>'ROW_RANGES_IN_SELECT_LIST'
+,p_query_row_count_max=>500
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(34025719867110146)
+,p_query_column_id=>1
+,p_column_alias=>'ID'
+,p_column_display_sequence=>2
+,p_disable_sort_column=>'N'
+,p_hidden_column=>'Y'
+,p_display_as=>'HIDDEN'
+,p_pk_col_source_type=>'T'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+,p_ref_schema=>'REAGOVAT'
+,p_ref_table_name=>'INCOME_STATEMENT_LINES'
+,p_ref_column_name=>'ID'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(34026187228110147)
+,p_query_column_id=>2
+,p_column_alias=>'ID_DISPLAY'
+,p_column_display_sequence=>3
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
+,p_ref_schema=>'REAGOVAT'
+,p_ref_table_name=>'INCOME_STATEMENT_LINES'
+,p_ref_column_name=>'ID_DISPLAY'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(34026518126110147)
+,p_query_column_id=>3
+,p_column_alias=>'NAME'
+,p_column_display_sequence=>4
+,p_column_heading=>'Name'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_disable_sort_column=>'N'
+,p_display_as=>'TEXTAREA'
+,p_column_width=>32
+,p_column_height=>3
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+,p_ref_schema=>'REAGOVAT'
+,p_ref_table_name=>'INCOME_STATEMENT_LINES'
+,p_ref_column_name=>'NAME'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(34026904877110147)
+,p_query_column_id=>4
+,p_column_alias=>'ACCOUNT_TYPE'
+,p_column_display_sequence=>5
+,p_column_heading=>'Account Type'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_disable_sort_column=>'N'
+,p_display_as=>'SELECT_LIST_FROM_LOV'
+,p_named_lov=>wwv_flow_api.id(31802093841242362)
+,p_lov_show_nulls=>'NO'
+,p_derived_column=>'N'
+,p_lov_display_extra=>'NO'
+,p_include_in_export=>'Y'
+,p_ref_schema=>'REAGOVAT'
+,p_ref_table_name=>'INCOME_STATEMENT_LINES'
+,p_ref_column_name=>'ACCOUNT_TYPE'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(33849510484183411)
+,p_query_column_id=>5
+,p_column_alias=>'SEQ'
+,p_column_display_sequence=>6
+,p_column_heading=>'Sequence'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_disable_sort_column=>'N'
+,p_display_as=>'TEXT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_api.create_report_columns(
+ p_id=>wwv_flow_api.id(34032794106110163)
+,p_query_column_id=>6
+,p_column_alias=>'CHECK$01'
+,p_column_display_sequence=>1
+,p_column_heading=>'Select Row'
+,p_display_as=>'CHECKBOX'
+,p_derived_column=>'Y'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(34033649767110167)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader:t-Region--scrollBody:t-Form--labelsAbove'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(31261378455831956)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(30679303014989995)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(30673328750989954)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(34028817089110157)
+,p_button_sequence=>40
+,p_button_plug_id=>wwv_flow_api.id(34025013057110142)
+,p_button_name=>'ADD'
+,p_button_action=>'REDIRECT_URL'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(30672878552989954)
+,p_button_image_alt=>'Add Entry'
+,p_button_position=>'BOTTOM'
+,p_button_redirect_url=>'javascript:apex.widget.tabular.addRow();'
+,p_button_execute_validations=>'N'
+,p_grid_new_grid=>false
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(34028627096110157)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_api.id(34025013057110142)
+,p_button_name=>'SUBMIT'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(30672878552989954)
+,p_button_image_alt=>'Apply Changes'
+,p_button_position=>'REGION_TEMPLATE_CHANGE'
+,p_grid_new_grid=>false
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(34028583638110157)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(34025013057110142)
+,p_button_name=>'CANCEL'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(30672878552989954)
+,p_button_image_alt=>'Cancel'
+,p_button_position=>'REGION_TEMPLATE_CLOSE'
+,p_button_redirect_url=>'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:::'
+,p_grid_new_grid=>false
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(34028725001110157)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_api.id(34025013057110142)
+,p_button_name=>'MULTI_ROW_DELETE'
+,p_button_action=>'REDIRECT_URL'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(30672878552989954)
+,p_button_image_alt=>'Delete'
+,p_button_position=>'REGION_TEMPLATE_DELETE'
+,p_button_redirect_url=>'javascript:apex.confirm(htmldb_delete_message,''MULTI_ROW_DELETE'');'
+,p_button_execute_validations=>'N'
+,p_grid_new_grid=>false
+);
+wwv_flow_api.create_page_branch(
+ p_id=>wwv_flow_api.id(34033124700110163)
+,p_branch_action=>'f?p=&APP_ID.:52:&SESSION.&success_msg=#SUCCESS_MSG#'
+,p_branch_point=>'AFTER_PROCESSING'
+,p_branch_type=>'REDIRECT_URL'
+,p_branch_when_button_id=>wwv_flow_api.id(34028627096110157)
+,p_branch_sequence=>1
+);
+wwv_flow_api.create_page_validation(
+ p_id=>wwv_flow_api.id(34030459677110160)
+,p_tabular_form_region_id=>wwv_flow_api.id(34025013057110142)
+,p_validation_name=>'ACCOUNT_TYPE must be numeric'
+,p_validation_sequence=>40
+,p_validation=>'ACCOUNT_TYPE'
+,p_validation_type=>'ITEM_IS_NUMERIC'
+,p_error_message=>'#COLUMN_HEADER# must be numeric.'
+,p_always_execute=>'N'
+,p_when_button_pressed=>wwv_flow_api.id(34028627096110157)
+,p_exec_cond_for_each_row=>'N'
+,p_only_for_changed_rows=>'Y'
+,p_associated_column=>'ACCOUNT_TYPE'
+,p_error_display_location=>'INLINE_WITH_FIELD_AND_NOTIFICATION'
+);
+wwv_flow_api.create_page_validation(
+ p_id=>wwv_flow_api.id(33849650100183412)
+,p_tabular_form_region_id=>wwv_flow_api.id(34025013057110142)
+,p_validation_name=>'Sequence must be numeric'
+,p_validation_sequence=>50
+,p_validation=>'SEQ'
+,p_validation_type=>'ITEM_IS_NUMERIC'
+,p_error_message=>'#COLUMN_HEADER# must be numeric'
+,p_always_execute=>'Y'
+,p_only_for_changed_rows=>'Y'
+,p_associated_column=>'SEQ'
+,p_error_display_location=>'INLINE_WITH_FIELD_AND_NOTIFICATION'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(34030734185110160)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_SUBMIT'
+,p_region_id=>wwv_flow_api.id(34025013057110142)
+,p_process_type=>'NATIVE_TABFORM_UPDATE'
+,p_process_name=>'ApplyMRU'
+,p_attribute_02=>'INCOME_STATEMENT_LINES'
+,p_attribute_03=>'ID'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(34028627096110157)
+,p_process_success_message=>'#MRU_COUNT# row(s) updated, #MRI_COUNT# row(s) inserted.'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(34031118910110161)
+,p_process_sequence=>20
+,p_process_point=>'AFTER_SUBMIT'
+,p_region_id=>wwv_flow_api.id(34025013057110142)
+,p_process_type=>'NATIVE_TABFORM_DELETE'
+,p_process_name=>'ApplyMRD'
+,p_attribute_02=>'INCOME_STATEMENT_LINES'
 ,p_attribute_03=>'ID'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when=>'MULTI_ROW_DELETE'

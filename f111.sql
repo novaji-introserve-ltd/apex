@@ -27,7 +27,7 @@ prompt APPLICATION 111 - ore.ng
 -- Application Export:
 --   Application:     111
 --   Name:            ore.ng
---   Date and Time:   00:00 Saturday July 30, 2016
+--   Date and Time:   00:00 Sunday July 31, 2016
 --   Exported By:     ORE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -163,7 +163,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_12=>'LOGO1'
 ,p_substitution_value_12=>'ore-logo-blue.png'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160727163021'
+,p_last_upd_yyyymmddhh24miss=>'20160730110316'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'https://ore.ng/')
 ,p_ui_type_name => null
 );
@@ -2819,6 +2819,8 @@ wwv_flow_api.create_list_of_values(
 ,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select yr as d,',
 '       yr as r',
+'  from or_accounting_years',
+'union all select ''All Years'' d,listagg(yr, '','') within group (order by yr) r',
 '  from or_accounting_years',
 ' order by 1'))
 );
@@ -63720,7 +63722,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ADMIN'
-,p_last_upd_yyyymmddhh24miss=>'20160711162016'
+,p_last_upd_yyyymmddhh24miss=>'20160730110316'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(33483520245784874)
@@ -63733,8 +63735,13 @@ wwv_flow_api.create_page_plug(
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select t.id,t.tran_date,t.tran_mth,t.user_id,t.tran_id,t.tran_type,t.document_src,t.document_id,t.debit,t.credit,t.account_id,t.circle_id',
 'from v_transactions t',
-'where to_char(t.tran_date,''yyyy'') = :p128_yr AND T.tran_type = :P128_TYPE  and ',
-'circle_id=user_mgt.default_circle(or_auth.user_id(:app_user)) ORDER BY t.tran_date desc,t.document_id desc,t.id DESC '))
+'where  T.tran_type = :P128_TYPE  and ',
+'circle_id=user_mgt.default_circle(or_auth.user_id(:app_user)) and ',
+'',
+'to_char(t.tran_date,''yyyy'') in (  select regexp_substr(:p128_yr,''[^,]+'', 1, level) from dual ',
+'  connect by regexp_substr(:p128_yr, ''[^,]+'', 1, level) is not null)',
+'',
+'ORDER BY t.tran_date desc,t.document_id desc,t.id DESC '))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -63915,6 +63922,8 @@ wwv_flow_api.create_page_item(
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select yr as d,',
 '       yr as r',
+'  from or_accounting_years',
+'union all select ''All Years'' d,listagg(yr, '','') within group (order by yr) r',
 '  from or_accounting_years',
 ' order by 1'))
 ,p_cHeight=>1
